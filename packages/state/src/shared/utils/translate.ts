@@ -125,8 +125,8 @@ export const getIdBySystemFieldValues = (systemFieldValues: SystemFieldValues): 
     return systemFieldValues[0]['_id'];
 };
 
-export const getIdBySystemFieldValuesType = (systemFieldValues: Y.Array<any>): string => {
-    return systemFieldValues.get(0)['_id'];
+export const getIdBySystemFieldValuesType = (systemFieldValuesType: Y.Array<any>): string => {
+    return systemFieldValuesType.get(0)['_id'];
 };
 
 export const getPositionsBySystemFieldValues = (systemFieldValues: SystemFieldValues): Positions => {
