@@ -9,8 +9,9 @@ import {
     SyncMapElement
 } from '../../types';
 import { getSharedMapValueIndex, getSharedRecordIndex } from '../utils';
+import { AITable } from '@ai-table/grid';
 
-export default function removeNode(sharedType: SharedType, action: RemoveFieldAction | RemoveRecordAction | RemoveViewAction): SharedType {
+export default function removeNode(aiTable: AITable, sharedType: SharedType, action: RemoveFieldAction | RemoveRecordAction | RemoveViewAction): SharedType {
     const fields = sharedType.get('fields') as Y.Array<SyncMapElement>;
     const records = sharedType.get('records') as Y.Array<SyncArrayElement>;
     const views = sharedType.get('views')! as Y.Array<SyncMapElement>;

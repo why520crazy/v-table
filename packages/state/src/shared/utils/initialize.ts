@@ -52,10 +52,11 @@ export function toSharedType(
         const fieldSharedType = new Y.Array();
         fieldSharedType.insert(0, data.fields.map(toSyncElement));
         sharedType.set('fields', fieldSharedType);
-
         const recordSharedType = new Y.Array<Y.Array<any>>();
         sharedType.set('records', recordSharedType);
-        recordSharedType.insert(0, data.records.map(toRecordSyncElement));
+        recordSharedType.insert(0, data.records.map((record) => {
+            return toRecordSyncElement(record, data.fields);
+        }));
 
         const viewsSharedType = new Y.Array();
         sharedType.set('views', viewsSharedType);

@@ -1,5 +1,6 @@
-import { TrackableEntity } from '@ai-table/grid';
+import { FieldValue, TrackableEntity } from '@ai-table/grid';
 import {
+    AITableViewField,
     AITableViewFields,
     AITableViewRecord,
     AITableViewRecords,
@@ -22,15 +23,15 @@ export function toSyncElement(node: any): SyncMapElement {
     return element;
 }
 
-export function toRecordSyncElement(record: AITableViewRecord): Y.Array<Y.Array<any>> {
+export function toRecordSyncElement(record: AITableViewRecord, fields: AITableViewFields): Y.Array<Y.Array<any>> {
     const systemFieldValues = new Y.Array();
     // 临时方案：为了解决删除时协同操作无法精准获取删除的 id 的问题，将原来的[idValue] 改为[{'_id': idValue}]
     systemFieldValues.insert(0, getSystemFieldValues(record));
     const customFieldValues = new Y.Array();
-    const valuesArray = [];
-    for (const fieldId in record['values']) {
-        valuesArray.push(record['values'][fieldId]);
-    }
+    const valuesArray: FieldValue[] = [];
+    fields.forEach((field: AITableViewField) => {
+        valuesArray.push(record['values'][field._id]);
+    });
     customFieldValues.insert(0, valuesArray);
     // To save memory, convert map to array.
     const element: RecordSyncElement = new Y.Array<Y.Array<any>>();

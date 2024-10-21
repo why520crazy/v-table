@@ -16,8 +16,8 @@ import { computed, inject, Injectable, isDevMode, Signal, signal, WritableSignal
 import { Router } from '@angular/router';
 import { WebsocketProvider } from 'y-websocket';
 import { getProvider } from '../provider';
-import { getDefaultValue, sortDataByView } from '../utils/utils';
-import { AITableRecords, AITableFields, AITableValue } from '@ai-table/grid';
+import { getCanvasDefaultValue, sortDataByView } from '../utils/utils';
+import { AITableValue } from '@ai-table/grid';
 
 export const LOCAL_STORAGE_KEY = 'ai-table-active-view-id';
 const LOCAL_STORAGE_AI_TABLE_SHARED_DATA = 'ai-table-demo-shared-data';
@@ -113,7 +113,7 @@ export class TableService {
         this.provider.once('synced', () => {
             if (this.provider!.synced && [...this.sharedType!.doc!.store.clients.keys()].length === 0) {
                 console.log('init shared type');
-                const value = getDefaultValue();
+                const value = getCanvasDefaultValue();
                 getSharedTypeByData(this.sharedType!.doc!, {
                     records: value.records,
                     fields: value.fields,

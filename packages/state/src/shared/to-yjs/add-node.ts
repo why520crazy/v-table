@@ -1,4 +1,4 @@
-import { getDefaultFieldValue } from '@ai-table/grid';
+import { AITable, getDefaultFieldValue } from '@ai-table/grid';
 import * as Y from 'yjs';
 import {
     ActionName,
@@ -9,11 +9,13 @@ import {
     AITableViewRecord,
     SharedType,
     SyncArrayElement,
-    SyncMapElement
+    SyncMapElement,
+    AITableViewFields
 } from '../../types';
 import { getPositionsByRecordSyncElement, getSharedRecordIndex, toRecordSyncElement, toSyncElement, setRecordPositions } from '../utils';
 
 export default function addNode(
+    aiTable: AITable,
     sharedType: SharedType,
     action: AddFieldAction | AddRecordAction | AddViewAction | SetRecordPositionAction
 ): SharedType {
@@ -22,7 +24,7 @@ export default function addNode(
     const fields = sharedType.get('fields')! as Y.Array<SyncMapElement>;
     switch (action.type) {
         case ActionName.AddRecord:
-            records && records.push([toRecordSyncElement(action.record as AITableViewRecord)]);
+            records && records.push([toRecordSyncElement(action.record as AITableViewRecord, aiTable.fields() as AITableViewFields)]);
             break;
         case ActionName.AddView:
             views && views.push([toSyncElement(action.view)]);
