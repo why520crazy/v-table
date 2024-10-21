@@ -14,6 +14,8 @@ import {
 import * as Y from 'yjs';
 
 export const POSITIONS_INDEX = 3;
+export const UPDATED_AT_INDEX = 4;
+export const UPDATED_BY_INDEX = 5;
 
 export function toSyncElement(node: any): SyncMapElement {
     const element: SyncMapElement = new Y.Map();
@@ -119,6 +121,10 @@ export const getIdBySystemFieldValues = (systemFieldValues: SystemFieldValues): 
     return systemFieldValues[0]['_id'];
 };
 
+export const getIdBySystemFieldValuesType = (systemFieldValues: Y.Array<any>): string => {
+    return systemFieldValues.get(0)['_id'];
+};
+
 export const getPositionsBySystemFieldValues = (systemFieldValues: SystemFieldValues): Positions => {
     return systemFieldValues[POSITIONS_INDEX];
 };
@@ -133,4 +139,10 @@ export const setRecordPositions = (recordSyncElement: RecordSyncElement, newPosi
     const systemFieldType = recordSyncElement.get(0) as Y.Array<any>;
     systemFieldType.delete(POSITIONS_INDEX);
     systemFieldType.insert(POSITIONS_INDEX, [newPositions]);
+};
+
+export const setRecordUpdatedInfo = (recordSyncElement: RecordSyncElement, info: { update_at: number; updated_by: string }) => {
+    const systemFieldType = recordSyncElement.get(0) as Y.Array<any>;
+    systemFieldType.delete(UPDATED_AT_INDEX, 2);
+    systemFieldType.insert(UPDATED_AT_INDEX, [info.update_at, info.updated_by]);
 };
