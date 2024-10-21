@@ -13,7 +13,13 @@ import {
     SyncMapElement
 } from '../../types';
 import { getIdBySystemFieldValues, getShareTypeNumberPath, getTrackableEntityBySystemFieldValues, translatePositionToPath } from '../utils';
-import { getPositionsBySystemFieldValues, getSharedMapValueId, getSharedRecordId, getValuesByCustomFieldValues, POSITIONS_INDEX } from '../utils/translate';
+import {
+    getPositionsBySystemFieldValues,
+    getSharedMapValueId,
+    getSharedRecordId,
+    getValuesByCustomFieldValues,
+    POSITIONS_INDEX
+} from '../utils/translate';
 import { AIFieldValueIdPath, AITableField, AITableQueries, IdPath, NumberPath } from '@ai-table/grid';
 
 export default function translateArrayEvent(aiTable: AIViewTable, sharedType: SharedType, event: Y.YEvent<any>): AITableAction[] {

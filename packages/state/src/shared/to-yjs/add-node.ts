@@ -1,4 +1,4 @@
-import { AITable, getDefaultFieldValue } from '@ai-table/grid';
+import { AITable } from '@ai-table/grid';
 import * as Y from 'yjs';
 import {
     ActionName,
@@ -12,7 +12,14 @@ import {
     SyncMapElement,
     AITableViewFields
 } from '../../types';
-import { getPositionsByRecordSyncElement, getSharedRecordIndex, toRecordSyncElement, toSyncElement, setRecordPositions } from '../utils';
+import {
+    getPositionsByRecordSyncElement,
+    getSharedRecordIndex,
+    toRecordSyncElement,
+    toSyncElement,
+    setRecordPositions,
+    getIdBySystemFieldValuesType
+} from '../utils';
 
 export default function addNode(
     aiTable: AITable,
@@ -50,9 +57,11 @@ export default function addNode(
                 fields.push([toSyncElement(action.field)]);
                 const path = action.path[0];
                 for (let value of records) {
-                    const newRecord = getDefaultFieldValue(action.field);
-                    const customField = value.get(1);
-                    customField.insert(path, [newRecord]);
+                    const customFieldValues = value.get(1);
+                    const systemFieldValues = value.get(0);
+                    const recordEntity = aiTable.recordsMap()[getIdBySystemFieldValuesType(systemFieldValues)];
+                    const newFieldValue = recordEntity.values[action.field._id];
+                    customFieldValues.insert(path, [newFieldValue]);
                 }
             }
             break;
