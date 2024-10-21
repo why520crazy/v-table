@@ -1,4 +1,4 @@
-import { FieldValue, TrackableEntity } from '@ai-table/grid';
+import { AITableRecordUpdatedInfo, FieldValue, TrackableEntity } from '@ai-table/grid';
 import {
     AITableViewField,
     AITableViewFields,
@@ -61,6 +61,10 @@ export function getShareTypeNumberPath(path: (string | number)[]): number[] {
 
 export function getSharedRecordId(records: Y.Array<SyncArrayElement>, recordIndex: number) {
     return records && (records as Y.Array<SyncArrayElement>).get(recordIndex).get(0).get(0)['_id'];
+}
+
+export function getSharedRecord(records: Y.Array<SyncArrayElement>, recordIndex: number) {
+    return records && (records as Y.Array<SyncArrayElement>).get(recordIndex);
 }
 
 export function getSharedMapValueId(values: Y.Array<SyncMapElement>, index: number) {
@@ -141,8 +145,8 @@ export const setRecordPositions = (recordSyncElement: RecordSyncElement, newPosi
     systemFieldType.insert(POSITIONS_INDEX, [newPositions]);
 };
 
-export const setRecordUpdatedInfo = (recordSyncElement: RecordSyncElement, info: { update_at: number; updated_by: string }) => {
+export const setRecordUpdatedInfo = (recordSyncElement: RecordSyncElement, info: AITableRecordUpdatedInfo) => {
     const systemFieldType = recordSyncElement.get(0) as Y.Array<any>;
     systemFieldType.delete(UPDATED_AT_INDEX, 2);
-    systemFieldType.insert(UPDATED_AT_INDEX, [info.update_at, info.updated_by]);
+    systemFieldType.insert(UPDATED_AT_INDEX, [info.updated_at, info.updated_by]);
 };

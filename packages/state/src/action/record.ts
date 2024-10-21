@@ -1,5 +1,13 @@
-import { AIFieldValueIdPath, AITableQueries, AITableRecord, IdPath, NumberPath } from '@ai-table/grid';
-import { UpdateFieldValueAction, ActionName, AddRecordAction, MoveRecordAction, RemoveRecordAction, AIViewTable } from '../types';
+import { AIFieldValueIdPath, AITableQueries, AITableRecord, AITableRecordUpdatedInfo, IdPath, NumberPath } from '@ai-table/grid';
+import {
+    UpdateFieldValueAction,
+    ActionName,
+    AddRecordAction,
+    MoveRecordAction,
+    RemoveRecordAction,
+    AIViewTable,
+    UpdateSystemFieldValue
+} from '../types';
 
 export function updateFieldValue(aiTable: AIViewTable, value: any, path: AIFieldValueIdPath) {
     const oldValue = AITableQueries.getFieldValue(aiTable, path);
@@ -12,6 +20,15 @@ export function updateFieldValue(aiTable: AIViewTable, value: any, path: AIField
         };
         aiTable.apply(operation);
     }
+}
+
+export function updateSystemFieldValue(aiTable: AIViewTable, path: IdPath, updatedInfo: AITableRecordUpdatedInfo) {
+    const operation: UpdateSystemFieldValue = {
+        type: ActionName.UpdateSystemFieldValue,
+        updatedInfo,
+        path
+    };
+    aiTable.apply(operation);
 }
 
 export function addRecord(aiTable: AIViewTable, record: AITableRecord, path: NumberPath) {
@@ -44,5 +61,6 @@ export const RecordActions = {
     addRecord,
     updateFieldValue,
     moveRecord,
-    removeRecord
+    removeRecord,
+    updateSystemFieldValue
 };

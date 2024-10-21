@@ -21,7 +21,8 @@ export const actionMappers: Partial<ActionMapper<any>> = {
     [ActionName.SetView]: setNode,
     [ActionName.AddView]: addNode,
     [ActionName.RemoveView]: removeNode,
-    [ActionName.SetRecordPositions]: addNode
+    [ActionName.SetRecordPositions]: addNode,
+    [ActionName.UpdateSystemFieldValue]: addNode
 };
 
 export function applyActionOps(aiTable: AITable, sharedType: SharedType, actions: AITableAction[]): SharedType {

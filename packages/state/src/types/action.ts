@@ -1,4 +1,4 @@
-import { AIFieldValueIdPath, AITableField, AITableRecord, IdPath, NumberPath } from '@ai-table/grid';
+import { AIFieldValueIdPath, AITableField, AITableRecord, AITableRecordUpdatedInfo, IdPath, NumberPath } from '@ai-table/grid';
 import { AITableView, AITableViewRecord, Positions, RemovePositions } from './view';
 
 export enum ActionName {
@@ -13,7 +13,8 @@ export enum ActionName {
     SetView = 'set_view',
     AddView = 'add_view',
     RemoveView = 'remove_view',
-    SetRecordPositions = 'set_record_positions'
+    SetRecordPositions = 'set_record_positions',
+    UpdateSystemFieldValue = 'update_system_field_value'
 }
 
 export enum ExecuteType {
@@ -94,9 +95,15 @@ export interface SetRecordPositionAction {
     path: IdPath;
 }
 
+export interface UpdateSystemFieldValue {
+    type: ActionName.UpdateSystemFieldValue;
+    updatedInfo: Partial<AITableRecordUpdatedInfo>;
+    path: IdPath;
+}
+
 export type AITableViewAction = SetViewAction | AddViewAction | RemoveViewAction;
 
-export type AITablePositionAction = SetRecordPositionAction;
+export type AITableSystemFieldAction = SetRecordPositionAction | UpdateSystemFieldValue;
 
 export type AITableAction =
     | UpdateFieldValueAction
@@ -108,4 +115,4 @@ export type AITableAction =
     | MoveFieldAction
     | MoveRecordAction
     | AITableViewAction
-    | AITablePositionAction;
+    | AITableSystemFieldAction;

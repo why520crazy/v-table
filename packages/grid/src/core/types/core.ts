@@ -141,6 +141,11 @@ export interface AITableRecord {
     values: Record<string, FieldValue>;
 }
 
+export interface AITableRecordUpdatedInfo {
+    updated_at: number;
+    updated_by: string;
+}
+
 export type AITableRecords = AITableRecord[];
 
 export type AITableFields = AITableField[];

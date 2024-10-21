@@ -16,9 +16,11 @@ import { getIdBySystemFieldValues, getShareTypeNumberPath, getTrackableEntityByS
 import {
     getPositionsBySystemFieldValues,
     getSharedMapValueId,
+    getSharedRecord,
     getSharedRecordId,
     getValuesByCustomFieldValues,
-    POSITIONS_INDEX
+    POSITIONS_INDEX,
+    UPDATED_BY_INDEX
 } from '../utils/translate';
 import { AIFieldValueIdPath, AITableField, AITableQueries, IdPath, NumberPath } from '@ai-table/grid';
 
@@ -91,6 +93,7 @@ export default function translateArrayEvent(aiTable: AIViewTable, sharedType: Sh
                         try {
                             const sharedRecords = sharedType.get('records')! as Y.Array<SyncArrayElement>;
                             const sharedFields = sharedType.get('fields')! as Y.Array<SyncMapElement>;
+                            let systemFieldOffset = 0;
                             delta.insert?.map((item: any) => {
                                 const recordIndex = targetPath[0] as number;
                                 const fieldIndex = offset;
@@ -106,9 +109,17 @@ export default function translateArrayEvent(aiTable: AIViewTable, sharedType: Sh
                                             path: [record._id],
                                             positions: newPositions
                                         });
-                                    } else {
-                                        console.log('更新其它系统字段，比如修改人、修改时间等');
+                                    // 此处的循环会包含 updated_at 和 updated_by 各一次，这里只处理 updated_by 同时包含两个字段的修改
+                                    } else if (isUpdatedByOperation(fieldIndex + systemFieldOffset)) {
+                                        const systemFieldValues = getSharedRecord(sharedRecords, recordIndex).get(0).toJSON();
+                                        const { updated_at, updated_by } = getTrackableEntityBySystemFieldValues(systemFieldValues);
+                                        actions.push({
+                                            type: ActionName.UpdateSystemFieldValue,
+                                            path: [record._id],
+                                            updatedInfo: { updated_at, updated_by }
+                                        });
                                     }
+                                    systemFieldOffset++;
                                 } else {
                                     const recordId = getSharedRecordId(sharedRecords, recordIndex);
                                     const fieldId = getSharedMapValueId(sharedFields, fieldIndex);
@@ -179,6 +190,10 @@ export function isCustomFieldOperation(targetPath: number[]): boolean {
 
 export function isPositionsOperation(fieldIndex: number): boolean {
     return fieldIndex === POSITIONS_INDEX;
+}
+
+export function isUpdatedByOperation(fieldIndex: number): boolean {
+    return fieldIndex === UPDATED_BY_INDEX;
 }
 
 export function getRemoveIds(event: Y.YEvent<any>, type: ActionName.RemoveField | ActionName.RemoveRecord) {

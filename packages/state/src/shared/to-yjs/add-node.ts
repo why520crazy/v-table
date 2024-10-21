@@ -10,7 +10,8 @@ import {
     SharedType,
     SyncArrayElement,
     SyncMapElement,
-    AITableViewFields
+    AITableViewFields,
+    UpdateSystemFieldValue
 } from '../../types';
 import {
     getPositionsByRecordSyncElement,
@@ -18,13 +19,14 @@ import {
     toRecordSyncElement,
     toSyncElement,
     setRecordPositions,
-    getIdBySystemFieldValuesType
+    getIdBySystemFieldValuesType,
+    setRecordUpdatedInfo
 } from '../utils';
 
 export default function addNode(
     aiTable: AITable,
     sharedType: SharedType,
-    action: AddFieldAction | AddRecordAction | AddViewAction | SetRecordPositionAction
+    action: AddFieldAction | AddRecordAction | AddViewAction | SetRecordPositionAction | UpdateSystemFieldValue
 ): SharedType {
     const records = sharedType.get('records')! as Y.Array<SyncArrayElement>;
     const views = sharedType.get('views')!;
@@ -50,6 +52,15 @@ export default function addNode(
                     }
                 }
                 setRecordPositions(record, newPositions);
+            }
+            break;
+        case ActionName.UpdateSystemFieldValue:
+            if (records) {
+                const recordIndex = getSharedRecordIndex(records, action.path[0]);
+                const record = records.get(recordIndex);
+                if (action.updatedInfo.updated_at && action.updatedInfo.updated_at) {
+                    setRecordUpdatedInfo(record, action.updatedInfo as { updated_at: number; updated_by: string });
+                }
             }
             break;
         case ActionName.AddField:
