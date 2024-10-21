@@ -22,6 +22,19 @@ const apply = (aiTable: AIViewTable, records: AITableViewRecords, fields: AITabl
             }
             break;
         }
+        case ActionName.UpdateSystemFieldValue: {
+            const [recordId] = action.path;
+            if (recordId && action.updatedInfo) {
+                const recordIndex = aiTable.records().findIndex((item) => item._id === recordId);
+                if (action.updatedInfo.updated_at) {
+                    records[recordIndex].updated_at = action.updatedInfo.updated_at;
+                }
+                if (action.updatedInfo.updated_by) {
+                    records[recordIndex].updated_by = action.updatedInfo.updated_by;
+                }
+            }
+            break;
+        }
         case ActionName.AddRecord: {
             const [recordIndex] = action.path;
             if (recordIndex > -1) {
@@ -81,7 +94,6 @@ const apply = (aiTable: AIViewTable, records: AITableViewRecords, fields: AITabl
             const field = fields[action.path[0]];
             fields.splice(action.path[0], 1);
             fields.splice(action.newPath[0], 0, field);
-
             break;
         }
         case ActionName.RemoveField: {

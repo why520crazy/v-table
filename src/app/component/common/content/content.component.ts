@@ -177,7 +177,9 @@ export class DemoTableContent {
     }
 
     updateFieldValue(value: UpdateFieldValueOptions) {
-        updateFieldValue(this.aiTable, value);
+        const member = 'member_02';
+        const time = new Date().getTime();
+        updateFieldValue(this.aiTable, value, { updated_by: member, updated_at: time });
     }
 
     addField(data: AddFieldOptions) {
