@@ -1,8 +1,9 @@
 import { getSharedMapValueIndex } from '../utils';
 import { ActionName, SetFieldAction, SetViewAction, SharedType, SyncMapElement } from '../../types';
 import * as Y from 'yjs';
+import { AITable } from '@ai-table/grid';
 
-export default function setNode(sharedType: SharedType, action: SetFieldAction | SetViewAction): SharedType {
+export default function setNode(aiTable: AITable, sharedType: SharedType, action: SetFieldAction | SetViewAction): SharedType {
     let sharedNodes;
     if (action.type === ActionName.SetField) {
         sharedNodes = sharedType.get('fields')! as Y.Array<SyncMapElement>;

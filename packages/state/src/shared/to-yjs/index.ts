@@ -9,7 +9,7 @@ export type ActionMapper<O extends AITableAction = AITableAction> = {
     [K in O['type']]: O extends { type: K } ? ApplyFunc<O> : never;
 };
 
-export type ApplyFunc<O extends AITableAction = AITableAction> = (sharedType: SharedType, op: O) => SharedType;
+export type ApplyFunc<O extends AITableAction = AITableAction> = (aiTable: AITable, sharedType: SharedType, op: O) => SharedType;
 
 export const actionMappers: Partial<ActionMapper<any>> = {
     [ActionName.AddRecord]: addNode,
@@ -24,13 +24,13 @@ export const actionMappers: Partial<ActionMapper<any>> = {
     [ActionName.SetRecordPositions]: addNode
 };
 
-export function applyActionOps(sharedType: SharedType, actions: AITableAction[], aiTable: AITable): SharedType {
+export function applyActionOps(aiTable: AITable, sharedType: SharedType, actions: AITableAction[]): SharedType {
     if (actions.length > 0) {
         sharedType.doc!.transact(() => {
             actions.forEach((action) => {
                 const apply = actionMappers[action.type] as ApplyFunc<typeof action>;
                 if (apply) {
-                    return apply(sharedType, action);
+                    return apply(aiTable, sharedType, action);
                 }
                 return null;
             });

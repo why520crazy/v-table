@@ -215,7 +215,7 @@ export class DemoTableContent {
             if (this.tableService.sharedType) {
                 if (!YjsAITable.isRemote(this.aiTable) && !YjsAITable.isUndo(this.aiTable)) {
                     YjsAITable.asLocal(this.aiTable, () => {
-                        applyActionOps(this.tableService.sharedType!, this.aiTable.actions, this.aiTable);
+                        applyActionOps(this.aiTable, this.tableService.sharedType!, this.aiTable.actions);
                     });
                 }
             }
