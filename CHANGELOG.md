@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.15](https://github.com/worktile/ai-table/compare/0.0.14...0.0.15) (2024-10-22)
+
+
+### Bug Fixes
+
+* **editor:** fix date editor unexpected close #WIK-16685 ([70863d1](https://github.com/worktile/ai-table/commit/70863d12d32084a21235609e081d6155a91364de)), closes [#WIK-16685](https://github.com/worktile/ai-table/issues/WIK-16685)
+* **shared:** build customFieldValues by fields array #WIK-16693 ([e12e485](https://github.com/worktile/ai-table/commit/e12e48528d8734a05d8a928f983e1f8f90f2c792)), closes [#WIK-16693](https://github.com/worktile/ai-table/issues/WIK-16693)
+
+
+### Features
+
+* **field:** improve system field data query logic #WIK-16680 ([0635a42](https://github.com/worktile/ai-table/commit/0635a422cc361faf2c33a62a0b9e6a26bb2ed58a)), closes [#WIK-16680](https://github.com/worktile/ai-table/issues/WIK-16680)
+* **operation:** support update system field value operation and yjs translate #WIK-16689 ([b20503d](https://github.com/worktile/ai-table/commit/b20503db35f82ee0bee69b07c36796ff25454021)), closes [#WIK-16689](https://github.com/worktile/ai-table/issues/WIK-16689)
+* **state:** support update updatedInfo when add field and remove field #WIK-16696 ([92b8a97](https://github.com/worktile/ai-table/commit/92b8a97fc46a6e094a5cc670f69614feed552d65)), closes [#WIK-16696](https://github.com/worktile/ai-table/issues/WIK-16696)
+
+
+
 ## [0.0.14](https://github.com/worktile/ai-table/compare/0.0.13...0.0.14) (2024-10-16)
 
 
