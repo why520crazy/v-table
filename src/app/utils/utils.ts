@@ -11,7 +11,7 @@ export function sortDataByView(data: AITableViewRecords | AITableViewFields, act
 
 export const getDefaultTrackableEntity = () => {
     const member = 'member_01';
-    const time = new Date().getTime();
+    const time = new Date('2024-10-01').getTime();
     return { created_by: member, created_at: time, updated_by: member, updated_at: time };
 };
 
