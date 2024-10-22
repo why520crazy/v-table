@@ -1,6 +1,7 @@
 export * from './build';
 export * from './field/model';
 export * from './/field/add-fields';
+export * from './/field/remove-field';
 export * from './/field/sort-fields';
 export * from './view';
 export * from './common';
@@ -8,4 +9,5 @@ export * from './record/add-records';
 export * from './record/sort';
 export * from './record/filter';
 export * from './record/update-field-value';
+export * from './record/update-system-field-value';
 export * from './weak-map';

@@ -14,7 +14,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, fromEvent } from 'rxjs';
 import { KoEventObject } from './angular-konva';
-import { AbstractEditCellEditor } from './components/cell-editors/abstract-cell-editor.component';
 import {
     AI_TABLE_CELL,
     AI_TABLE_FIELD_ADD_BUTTON,

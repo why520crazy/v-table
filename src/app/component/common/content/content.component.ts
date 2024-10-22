@@ -20,9 +20,9 @@ import {
     AITableView,
     AIViewTable,
     applyActionOps,
+    buildRemoveFieldItem,
     DividerMenuItem,
     EditFieldPropertyItem,
-    RemoveFieldItem,
     updateFieldValue,
     withState,
     YjsAITable
@@ -105,7 +105,11 @@ export class DemoTableContent {
                 disabled: (aiTable: AITable, field: Signal<AITableField>) => false
             },
             DividerMenuItem,
-            RemoveFieldItem
+            buildRemoveFieldItem(() => {
+                const member = 'member_03';
+                const time = new Date().getTime();
+                return { updated_at: time, updated_by: member };
+            })
         ]
     };
 
@@ -183,7 +187,9 @@ export class DemoTableContent {
     }
 
     addField(data: AddFieldOptions) {
-        addFields(this.aiTable, data);
+        const member = 'member_02';
+        const time = new Date().getTime();
+        addFields(this.aiTable, data, { updated_by: member, updated_at: time });
     }
 
     prevent(event: Event) {
