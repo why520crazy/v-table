@@ -11,15 +11,13 @@ import {
 
 export function updateFieldValue(aiTable: AIViewTable, value: any, path: AIFieldValueIdPath) {
     const oldValue = AITableQueries.getFieldValue(aiTable, path);
-    if (oldValue !== value) {
-        const operation: UpdateFieldValueAction = {
-            type: ActionName.UpdateFieldValue,
-            fieldValue: oldValue,
-            newFieldValue: value,
-            path
-        };
-        aiTable.apply(operation);
-    }
+    const operation: UpdateFieldValueAction = {
+        type: ActionName.UpdateFieldValue,
+        fieldValue: oldValue,
+        newFieldValue: value,
+        path
+    };
+    aiTable.apply(operation);
 }
 
 export function updateSystemFieldValue(aiTable: AIViewTable, path: IdPath, updatedInfo: AITableRecordUpdatedInfo) {

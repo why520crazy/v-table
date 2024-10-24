@@ -67,7 +67,7 @@ export class SelectCellEditorComponent extends AbstractEditCellEditor<string[] |
 
     updateValue(value: boolean) {
         if (!value) {
-            const value = this.isMultiple ? this.modelValue : ([this.modelValue] as string[]);
+            const value = this.isMultiple ? this.modelValue : (this.modelValue && ([this.modelValue] as string[])) || [];
             this.updateFieldValue.emit({
                 value: value,
                 path: [this.record()._id, this.field()._id]
