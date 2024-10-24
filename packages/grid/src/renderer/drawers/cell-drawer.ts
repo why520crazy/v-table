@@ -384,6 +384,9 @@ export class CellDrawer extends Drawer {
         if (!isValid || transformValue.length === 0) {
             return;
         }
+        if (!transformValue[0]) {
+            console.warn(`single select field unexpected value: ${transformValue[0]}`);
+        }
         const isOperating = isActive;
         const item = (field as AITableSelectField).settings.options?.find((option) => option._id === transformValue[0]);
         const itemName = item?.text || '';
