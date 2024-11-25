@@ -8,10 +8,11 @@ import {
     toRecordSyncElement,
     toSyncElement
 } from './translate';
+import { AI_TABLE_CONTENT_FIELD_NAME } from '../../constants/default';
 
-export const createSharedType = () => {
+export const createSharedType = (fieldName: string = AI_TABLE_CONTENT_FIELD_NAME) => {
     const doc = new Y.Doc();
-    const sharedType = doc.getMap<any>('ai-table');
+    const sharedType = doc.getMap<any>(fieldName);
     return sharedType;
 };
 
@@ -35,7 +36,7 @@ export const getSharedTypeByData = (
         views: AITableViews;
     }
 ) => {
-    const sharedType = doc.getMap<any>('ai-table');
+    const sharedType = doc.getMap<any>(AI_TABLE_CONTENT_FIELD_NAME);
     toSharedType(sharedType, initializeValue);
     return sharedType;
 };
@@ -54,9 +55,12 @@ export function toSharedType(
         sharedType.set('fields', fieldSharedType);
         const recordSharedType = new Y.Array<Y.Array<any>>();
         sharedType.set('records', recordSharedType);
-        recordSharedType.insert(0, data.records.map((record) => {
-            return toRecordSyncElement(record, data.fields);
-        }));
+        recordSharedType.insert(
+            0,
+            data.records.map((record) => {
+                return toRecordSyncElement(record, data.fields);
+            })
+        );
 
         const viewsSharedType = new Y.Array();
         sharedType.set('views', viewsSharedType);
