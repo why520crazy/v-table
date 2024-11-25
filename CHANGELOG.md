@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.16](https://github.com/worktile/ai-table/compare/0.0.15...0.0.16) (2024-11-25)
+
+
+### Bug Fixes
+
+* **actions:** fix select cell editor updated invalid value #WIK-16707 ([1350aa0](https://github.com/worktile/ai-table/commit/1350aa056210f40ff54ea4217ab25bad452da167)), closes [#WIK-16707](https://github.com/worktile/ai-table/issues/WIK-16707)
+
+
+### Features
+
+* **state:** support custom sharedType fieldName ([071392d](https://github.com/worktile/ai-table/commit/071392d15e0a8a1485070e23dc7d4c0e8a20f075))
+
+
+
 ## [0.0.15](https://github.com/worktile/ai-table/compare/0.0.14...0.0.15) (2024-10-22)
 
 
