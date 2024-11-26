@@ -1,5 +1,5 @@
-import { AI_TABLE_FIELD_ADD_BUTTON_WIDTH } from '../../constants/table';
-import { AITableLayout } from '../../types';
+import { AI_TABLE_FIELD_ADD_BUTTON_WIDTH, AI_TABLE_OFFSET } from '../../constants/table';
+import { AITableCell, AITableLayout } from '../../types';
 import { Drawer } from './drawer';
 
 /**
@@ -46,16 +46,19 @@ export class Layout extends Drawer {
         return this.columnIndex === this.columnCount - 1;
     }
 
-    protected renderAddFieldBlank() {
-        const width = AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
-        const y = this.y;
+    protected renderAddFieldBlank({ style, isHoverRow }: Pick<AITableCell, 'isHoverRow' | 'style'>) {
         const rowHeight = this.rowHeight;
+        const fill = style?.fill || (isHoverRow ? this.colors.gray80 : this.colors.transparent);
+        const addFieldBlankX = this.x + this.columnWidth + AI_TABLE_OFFSET;
         this.rect({
-            x: this.x + 0.5,
-            y: y - 0.5,
-            width: this.containerWidth - this.x < width ? width : this.containerWidth - this.x,
-            height: rowHeight + 1,
-            fill: this.colors.transparent
+            x: addFieldBlankX,
+            y: this.y + AI_TABLE_OFFSET,
+            width:
+                this.containerWidth - addFieldBlankX < AI_TABLE_FIELD_ADD_BUTTON_WIDTH
+                    ? AI_TABLE_FIELD_ADD_BUTTON_WIDTH
+                    : this.containerWidth - addFieldBlankX,
+            height: rowHeight,
+            fill
         });
     }
 }

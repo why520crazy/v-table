@@ -52,8 +52,8 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
             const row = context.linearRows()[rowIndex];
             const { _id: recordId, type } = row;
             const y = coordinate.getRowOffset(rowIndex) + AI_TABLE_OFFSET;
-            const { rowIndex: pointRowIndex, areaType, targetName } = context.pointPosition();
-            const isHover = pointRowIndex === rowIndex && areaType !== AITableAreaType.none;
+            const { rowIndex: pointRowIndex, targetName } = context.pointPosition();
+            const isHover = pointRowIndex === rowIndex;
 
             switch (type) {
                 case AITableRowType.add: {

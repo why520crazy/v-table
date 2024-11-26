@@ -11,13 +11,11 @@ import { AITableCell } from '../../types';
 import { Layout } from './layout-drawer';
 
 export class AddRowLayout extends Layout {
-    override renderAddFieldBlank() {
-        super.renderAddFieldBlank();
-
+    override renderAddFieldBlank({ isHoverRow }: Pick<AITableCell, 'isHoverRow'>) {
+        super.renderAddFieldBlank({ isHoverRow });
         const rowHeight = this.rowHeight;
         const defaultWidth = AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
         const width = this.containerWidth - this.x < defaultWidth ? defaultWidth : this.containerWidth - this.x;
-
         this.line({
             x: this.x + this.columnWidth,
             y: this.y,
@@ -87,7 +85,7 @@ export class AddRowLayout extends Layout {
                 isHoverRow
             });
         }
-        this.renderAddFieldBlank();
+        this.renderAddFieldBlank({ isHoverRow });
     }
 
     private renderCommonCell({ isHoverRow }: Pick<AITableCell, 'isHoverRow'>) {

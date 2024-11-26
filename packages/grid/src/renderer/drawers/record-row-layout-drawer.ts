@@ -1,4 +1,10 @@
-import { AI_TABLE_FIELD_HEAD_HEIGHT, AI_TABLE_OFFSET, AI_TABLE_ROW_HEAD_WIDTH, DEFAULT_FONT_SIZE } from '../../constants';
+import {
+    AI_TABLE_FIELD_ADD_BUTTON_WIDTH,
+    AI_TABLE_FIELD_HEAD_HEIGHT,
+    AI_TABLE_OFFSET,
+    AI_TABLE_ROW_HEAD_WIDTH,
+    DEFAULT_FONT_SIZE
+} from '../../constants';
 import { DEFAULT_TEXT_ALIGN_CENTER, DEFAULT_TEXT_VERTICAL_ALIGN_MIDDLE } from '../../constants/text';
 import { AITable } from '../../core';
 import { AITableCell } from '../../types';
@@ -60,22 +66,33 @@ export class RecordRowLayout extends Layout {
     }
 
     // 尾列
-    private renderLastCell({ style }: Pick<AITableCell, 'style'>) {
+    private renderLastCell({ style, isHoverRow }: Pick<AITableCell, 'style' | 'isHoverRow'>) {
         if (!this.isLast || this.isFirst) return;
 
         const { fill, stroke } = style;
-        const columnWidth = this.columnWidth;
-        const width = columnWidth;
         const colors = AITable.getColors();
 
         // 背景、边框
         this.rect({
             x: this.x,
             y: this.y,
-            width,
+            width: this.columnWidth,
             height: this.rowHeight,
             fill: fill || colors.white,
             stroke: stroke || colors.gray200
+        });
+
+        // 延伸到 FIELD_ADD_BUTTON
+        super.renderAddFieldBlank({ style, isHoverRow });
+        const rowHeight = this.rowHeight;
+        const startX = this.x + this.columnWidth;
+        const lineWidth =
+            this.containerWidth - startX < AI_TABLE_FIELD_ADD_BUTTON_WIDTH ? AI_TABLE_FIELD_ADD_BUTTON_WIDTH : this.containerWidth - startX;
+        this.line({
+            x: startX,
+            y: this.y,
+            points: [0, rowHeight, lineWidth, rowHeight],
+            stroke: this.colors.gray200
         });
     }
 
@@ -101,7 +118,7 @@ export class RecordRowLayout extends Layout {
         const { row, style, isCheckedRow, isHoverRow } = config;
         this.renderFirstCell({ row, style, isCheckedRow, isHoverRow });
         this.renderCommonCell({ style });
-        this.renderLastCell({ style });
+        this.renderLastCell({ style, isHoverRow });
     }
 }
 
