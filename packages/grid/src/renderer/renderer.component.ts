@@ -31,8 +31,6 @@ Konva.pixelRatio = 2;
         KoContainer,
         KoStage,
         KoShape,
-        AITableIcon,
-        AITableFieldHead,
         AITableColumnHeads,
         AITableFrozenColumnHeads,
         AITableCells,
@@ -95,11 +93,7 @@ export class AITableRenderer {
     });
 
     cellGroupClipWidth = computed(() => {
-        const { scrollLeft } = this.scrollState()!;
-        return Math.min(
-            this.containerWidth() - this.frozenAreaWidth(),
-            AI_TABLE_FIELD_ADD_BUTTON_WIDTH + this.lastColumnOffset() + this.lastColumnWidth() - scrollLeft - this.frozenAreaWidth()
-        );
+        return this.containerWidth() - this.frozenAreaWidth();
     });
 
     stageConfig = computed<Partial<StageConfig>>(() => {
