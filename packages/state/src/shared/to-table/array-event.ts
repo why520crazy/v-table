@@ -70,7 +70,7 @@ export default function translateArrayEvent(aiTable: AIViewTable, sharedType: Sh
                         delta.insert?.map((item: Y.Array<any>) => {
                             const data = item.toJSON();
                             const [systemFieldValues, customFieldValues] = data;
-                            const positions = getPositionsBySystemFieldValues(customFieldValues);
+                            const positions = getPositionsBySystemFieldValues(systemFieldValues);
                             const position = positions[activeViewId];
                             const path = translatePositionToPath(
                                 aiTable.records() as AITableViewRecords,
@@ -84,7 +84,7 @@ export default function translateArrayEvent(aiTable: AIViewTable, sharedType: Sh
                                 record: {
                                     _id: getIdBySystemFieldValues(systemFieldValues),
                                     ...getTrackableEntityBySystemFieldValues(systemFieldValues),
-                                    positions: getPositionsBySystemFieldValues(customFieldValues),
+                                    positions: getPositionsBySystemFieldValues(systemFieldValues),
                                     values: getValuesByCustomFieldValues(customFieldValues, aiTable.fields() as AITableViewFields)
                                 }
                             });
