@@ -73,7 +73,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     horizontalBarRef = viewChild<ElementRef>('horizontalBar');
 
     linearRows = computed(() => {
-        return buildGridLinearRows(this.gridData().records);
+        return buildGridLinearRows(this.gridData().records, !this.aiReadonly());
     });
 
     visibleColumnsMap = computed(() => {
@@ -108,7 +108,8 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             coordinate: coordinate,
             containerWidth: this.containerRect().width,
             containerHeight: this.containerRect().height,
-            references: this.aiReferences()
+            references: this.aiReferences(),
+            readonly: this.aiReadonly()
         };
     });
 
@@ -138,7 +139,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             }
         });
         effect(() => {
-            if (this.aiTable.context?.pointPosition()) {
+            if (!this.aiReadonly() && this.aiTable.context?.pointPosition()) {
                 this.toggleHoverCellEditor();
             }
         });
@@ -268,7 +269,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                     const editOrigin = this.containerElement().querySelector('.konvajs-content') as HTMLElement;
                     this.aiTableGridFieldService.openFieldMenu(this.aiTable, {
                         fieldId: fieldId,
-                        fieldMenus: this.fieldMenus,
+                        fieldMenus: this.fieldMenus(),
                         origin: this.containerElement(),
                         position,
                         editOrigin: editOrigin,
@@ -280,6 +281,9 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     }
 
     stageDblclick(e: KoEventObject<MouseEvent>) {
+        if (this.aiReadonly()) {
+            return;
+        }
         const _targetName = e.event.target.name();
         const { fieldId, recordId } = getDetailByTargetName(_targetName);
         if (!recordId || !fieldId) {

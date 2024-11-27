@@ -5,6 +5,7 @@ import {
     AITable,
     AITableDomGrid,
     AITableField,
+    AITableFieldMenuItem,
     AITableFieldType,
     AITableGrid,
     AITableQueries,
@@ -72,46 +73,52 @@ export class DemoTableContent {
 
     plugins = [withState, withRemoveView];
 
-    aiFieldConfig: AIFieldConfig = {
-        fieldRenderers: {
-            [AITableFieldType.date]: {
-                transform: (field: AITableField, value: DateFieldValue) => {
-                    const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                    return datePickerFormatPipe.transform(value.timestamp as any);
+    aiFieldConfig: Signal<AIFieldConfig> = computed(() => {
+        const readonly = this.tableService.readonly();
+        return {
+            fieldRenderers: {
+                [AITableFieldType.date]: {
+                    transform: (field: AITableField, value: DateFieldValue) => {
+                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
+                        return datePickerFormatPipe.transform(value.timestamp as any);
+                    }
+                },
+                [AITableFieldType.createdAt]: {
+                    transform: (field: AITableField, value: DateFieldValue) => {
+                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
+                        return datePickerFormatPipe.transform(value.timestamp as any);
+                    }
+                },
+                [AITableFieldType.updatedAt]: {
+                    transform: (field: AITableField, value: DateFieldValue) => {
+                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
+                        return datePickerFormatPipe.transform(value.timestamp as any);
+                    }
                 }
             },
-            [AITableFieldType.createdAt]: {
-                transform: (field: AITableField, value: DateFieldValue) => {
-                    const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                    return datePickerFormatPipe.transform(value.timestamp as any);
+            fieldMenus: [
+                { ...EditFieldPropertyItem, hidden: () => readonly } as any,
+                { ...DividerMenuItem, hidden: () => readonly },
+                {
+                    type: 'filterFields',
+                    name: '按本列筛选',
+                    icon: 'filter-line',
+                    exec: (aiTable: AITable, field: Signal<AITableField>) => {},
+                    hidden: (aiTable: AITable, field: Signal<AITableField>) => false,
+                    disabled: (aiTable: AITable, field: Signal<AITableField>) => false
+                },
+                { ...DividerMenuItem, hidden: () => readonly },
+                {
+                    ...buildRemoveFieldItem(() => {
+                        const member = 'member_03';
+                        const time = new Date().getTime();
+                        return { updated_at: time, updated_by: member };
+                    }),
+                    hidden: () => readonly
                 }
-            },
-            [AITableFieldType.updatedAt]: {
-                transform: (field: AITableField, value: DateFieldValue) => {
-                    const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                    return datePickerFormatPipe.transform(value.timestamp as any);
-                }
-            }
-        },
-        fieldMenus: [
-            EditFieldPropertyItem,
-            DividerMenuItem,
-            {
-                type: 'filterFields',
-                name: '按本列筛选',
-                icon: 'filter-line',
-                exec: (aiTable: AITable, field: Signal<AITableField>) => {},
-                hidden: (aiTable: AITable, field: Signal<AITableField>) => false,
-                disabled: (aiTable: AITable, field: Signal<AITableField>) => false
-            },
-            DividerMenuItem,
-            buildRemoveFieldItem(() => {
-                const member = 'member_03';
-                const time = new Date().getTime();
-                return { updated_at: time, updated_by: member };
-            })
-        ]
-    };
+            ]
+        };
+    });
 
     iconRegistry = inject(ThyIconRegistry);
 

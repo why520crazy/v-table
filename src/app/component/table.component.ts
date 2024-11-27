@@ -1,13 +1,5 @@
 import { AITableGrid } from '@ai-table/grid';
-import {
-    Actions,
-    addView,
-    AITableFilterOperation,
-    AITableView,
-    AITableViewFields,
-    AITableViewRecords,
-    removeView
-} from '@ai-table/state';
+import { Actions, addView, AITableView, AITableViewFields, AITableViewRecords, removeView } from '@ai-table/state';
 import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
@@ -74,6 +66,8 @@ export class DemoTable implements OnInit, AfterViewInit, OnDestroy {
 
     isEdit = false;
 
+    readonly = false;
+
     activeViewName!: string;
 
     ngOnInit(): void {
@@ -97,6 +91,11 @@ export class DemoTable implements OnInit, AfterViewInit, OnDestroy {
 
     handleShared() {
         this.tableService.handleShared(this.room);
+    }
+
+    handleReadonlyChange(e: any) {
+        this.readonly = e.target.checked;
+        this.tableService.setReadonly(e.target.checked);
     }
 
     updateValue() {

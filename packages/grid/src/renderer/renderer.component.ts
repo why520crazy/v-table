@@ -60,6 +60,10 @@ export class AITableRenderer {
         return AITable.getVisibleFields(this.config().aiTable);
     });
 
+    readonly = computed(() => {
+        return this.config()?.readonly;
+    });
+
     coordinate = computed(() => {
         return this.config()?.coordinate;
     });

@@ -8,6 +8,9 @@
         (click)="handleShared()"
         >{{ tableService.provider ? '断开连接' : '连接协同' }}</a
     >
+    <label class="mb-0 ml-2 d-flex align-items-center"
+        ><input type="checkbox" [checked]="readonly" (change)="handleReadonlyChange($event)" /><span class="pl-1 pt-1">只读</span></label
+    >
 </div>
 <thy-tabs [thyExtra]="extra" (thyActiveTabChange)="activeTabChange($event)" [thyActiveTab]="tableService.activeViewId()">
     @for (item of tableService.views(); let index = $index; track $index) {
@@ -26,7 +29,9 @@
                     } @else {
                         <p class="mb-0">
                             <span> {{ item.name }} </span>
-                            <a thySize="xxs" thyAction class="ml-1" thyIcon="more" [thyDropdown]="menu" href="javascript:;"></a>
+                            @if (!readonly) {
+                                <a thySize="xxs" thyAction class="ml-1" thyIcon="more" [thyDropdown]="menu" href="javascript:;"></a>
+                            }
                         </p>
                     }
                 </ng-template>
@@ -53,5 +58,7 @@
 </thy-dropdown-menu>
 
 <ng-template #extra>
-    <thy-action thyIcon="plus" class="cursor-pointer" (click)="addView('add')"></thy-action>
+    @if (!readonly) {
+        <thy-action thyIcon="plus" class="cursor-pointer" (click)="addView('add')"></thy-action>
+    }
 </ng-template>
