@@ -169,7 +169,7 @@ export class AITableRenderer {
 
     columnHeadOrAddFieldConfig = computed(() => {
         const { columnStartIndex, columnStopIndex } = this.visibleRangeInfo();
-        const { aiTable, coordinate } = this.config();
+        const { aiTable, coordinate, readonly } = this.config();
         const { pointPosition } = aiTable.context!;
         const fields = this.fields();
         return {
@@ -178,7 +178,8 @@ export class AITableRenderer {
             fields,
             columnStartIndex,
             columnStopIndex,
-            pointPosition: pointPosition()
+            pointPosition: pointPosition(),
+            readonly
         };
     });
 

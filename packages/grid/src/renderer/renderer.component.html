@@ -25,9 +25,7 @@
 
                 <ko-group [config]="offsetXConfig()">
                     <ai-table-column-heads [config]="columnHeadOrAddFieldConfig()"></ai-table-column-heads>
-                    @if (!readonly()) {
-                        <ai-table-add-field [config]="columnHeadOrAddFieldConfig()"></ai-table-add-field>
-                    }
+                    <ai-table-add-field [config]="columnHeadOrAddFieldConfig()"></ai-table-add-field>
                 </ko-group>
             </ko-group>
 
