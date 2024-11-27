@@ -136,7 +136,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             }
         });
         effect(() => {
-            if (this.aiTable.context?.pointPosition()) {
+            if (!this.aiReadonly() && this.aiTable.context?.pointPosition()) {
                 this.toggleHoverCellEditor();
             }
         });
@@ -405,9 +405,6 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     }
 
     private toggleHoverCellEditor() {
-        if (this.aiReadonly()) {
-            return;
-        }
         const { realTargetName } = this.aiTable.context?.pointPosition()!;
         const { targetName, fieldId, recordId } = getDetailByTargetName(realTargetName!);
         const editingCell = this.aiTableGridEventService.getCurrentEditCell();
