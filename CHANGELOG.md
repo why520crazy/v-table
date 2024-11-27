@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.17](https://github.com/worktile/ai-table/compare/0.0.16...0.0.17) (2024-11-27)
+
+
+### Bug Fixes
+
+* **field-head:** correct field more icon style and action #WIK-16740 ([08b0901](https://github.com/worktile/ai-table/commit/08b09016ff42b65c40afc06031376214821d3b43)), closes [#WIK-16740](https://github.com/worktile/ai-table/issues/WIK-16740)
+* **field:** correct editFieldPosition #WIK-16748 ([5f46b69](https://github.com/worktile/ai-table/commit/5f46b6911f5ba6e6b90fc3825a5829e50e8b32c1)), closes [#WIK-16748](https://github.com/worktile/ai-table/issues/WIK-16748)
+* **renderer:** support full width add blank #WIK-16745 ([90cc20b](https://github.com/worktile/ai-table/commit/90cc20bf08f9a9a109ced0c3956bb5a2dca59d6a)), closes [#WIK-16745](https://github.com/worktile/ai-table/issues/WIK-16745)
+* **state:** #WIK-16805 new row coordination error ([2e21b9b](https://github.com/worktile/ai-table/commit/2e21b9b22c6aa8c7d9c42b41ca8e89f5b39e15b6)), closes [#WIK-16805](https://github.com/worktile/ai-table/issues/WIK-16805)
+
+
+### Features
+
+* **field:** support hover style for add field blank #WIK-16857 ([68a4248](https://github.com/worktile/ai-table/commit/68a424895a3b331008efc070f6997edd462f7e3a)), closes [#WIK-16857](https://github.com/worktile/ai-table/issues/WIK-16857)
+
+
+
 ## [0.0.16](https://github.com/worktile/ai-table/compare/0.0.15...0.0.16) (2024-11-25)
 
 

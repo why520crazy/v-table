@@ -1,7 +1,7 @@
 import { AI_TABLE_FIELD_HEAD, AI_TABLE_FIELD_HEAD_MORE, Colors } from '../../constants';
-import { AITableCreateHeadsConfig, AITableFieldHeadConfig } from '../../types';
+import { AITableColumnHeadsConfig, AITableFieldHeadConfig } from '../../types';
 
-export const createColumnHeads = (config: AITableCreateHeadsConfig) => {
+export const createColumnHeads = (config: AITableColumnHeadsConfig) => {
     const { coordinate, columnStartIndex, columnStopIndex, pointPosition, aiTable } = config;
     const colors = Colors;
     const { columnCount, rowInitSize: fieldHeadHeight } = coordinate;

@@ -32,5 +32,5 @@ export interface AITableFieldMenuOptions {
     editOrigin?: any;
     origin?: any;
     position?: { x: number; y: number };
-    editOriginPosition?: { x: number; y: number };
+    editFieldPosition?: { x: number; y: number };
 }

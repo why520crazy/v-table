@@ -27,10 +27,18 @@ export interface AITableFieldHeadConfig {
     isHoverIcon?: boolean;
 }
 
-export interface AITableCreateHeadsConfig {
+export interface AITableColumnHeadsConfig {
     aiTable: AITable;
     coordinate: Coordinate;
     columnStartIndex: number;
+    columnStopIndex: number;
+    pointPosition: AITablePointPosition;
+}
+
+export interface AITableAddFieldConfig {
+    aiTable: AITable;
+    coordinate: Coordinate;
+    fields: AITableField[];
     columnStopIndex: number;
     pointPosition: AITablePointPosition;
 }

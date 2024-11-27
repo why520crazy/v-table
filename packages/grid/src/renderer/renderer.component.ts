@@ -167,7 +167,7 @@ export class AITableRenderer {
         };
     });
 
-    columnHeadConfig = computed(() => {
+    columnHeadOrAddFieldConfig = computed(() => {
         const { columnStartIndex, columnStopIndex } = this.visibleRangeInfo();
         const { aiTable, coordinate } = this.config();
         const { pointPosition } = aiTable.context!;

@@ -16,6 +16,7 @@ import { filter, fromEvent } from 'rxjs';
 import { KoEventObject } from './angular-konva';
 import {
     AI_TABLE_CELL,
+    AI_TABLE_CELL_PADDING,
     AI_TABLE_FIELD_ADD_BUTTON,
     AI_TABLE_FIELD_ADD_BUTTON_WIDTH,
     AI_TABLE_FIELD_HEAD,
@@ -58,8 +59,6 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     resizeObserver!: ResizeObserver;
 
     fieldHeadHeight = AI_TABLE_FIELD_HEAD_HEIGHT;
-
-    ADD_BUTTON_WIDTH = AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
 
     containerRect = signal({ width: 0, height: 0 });
 
@@ -120,6 +119,10 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
 
     scrollTotalHeight = computed(() => {
         return Math.max(this.coordinate().totalHeight, this.containerRect().height - this.fieldHeadHeight);
+    });
+
+    scrollbarWidth = computed(() => {
+        return this.coordinate().totalWidth + AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
     });
 
     constructor() {
@@ -258,8 +261,8 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                         x: containerRect.x + moreRect.x,
                         y: containerRect.y + moreRect.y + moreRect.height
                     };
-                    const editOriginPosition = {
-                        x: AI_TABLE_POPOVER_LEFT_OFFSET + fieldGroupRect.x,
+                    const editFieldPosition = {
+                        x: containerRect.x + fieldGroupRect.x - AI_TABLE_CELL_PADDING,
                         y: containerRect.y + fieldGroupRect.y + fieldGroupRect.height
                     };
 
@@ -270,7 +273,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                         origin: this.containerElement(),
                         position,
                         editOrigin: editOrigin,
-                        editOriginPosition
+                        editFieldPosition
                     });
                 }
                 return;
@@ -394,7 +397,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private containerResizeListener() {
         this.resizeObserver = new ResizeObserver(() => {
             const containerWidth = this.containerElement().offsetWidth;
-            const totalWidth = this.coordinate().totalWidth + this.ADD_BUTTON_WIDTH;
+            const totalWidth = this.coordinate().totalWidth + AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
             this.setContainerRect();
             if (containerWidth >= totalWidth) {
                 this.aiTable.context!.setScrollState({ scrollLeft: 0 });

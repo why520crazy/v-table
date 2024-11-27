@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { StageConfig } from 'konva/lib/Stage';
-import { KoShape, KoStage, KoContainer } from '../../angular-konva';
+import { KoShape, KoContainer } from '../../angular-konva';
 import {
     AI_TABLE_CELL_PADDING,
     AI_TABLE_FIELD_HEAD_SELECT_CHECKBOX,
@@ -9,7 +9,7 @@ import {
     AI_TABLE_ROW_HEAD_WIDTH,
     Colors
 } from '../../constants';
-import { AITableCheckType, AITableCreateHeadsConfig } from '../../types';
+import { AITableCheckType, AITableColumnHeadsConfig } from '../../types';
 import { createColumnHeads } from '../creations/create-heads';
 import { AITableFieldHead } from './field-head.component';
 import { AITableIcon } from './icon.component';
@@ -29,11 +29,11 @@ import { AITableIcon } from './icon.component';
         <ko-rect [config]="headBgConfig()"></ko-rect>
     `,
     standalone: true,
-    imports: [KoStage, KoShape, AITableFieldHead, AITableIcon, KoContainer],
+    imports: [KoShape, AITableFieldHead, AITableIcon, KoContainer],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AITableFrozenColumnHeads {
-    config = input.required<AITableCreateHeadsConfig>();
+    config = input.required<AITableColumnHeadsConfig>();
 
     coordinate = computed(() => {
         return this.config().coordinate;
