@@ -40,7 +40,7 @@ export class AITableGridFieldService {
             originPosition: position,
             placement: 'bottomLeft',
             originActiveClass: origin ? 'active' : undefined,
-            hasBackdrop: false,
+            hasBackdrop: true,
             insideClosable: true,
             outsideClosable: true,
             initialState: {
