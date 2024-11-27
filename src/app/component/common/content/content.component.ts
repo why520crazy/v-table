@@ -5,6 +5,7 @@ import {
     AITable,
     AITableDomGrid,
     AITableField,
+    AITableFieldMenuItem,
     AITableFieldType,
     AITableGrid,
     AITableQueries,
@@ -72,30 +73,8 @@ export class DemoTableContent {
 
     plugins = [withState, withRemoveView];
 
-    aiFieldConfig: AIFieldConfig = {
-        fieldRenderers: {
-            [AITableFieldType.date]: {
-                transform: (field: AITableField, value: DateFieldValue) => {
-                    const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                    return datePickerFormatPipe.transform(value.timestamp as any);
-                }
-            },
-            [AITableFieldType.createdAt]: {
-                transform: (field: AITableField, value: DateFieldValue) => {
-                    const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                    return datePickerFormatPipe.transform(value.timestamp as any);
-                }
-            },
-            [AITableFieldType.updatedAt]: {
-                transform: (field: AITableField, value: DateFieldValue) => {
-                    const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                    return datePickerFormatPipe.transform(value.timestamp as any);
-                }
-            }
-        },
-        fieldMenus: [
-            EditFieldPropertyItem,
-            DividerMenuItem,
+    aiFieldConfig: Signal<AIFieldConfig> = computed(() => {
+        const defaultFieldMenus: AITableFieldMenuItem[] = [
             {
                 type: 'filterFields',
                 name: '按本列筛选',
@@ -103,15 +82,44 @@ export class DemoTableContent {
                 exec: (aiTable: AITable, field: Signal<AITableField>) => {},
                 hidden: (aiTable: AITable, field: Signal<AITableField>) => false,
                 disabled: (aiTable: AITable, field: Signal<AITableField>) => false
+            }
+        ];
+        const fieldMenus = defaultFieldMenus;
+        if (!this.tableService.readonly()) {
+            fieldMenus.unshift(EditFieldPropertyItem as any, DividerMenuItem);
+            fieldMenus.push(
+                DividerMenuItem,
+                buildRemoveFieldItem(() => {
+                    const member = 'member_03';
+                    const time = new Date().getTime();
+                    return { updated_at: time, updated_by: member };
+                })
+            );
+        }
+        return {
+            fieldRenderers: {
+                [AITableFieldType.date]: {
+                    transform: (field: AITableField, value: DateFieldValue) => {
+                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
+                        return datePickerFormatPipe.transform(value.timestamp as any);
+                    }
+                },
+                [AITableFieldType.createdAt]: {
+                    transform: (field: AITableField, value: DateFieldValue) => {
+                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
+                        return datePickerFormatPipe.transform(value.timestamp as any);
+                    }
+                },
+                [AITableFieldType.updatedAt]: {
+                    transform: (field: AITableField, value: DateFieldValue) => {
+                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
+                        return datePickerFormatPipe.transform(value.timestamp as any);
+                    }
+                }
             },
-            DividerMenuItem,
-            buildRemoveFieldItem(() => {
-                const member = 'member_03';
-                const time = new Date().getTime();
-                return { updated_at: time, updated_by: member };
-            })
-        ]
-    };
+            fieldMenus
+        };
+    });
 
     iconRegistry = inject(ThyIconRegistry);
 

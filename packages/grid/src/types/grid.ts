@@ -44,6 +44,7 @@ export interface AITableRendererConfig {
     containerWidth: number;
     containerHeight: number;
     references: AITableReferences;
+    readonly?: boolean;
 }
 
 export enum AITableRowColumnType {

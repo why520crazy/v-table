@@ -2,7 +2,7 @@ import { AITableFields, AITableRecords, FieldOptions } from '../core';
 import { AITableGridData, AITableLinearRow } from '../types';
 import { AITableRowType } from '../types/row';
 
-export const buildGridLinearRows = (visibleRecords: AITableRecords): AITableLinearRow[] => {
+export const buildGridLinearRows = (visibleRecords: AITableRecords, isAddingVisible: boolean = true): AITableLinearRow[] => {
     const linearRows: AITableLinearRow[] = [];
     let displayRowIndex = 0;
     [...visibleRecords, { _id: '' }].forEach((row) => {
@@ -14,7 +14,7 @@ export const buildGridLinearRows = (visibleRecords: AITableRecords): AITableLine
                 displayIndex: displayRowIndex
             });
         }
-        if (!row._id) {
+        if (isAddingVisible && !row._id) {
             linearRows.push({
                 type: AITableRowType.add,
                 _id: ''

@@ -28,6 +28,8 @@ export const TABLE_SERVICE_MAP = new WeakMap<AIViewTable, TableService>();
 export class TableService {
     views!: WritableSignal<AITableView[]>;
 
+    readonly: WritableSignal<boolean> = signal(false);
+
     records!: WritableSignal<AITableViewRecords>;
 
     fields!: WritableSignal<AITableViewFields>;
@@ -65,6 +67,10 @@ export class TableService {
 
     initData(views: AITableView[]) {
         this.views = signal(views);
+    }
+
+    setReadonly(readonly: boolean) {
+        this.readonly.set(readonly);
     }
 
     setActiveView(activeViewId: string) {

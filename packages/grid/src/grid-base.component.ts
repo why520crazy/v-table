@@ -9,7 +9,8 @@ import {
     model,
     NgZone,
     OnInit,
-    output
+    output,
+    Signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ThyPopoverRef } from 'ngx-tethys/popover';
@@ -74,7 +75,9 @@ export class AITableGridBase implements OnInit {
 
     aiUpdateFieldValue = output<UpdateFieldValueOptions>();
 
-    fieldMenus!: AITableFieldMenuItem[];
+    fieldMenus: Signal<AITableFieldMenuItem[]> = computed(() => {
+        return this.aiFieldConfig()?.fieldMenus || [];
+    });
 
     mouseoverRef!: ThyPopoverRef<any>;
 
@@ -98,7 +101,6 @@ export class AITableGridBase implements OnInit {
     ngOnInit(): void {
         this.initAITable();
         this.initService();
-        this.buildFieldMenus();
     }
 
     initAITable() {
@@ -115,10 +117,6 @@ export class AITableGridBase implements OnInit {
         this.aiTableGridEventService.registerEvents(this.elementRef.nativeElement);
         this.aiTableGridFieldService.initAIFieldConfig(this.aiFieldConfig());
         AI_TABLE_GRID_FIELD_SERVICE_MAP.set(this.aiTable, this.aiTableGridFieldService);
-    }
-
-    buildFieldMenus() {
-        this.fieldMenus = this.aiFieldConfig()?.fieldMenus || [];
     }
 
     addRecord() {

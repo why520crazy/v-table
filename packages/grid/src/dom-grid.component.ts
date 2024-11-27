@@ -77,7 +77,7 @@ export class AITableDomGrid extends AITableGridBase implements OnInit {
             origin: moreBtn,
             editOrigin: fieldAction,
             fieldId: field._id,
-            fieldMenus: this.fieldMenus
+            fieldMenus: this.fieldMenus()
         });
     }
 }

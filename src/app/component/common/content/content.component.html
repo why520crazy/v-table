@@ -28,9 +28,10 @@
         @switch (renderMode()) {
             @case ('canvas') {
                 <ai-table-grid
+                    [aiReadonly]="tableService.readonly()"
                     [(aiRecords)]="tableService.records"
                     [(aiFields)]="tableService.fields"
-                    [aiFieldConfig]="aiFieldConfig"
+                    [aiFieldConfig]="aiFieldConfig()"
                     [aiPlugins]="plugins"
                     [aiReferences]="references()"
                     (aiAddRecord)="addRecord($event)"
@@ -42,9 +43,10 @@
             }
             @case ('dom') {
                 <ai-table-dom-grid
+                    [aiReadonly]="tableService.readonly()"
                     [(aiRecords)]="tableService.records"
                     [(aiFields)]="tableService.fields"
-                    [aiFieldConfig]="aiFieldConfig"
+                    [aiFieldConfig]="aiFieldConfig()"
                     [aiPlugins]="plugins"
                     [aiReferences]="references()"
                     (aiAddRecord)="addRecord($event)"
