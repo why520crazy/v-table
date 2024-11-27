@@ -16,6 +16,7 @@ import { filter, fromEvent } from 'rxjs';
 import { KoEventObject } from './angular-konva';
 import {
     AI_TABLE_CELL,
+    AI_TABLE_CELL_PADDING,
     AI_TABLE_FIELD_ADD_BUTTON,
     AI_TABLE_FIELD_ADD_BUTTON_WIDTH,
     AI_TABLE_FIELD_HEAD,
@@ -257,8 +258,8 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                         x: containerRect.x + moreRect.x,
                         y: containerRect.y + moreRect.y + moreRect.height
                     };
-                    const editOriginPosition = {
-                        x: AI_TABLE_POPOVER_LEFT_OFFSET + fieldGroupRect.x,
+                    const editFieldPosition = {
+                        x: containerRect.x + fieldGroupRect.x - AI_TABLE_CELL_PADDING,
                         y: containerRect.y + fieldGroupRect.y + fieldGroupRect.height
                     };
 
@@ -269,7 +270,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                         origin: this.containerElement(),
                         position,
                         editOrigin: editOrigin,
-                        editOriginPosition
+                        editFieldPosition
                     });
                 }
                 return;
