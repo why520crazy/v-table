@@ -74,28 +74,7 @@ export class DemoTableContent {
     plugins = [withState, withRemoveView];
 
     aiFieldConfig: Signal<AIFieldConfig> = computed(() => {
-        const defaultFieldMenus: AITableFieldMenuItem[] = [
-            {
-                type: 'filterFields',
-                name: '按本列筛选',
-                icon: 'filter-line',
-                exec: (aiTable: AITable, field: Signal<AITableField>) => {},
-                hidden: (aiTable: AITable, field: Signal<AITableField>) => false,
-                disabled: (aiTable: AITable, field: Signal<AITableField>) => false
-            }
-        ];
-        const fieldMenus = defaultFieldMenus;
-        if (!this.tableService.readonly()) {
-            fieldMenus.unshift(EditFieldPropertyItem as any, DividerMenuItem);
-            fieldMenus.push(
-                DividerMenuItem,
-                buildRemoveFieldItem(() => {
-                    const member = 'member_03';
-                    const time = new Date().getTime();
-                    return { updated_at: time, updated_by: member };
-                })
-            );
-        }
+        const readonly = this.tableService.readonly();
         return {
             fieldRenderers: {
                 [AITableFieldType.date]: {
@@ -117,7 +96,27 @@ export class DemoTableContent {
                     }
                 }
             },
-            fieldMenus
+            fieldMenus: [
+                { ...EditFieldPropertyItem, hidden: () => readonly } as any,
+                { ...DividerMenuItem, hidden: () => readonly },
+                {
+                    type: 'filterFields',
+                    name: '按本列筛选',
+                    icon: 'filter-line',
+                    exec: (aiTable: AITable, field: Signal<AITableField>) => {},
+                    hidden: (aiTable: AITable, field: Signal<AITableField>) => false,
+                    disabled: (aiTable: AITable, field: Signal<AITableField>) => false
+                },
+                { ...DividerMenuItem, hidden: () => readonly },
+                {
+                    ...buildRemoveFieldItem(() => {
+                        const member = 'member_03';
+                        const time = new Date().getTime();
+                        return { updated_at: time, updated_by: member };
+                    }),
+                    hidden: () => readonly
+                }
+            ]
         };
     });
 
