@@ -8,7 +8,7 @@
             (koDblclick)="stageDblclick($event)"
         >
             <div #horizontalBar class="ai-table-horizontal-scroll-bar-wrapper" [style.width.px]="containerRect().width">
-                <div class="ai-table-scroll-bar-inner" [style.width.px]="coordinate().totalWidth + ADD_BUTTON_WIDTH"></div>
+                <div class="ai-table-scroll-bar-inner" [style.width.px]="scrollbarWidth()"></div>
             </div>
             <div
                 #verticalBar
