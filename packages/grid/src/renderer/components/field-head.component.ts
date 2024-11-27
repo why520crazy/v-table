@@ -35,7 +35,7 @@ import { AITableText } from './text.component';
         </ko-group>
     `,
     standalone: true,
-    imports: [KoContainer, KoStage, KoShape, AITableFieldIcon, AITableText, AITableIcon],
+    imports: [KoContainer, KoShape, AITableFieldIcon, AITableText, AITableIcon],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AITableFieldHead {
@@ -123,11 +123,11 @@ export class AITableFieldHead {
                 targetName: AI_TABLE_FIELD_HEAD_MORE,
                 fieldId: field._id
             }),
-            x: width - AI_TABLE_CELL_PADDING - AI_TABLE_ACTION_COMMON_SIZE,
+            x: width - AI_TABLE_ACTION_COMMON_SIZE,
             y: commonIconOffsetY,
             data: MoreStandOutlinedPath,
             fill: isHoverIcon ? Colors.primary : Colors.gray600,
-            background: isSelected || isHoverIcon ? Colors.itemActiveBgColor : Colors.gray80,
+            background: Colors.transparent,
             backgroundWidth: AI_TABLE_ACTION_COMMON_SIZE,
             backgroundHeight: AI_TABLE_ACTION_COMMON_SIZE,
             cornerRadius: 4
