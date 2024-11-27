@@ -60,8 +60,6 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
 
     fieldHeadHeight = AI_TABLE_FIELD_HEAD_HEIGHT;
 
-    ADD_BUTTON_WIDTH = AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
-
     containerRect = signal({ width: 0, height: 0 });
 
     hasContainerRect = computed(() => {
@@ -120,6 +118,10 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
 
     scrollTotalHeight = computed(() => {
         return Math.max(this.coordinate().totalHeight, this.containerRect().height - this.fieldHeadHeight);
+    });
+
+    scrollbarWidth = computed(() => {
+        return this.coordinate().totalWidth + AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
     });
 
     constructor() {
@@ -391,7 +393,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private containerResizeListener() {
         this.resizeObserver = new ResizeObserver(() => {
             const containerWidth = this.containerElement().offsetWidth;
-            const totalWidth = this.coordinate().totalWidth + this.ADD_BUTTON_WIDTH;
+            const totalWidth = this.coordinate().totalWidth + AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
             this.setContainerRect();
             if (containerWidth >= totalWidth) {
                 this.aiTable.context!.setScrollState({ scrollLeft: 0 });

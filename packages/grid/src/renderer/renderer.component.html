@@ -15,7 +15,7 @@
             </ko-group>
 
             <ko-group>
-                <ai-table-frozen-column-heads [config]="columnHeadConfig()"></ai-table-frozen-column-heads>
+                <ai-table-frozen-column-heads [config]="columnHeadOrAddFieldConfig()"></ai-table-frozen-column-heads>
             </ko-group>
 
             <ko-group [config]="commonGroupConfig()">
@@ -24,11 +24,9 @@
                 </ko-group>
 
                 <ko-group [config]="offsetXConfig()">
-                    <ai-table-column-heads [config]="columnHeadConfig()"></ai-table-column-heads>
+                    <ai-table-column-heads [config]="columnHeadOrAddFieldConfig()"></ai-table-column-heads>
                     <ai-table-add-field
-                        [coordinate]="coordinate()"
-                        [fields]="fields()"
-                        [columnStopIndex]="visibleRangeInfo().columnStopIndex"
+                        [config]="columnHeadOrAddFieldConfig()"
                     ></ai-table-add-field>
                 </ko-group>
             </ko-group>
