@@ -405,6 +405,9 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     }
 
     private toggleHoverCellEditor() {
+        if (this.aiReadonly()) {
+            return;
+        }
         const { realTargetName } = this.aiTable.context?.pointPosition()!;
         const { targetName, fieldId, recordId } = getDetailByTargetName(realTargetName!);
         const editingCell = this.aiTableGridEventService.getCurrentEditCell();
