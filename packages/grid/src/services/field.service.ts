@@ -23,8 +23,8 @@ export class AITableGridFieldService {
         return this.thyPopover.open(component, {
             origin,
             originPosition: position,
-            manualClosure: true,
             placement: 'bottomLeft',
+            originActiveClass: undefined,
             initialState: {
                 aiTable,
                 aiEditField: field,
@@ -39,13 +39,10 @@ export class AITableGridFieldService {
             origin,
             originPosition: position,
             placement: 'bottomLeft',
-            originActiveClass: origin ? 'active' : undefined,
-            hasBackdrop: true,
-            insideClosable: true,
-            outsideClosable: true,
+            originActiveClass: undefined,
             initialState: {
                 origin: editOrigin,
-                position: options.editOriginPosition,
+                position: options.editFieldPosition,
                 aiTable,
                 fieldId,
                 fieldMenus
