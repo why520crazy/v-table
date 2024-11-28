@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.18](https://github.com/worktile/ai-table/compare/0.0.17...0.0.18) (2024-11-28)
+
+
+### Bug Fixes
+
+* **field-edit:** fix edit field component unexpected close #WIK-16866 ([#172](https://github.com/worktile/ai-table/issues/172)) ([1082c19](https://github.com/worktile/ai-table/commit/1082c190d8edf9adc431f02799ba051a6321807c)), closes [#WIK-16866](https://github.com/worktile/ai-table/issues/WIK-16866)
+* **grid:** fixed blank rendering of column headers for the last column in read-only mode #WIK-16864 ([#171](https://github.com/worktile/ai-table/issues/171)) ([477fef3](https://github.com/worktile/ai-table/commit/477fef3d429048c26c2fa0c91b8a88f6c60ec85b)), closes [#WIK-16864](https://github.com/worktile/ai-table/issues/WIK-16864)
+
+
+### Features
+
+* **config:**  support readonly mode #WIK-16851 ([#166](https://github.com/worktile/ai-table/issues/166)) ([c14926d](https://github.com/worktile/ai-table/commit/c14926dab393dd65ffd49c7e1790d57cf9bd02d0)), closes [#WIK-16851](https://github.com/worktile/ai-table/issues/WIK-16851)
+
+
+
 ## [0.0.17](https://github.com/worktile/ai-table/compare/0.0.16...0.0.17) (2024-11-27)
 
 
