@@ -24,6 +24,7 @@ export class AITableGridFieldService {
             origin,
             originPosition: position,
             placement: 'bottomLeft',
+            manualClosure: true,
             originActiveClass: undefined,
             initialState: {
                 aiTable,
