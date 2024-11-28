@@ -41,6 +41,7 @@ export interface AITableAddFieldConfig {
     fields: AITableField[];
     columnStopIndex: number;
     pointPosition: AITablePointPosition;
+    readonly?: boolean;
 }
 
 export interface AITableTargetNameOptions {

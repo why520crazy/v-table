@@ -6,6 +6,7 @@ import {
     AI_TABLE_CELL_PADDING,
     AI_TABLE_FIELD_ADD_BUTTON,
     AI_TABLE_FIELD_ADD_BUTTON_WIDTH,
+    AI_TABLE_FIELD_HEAD,
     AI_TABLE_ICON_COMMON_SIZE,
     AI_TABLE_OFFSET,
     Colors
@@ -13,6 +14,7 @@ import {
 import { AITableAddFieldConfig, AITableIconConfig } from '../../types';
 import { generateTargetName } from '../../utils';
 import { AITableIcon } from './icon.component';
+import { isNil } from 'lodash';
 
 @Component({
     selector: 'ai-table-add-field',
@@ -22,7 +24,9 @@ import { AITableIcon } from './icon.component';
                 <ko-rect [config]="rectConfig()"></ko-rect>
             </ko-group>
             <ko-group>
-                <ai-table-icon [config]="addIconConfig()"></ai-table-icon>
+                @if (addIconConfig().visible) {
+                    <ai-table-icon [config]="addIconConfig()"></ai-table-icon>
+                }
             </ko-group>
         </ko-group>
     `,
@@ -42,13 +46,16 @@ export class AITableAddField {
     });
 
     rectConfig = computed<Partial<StageConfig>>(() => {
-        const { targetName } = this.config().pointPosition;
+        const {
+            pointPosition: { targetName },
+            readonly
+        } = this.config();
         const fill = targetName === AI_TABLE_FIELD_ADD_BUTTON ? Colors.gray80 : Colors.white;
         return {
             name: generateTargetName({
                 targetName: AI_TABLE_FIELD_ADD_BUTTON,
                 fieldId: this.config().fields[this.config().columnStopIndex]._id,
-                mouseStyle: 'pointer'
+                mouseStyle: readonly ? 'default' : 'pointer'
             }),
             x: AI_TABLE_OFFSET,
             y: AI_TABLE_OFFSET,
@@ -65,13 +72,15 @@ export class AITableAddField {
     });
 
     addIconConfig = computed<AITableIconConfig>(() => {
+        const { readonly } = this.config();
         const offsetY = (this.config().coordinate.rowInitSize - AI_TABLE_ICON_COMMON_SIZE) / 2;
         return {
             x: AI_TABLE_CELL_PADDING,
             y: offsetY,
             data: AddOutlinedPath,
             fill: Colors.gray600,
-            listening: false
+            listening: false,
+            visible: isNil(readonly) ? true : !readonly
         };
     });
 }

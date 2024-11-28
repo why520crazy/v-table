@@ -221,7 +221,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         mouseEvent.preventDefault();
         const { context } = this.aiTable;
         const { targetName, rowIndex: pointRowIndex } = context!.pointPosition();
-        if (mouseEvent.button !== AITableMouseDownType.Left) return;
+        if (mouseEvent.button !== AITableMouseDownType.Left || (targetName !== AI_TABLE_FIELD_HEAD_MORE && this.aiReadonly())) return;
         switch (targetName) {
             case AI_TABLE_ROW_ADD_BUTTON: {
                 this.aiTableGridSelectionService.clearSelection();
