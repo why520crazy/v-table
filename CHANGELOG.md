@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.19](https://github.com/worktile/ai-table/compare/0.0.18...0.0.19) (2024-12-02)
+
+
+### Features
+
+* **core:** support short_id for record and view #WIK-16765 ([#175](https://github.com/worktile/ai-table/issues/175)) ([86a2473](https://github.com/worktile/ai-table/commit/86a24735f2757f9348198855208c400b71237bc5)), closes [#WIK-16765](https://github.com/worktile/ai-table/issues/WIK-16765)
+* **icon:** modify more icon #WIK-16865 ([#174](https://github.com/worktile/ai-table/issues/174)) ([844fae2](https://github.com/worktile/ai-table/commit/844fae2ea75c5651d13426af79b9044207148294)), closes [#WIK-16865](https://github.com/worktile/ai-table/issues/WIK-16865)
+
+
+
 ## [0.0.18](https://github.com/worktile/ai-table/compare/0.0.17...0.0.18) (2024-11-28)
 
 
