@@ -5,7 +5,6 @@ import {
     AITable,
     AITableDomGrid,
     AITableField,
-    AITableFieldMenuItem,
     AITableFieldType,
     AITableGrid,
     AITableQueries,
@@ -31,12 +30,9 @@ import {
 import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RouterOutlet } from '@angular/router';
 import { ThyAction } from 'ngx-tethys/action';
 import { DateHelperService, ThyDatePickerFormatPipe } from 'ngx-tethys/date-picker';
 import { ThyIconRegistry } from 'ngx-tethys/icon';
-import { ThyInputDirective } from 'ngx-tethys/input';
-import { ThyLoading } from 'ngx-tethys/loading';
 import { ThyPopoverModule } from 'ngx-tethys/popover';
 import { ThySegment, ThySegmentEvent, ThySegmentItem } from 'ngx-tethys/segment';
 import { withRemoveView } from '../../../plugins/view.plugin';
@@ -50,18 +46,7 @@ const LOCAL_STORAGE_AI_TABLE_DATA = 'ai-table-demo-data';
 @Component({
     selector: 'demo-table-content',
     standalone: true,
-    imports: [
-        RouterOutlet,
-        ThyPopoverModule,
-        ThyAction,
-        FormsModule,
-        ThyInputDirective,
-        ThySegment,
-        ThySegmentItem,
-        ThyLoading,
-        AITableGrid,
-        AITableDomGrid
-    ],
+    imports: [ThyPopoverModule, ThyAction, FormsModule, ThySegment, ThySegmentItem, AITableGrid, AITableDomGrid],
     templateUrl: './content.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

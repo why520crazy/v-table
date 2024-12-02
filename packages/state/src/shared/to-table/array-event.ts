@@ -18,9 +18,9 @@ import {
     getSharedMapValueId,
     getSharedRecord,
     getSharedRecordId,
+    getShortIdBySystemFieldValues,
     getValuesByCustomFieldValues,
-    POSITIONS_INDEX,
-    UPDATED_BY_INDEX
+    SystemFieldIndex
 } from '../utils/translate';
 import { AIFieldValueIdPath, AITableField, AITableQueries, IdPath, NumberPath } from '@ai-table/grid';
 
@@ -83,6 +83,7 @@ export default function translateArrayEvent(aiTable: AIViewTable, sharedType: Sh
                                 path: path,
                                 record: {
                                     _id: getIdBySystemFieldValues(systemFieldValues),
+                                    short_id: getShortIdBySystemFieldValues(systemFieldValues),
                                     ...getTrackableEntityBySystemFieldValues(systemFieldValues),
                                     positions: getPositionsBySystemFieldValues(systemFieldValues),
                                     values: getValuesByCustomFieldValues(customFieldValues, aiTable.fields() as AITableViewFields)
@@ -109,7 +110,7 @@ export default function translateArrayEvent(aiTable: AIViewTable, sharedType: Sh
                                             path: [record._id],
                                             positions: newPositions
                                         });
-                                    // 此处的循环会包含 updated_at 和 updated_by 各一次，这里只处理 updated_by 同时包含两个字段的修改
+                                        // 此处的循环会包含 updated_at 和 updated_by 各一次，这里只处理 updated_by 同时包含两个字段的修改
                                     } else if (isUpdatedByOperation(fieldIndex + systemFieldOffset)) {
                                         const systemFieldValues = getSharedRecord(sharedRecords, recordIndex).get(0).toJSON();
                                         const { updated_at, updated_by } = getTrackableEntityBySystemFieldValues(systemFieldValues);
@@ -189,11 +190,11 @@ export function isCustomFieldOperation(targetPath: number[]): boolean {
 }
 
 export function isPositionsOperation(fieldIndex: number): boolean {
-    return fieldIndex === POSITIONS_INDEX;
+    return fieldIndex === SystemFieldIndex.Positions;
 }
 
 export function isUpdatedByOperation(fieldIndex: number): boolean {
-    return fieldIndex === UPDATED_BY_INDEX;
+    return fieldIndex === SystemFieldIndex.UpdatedBy;
 }
 
 export function getRemoveIds(event: Y.YEvent<any>, type: ActionName.RemoveField | ActionName.RemoveRecord) {

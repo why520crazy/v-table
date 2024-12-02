@@ -41,6 +41,7 @@
         "@tethys/cdk": "^18.0.5",
         "@tethys/icons": "^1.4.69",
         "bson-objectid": "^2.0.4",
+        "nanoid": "^3.3.8",
         "date-fns": "^3.6.0",
         "grapheme-splitter": "^1.0.4",
         "immer": "^10.0.3",

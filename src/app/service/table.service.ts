@@ -48,6 +48,10 @@ export class TableService {
         return this.views().find((view) => view._id === this.activeViewId()) as AITableView;
     });
 
+    activeViewShortId = computed(() => {
+        return this.activeView().short_id;
+    });
+
     renderRecords = computed(() => {
         return buildRecordsByView(this.aiTable, this.records(), this.fields(), this.activeView()) as AITableViewRecords;
     });

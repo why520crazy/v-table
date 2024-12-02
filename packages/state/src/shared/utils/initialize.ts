@@ -3,6 +3,7 @@ import { AITableViewFields, AITableViewRecords, AITableViews, SharedRecordJsonTy
 import {
     getIdBySystemFieldValues,
     getPositionsBySystemFieldValues,
+    getShortIdBySystemFieldValues,
     getTrackableEntityBySystemFieldValues,
     getValuesByCustomFieldValues,
     toRecordSyncElement,
@@ -73,6 +74,7 @@ export const getRecordsBySharedJson = (recordJsonArray: SharedRecordJsonType[], 
         const [systemFieldValues, customFieldValues] = record;
         return {
             _id: getIdBySystemFieldValues(systemFieldValues),
+            short_id: getShortIdBySystemFieldValues(systemFieldValues),
             ...getTrackableEntityBySystemFieldValues(systemFieldValues),
             positions: getPositionsBySystemFieldValues(systemFieldValues),
             values: getValuesByCustomFieldValues(customFieldValues, fields)

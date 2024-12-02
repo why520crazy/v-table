@@ -23,6 +23,7 @@ export function getDefaultValue() {
         records: [
             {
                 _id: 'row-1',
+                short_id: `row-short-id-${1}`,
                 ...getDefaultTrackableEntity(),
                 positions: {
                     view1: 0,
@@ -51,6 +52,7 @@ export function getDefaultValue() {
             },
             {
                 _id: 'row-2',
+                short_id: `row-short-id-${2}`,
                 ...getDefaultTrackableEntity(),
                 positions: {
                     view1: 1,
@@ -76,6 +78,7 @@ export function getDefaultValue() {
             },
             {
                 _id: 'row-3',
+                short_id: `row-short-id-${3}`,
                 ...getDefaultTrackableEntity(),
                 positions: {
                     view1: 2,
@@ -415,6 +418,7 @@ export function getCanvasDefaultValue() {
         records: [
             {
                 _id: 'row-1',
+                short_id: `row-short-id-${1}`,
                 ...getDefaultTrackableEntity(),
                 positions: {
                     view1: 0,
@@ -450,6 +454,7 @@ export function getCanvasDefaultValue() {
             },
             {
                 _id: 'row-2',
+                short_id: `row-short-id-${2}`,
                 ...getDefaultTrackableEntity(),
                 positions: {
                     view1: 1,
@@ -480,6 +485,7 @@ export function getCanvasDefaultValue() {
             },
             {
                 _id: 'row-3',
+                short_id: `row-short-id-${3}`,
                 ...getDefaultTrackableEntity(),
                 positions: {
                     view1: 2,
@@ -968,6 +974,7 @@ export function getBigData() {
     for (let index = 0; index < 500000; index++) {
         initValue.records.push({
             _id: `row-${index + 1}`,
+            short_id: `row-short-id-${index + 1}`,
             ...getDefaultTrackableEntity(),
             positions: { view1: index, view2: index },
             values: {

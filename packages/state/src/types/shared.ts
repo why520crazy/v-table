@@ -10,7 +10,7 @@ export type RecordSyncElement = Y.Array<Y.Array<any>>;
 
 export type SharedType = Y.Map<Y.Array<SyncMapElement | SyncArrayElement | RecordSyncElement>>;
 
-export type SystemFieldValues = [{ _id: string }, number, string, Positions, number, string];
+export type SystemFieldValues = [{ _id: string }, string, number, string, Positions, number, string];
 
 export type CustomFieldValues = FieldValue[];
 
