@@ -1,4 +1,4 @@
-import { idCreator } from '@ai-table/grid';
+import { idCreator, shortIdCreator } from '@ai-table/grid';
 import { AITableView, AITableViewField, AITableViewFields, AITableViewRecords, AIViewTable, Positions } from '../types';
 import { Actions } from '../action';
 import { ViewActions } from '../action/view';
@@ -34,8 +34,10 @@ export function getPosition(data: AITableViewRecords | AITableViewFields, active
 export function addView(aiTable: AIViewTable, type: 'add' | 'copy') {
     let index = aiTable.views().length;
     const newId = idCreator();
+    const shortId = shortIdCreator();
     let newView: AITableView = {
         _id: newId,
+        short_id: shortId,
         name: '表格视图 ' + index
     };
     let originViewId = aiTable.views()[aiTable.views().length - 1]._id;

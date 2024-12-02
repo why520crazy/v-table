@@ -1,8 +1,7 @@
-import { AITableGrid } from '@ai-table/grid';
 import { Actions, addView, AITableView, AITableViewFields, AITableViewRecords, removeView } from '@ai-table/state';
 import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ThyAction } from 'ngx-tethys/action';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 import { ThyIconModule } from 'ngx-tethys/icon';
@@ -16,18 +15,10 @@ import { LOCAL_STORAGE_KEY, TableService } from '../service/table.service';
 const initViews: AITableView[] = [
     {
         _id: 'view1',
-        name: '表格视图',
-        settings: {
-            // conditions: [
-            //     {
-            //         field_id: 'column-1',
-            //         operation: AITableFilterOperation.contain,
-            //         value: '文本 2-1'
-            //     }
-            // ]
-        }
+        short_id: 'view-short-id-1',
+        name: '表格视图'
     },
-    { _id: 'view2', name: '表格视图 1' }
+    { _id: 'view2', short_id: 'view-short-id-2', name: '表格视图 1' }
 ];
 
 @Component({
@@ -35,7 +26,6 @@ const initViews: AITableView[] = [
     standalone: true,
     imports: [
         RouterOutlet,
-        AITableGrid,
         ThyAction,
         ThyTabs,
         ThyTab,
@@ -62,6 +52,8 @@ export class DemoTable implements OnInit, AfterViewInit, OnDestroy {
 
     router = inject(Router);
 
+    activatedRoute = inject(ActivatedRoute);
+
     tableService = inject(TableService);
 
     isEdit = false;
@@ -71,22 +63,22 @@ export class DemoTable implements OnInit, AfterViewInit, OnDestroy {
     activeViewName!: string;
 
     ngOnInit(): void {
-        let activeView = localStorage.getItem(`${LOCAL_STORAGE_KEY}`);
-        if (!activeView || (activeView && initViews.findIndex((item) => item._id === activeView) < 0)) {
-            activeView = initViews[0]._id;
+        let activeViewId = localStorage.getItem(`${LOCAL_STORAGE_KEY}`);
+        if (!activeViewId || (activeViewId && initViews.findIndex((item) => item._id === activeViewId) < 0)) {
+            activeViewId = initViews[0]._id;
         }
-        this.tableService.setActiveView(activeView);
-        this.router.navigate([`/${activeView}`]);
+        this.tableService.setActiveView(activeViewId);
         this.tableService.initData(initViews);
+        if (!this.activatedRoute.firstChild) {
+            this.router.navigateByUrl(`/${this.tableService.activeViewShortId()}`);
+        }
     }
 
-    ngAfterViewInit(): void {
-        this.router.navigate(['/view1']);
-    }
+    ngAfterViewInit(): void {}
 
     activeTabChange(data: any) {
         this.tableService.setActiveView(data);
-        this.router.navigateByUrl(`/${this.tableService.activeViewId()}`);
+        this.router.navigateByUrl(`/${this.tableService.activeViewShortId()}`);
     }
 
     handleShared() {
@@ -117,6 +109,7 @@ export class DemoTable implements OnInit, AfterViewInit, OnDestroy {
         const newView = addView(this.tableService.aiTable, type);
         if (newView) {
             this.tableService.setActiveView(newView._id);
+            this.router.navigateByUrl(`/${this.tableService.activeViewShortId()}`);
         }
     }
 

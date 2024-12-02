@@ -53,6 +53,7 @@ export type ViewSettings = AITableFilterConditions & AITableSortOptions;
 
 export interface AITableView {
     _id: string;
+    short_id: string;
     name: string;
     emoji_icon?: string;
     settings?: ViewSettings;

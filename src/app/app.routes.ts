@@ -8,7 +8,7 @@ export const routes: Routes = [
         component: DemoTable,
         children: [
             {
-                path: ':viewId',
+                path: ':viewShortId',
                 component: DemoTableContent
             }
         ]

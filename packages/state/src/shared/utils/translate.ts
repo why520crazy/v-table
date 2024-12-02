@@ -13,9 +13,15 @@ import {
 } from '../../types';
 import * as Y from 'yjs';
 
-export const POSITIONS_INDEX = 3;
-export const UPDATED_AT_INDEX = 4;
-export const UPDATED_BY_INDEX = 5;
+export enum SystemFieldIndex {
+    Id = 0,
+    ShortId = 1,
+    CreatedAt = 2,
+    CreatedBy = 3,
+    Positions = 4,
+    UpdatedAt = 5,
+    UpdatedBy = 6
+}
 
 export function toSyncElement(node: any): SyncMapElement {
     const element: SyncMapElement = new Y.Map();
@@ -96,7 +102,15 @@ export function getSharedMapValueIndex(sharedNodes: Y.Array<SyncMapElement>, id:
 }
 
 export const getSystemFieldValues = (record: AITableViewRecord): SystemFieldValues => {
-    return [{ _id: record['_id'] }, record.created_at, record.created_by, record['positions'], record.updated_at, record.updated_by];
+    return [
+        { _id: record['_id'] },
+        record.short_id,
+        record.created_at,
+        record.created_by,
+        record['positions'],
+        record.updated_at,
+        record.updated_by
+    ];
 };
 
 export const getCustomFieldValues = (record: AITableViewRecord): CustomFieldValues => {
@@ -114,39 +128,43 @@ export const getValuesByCustomFieldValues = (customFieldValues: CustomFieldValue
 
 export const getTrackableEntityBySystemFieldValues = (systemFieldValues: SystemFieldValues): TrackableEntity => {
     return {
-        created_at: systemFieldValues[1],
-        created_by: systemFieldValues[2],
-        updated_at: systemFieldValues[4],
-        updated_by: systemFieldValues[5]
+        created_at: systemFieldValues[SystemFieldIndex.CreatedAt],
+        created_by: systemFieldValues[SystemFieldIndex.CreatedBy],
+        updated_at: systemFieldValues[SystemFieldIndex.UpdatedAt],
+        updated_by: systemFieldValues[SystemFieldIndex.UpdatedBy]
     };
 };
 
 export const getIdBySystemFieldValues = (systemFieldValues: SystemFieldValues): string => {
-    return systemFieldValues[0]['_id'];
+    return systemFieldValues[SystemFieldIndex.Id]['_id'];
+};
+
+export const getShortIdBySystemFieldValues = (systemFieldValues: SystemFieldValues): string => {
+    return systemFieldValues[SystemFieldIndex.ShortId];
 };
 
 export const getIdBySystemFieldValuesType = (systemFieldValuesType: Y.Array<any>): string => {
-    return systemFieldValuesType.get(0)['_id'];
+    return systemFieldValuesType.get(SystemFieldIndex.Id)['_id'];
 };
 
 export const getPositionsBySystemFieldValues = (systemFieldValues: SystemFieldValues): Positions => {
-    return systemFieldValues[POSITIONS_INDEX];
+    return systemFieldValues[SystemFieldIndex.Positions];
 };
 
 export const getPositionsByRecordSyncElement = (recordSyncElement: RecordSyncElement) => {
     const systemFieldType = recordSyncElement.get(0) as Y.Array<any>;
-    const positions = systemFieldType.get(POSITIONS_INDEX);
+    const positions = systemFieldType.get(SystemFieldIndex.Positions);
     return positions;
 };
 
 export const setRecordPositions = (recordSyncElement: RecordSyncElement, newPositions: Positions) => {
     const systemFieldType = recordSyncElement.get(0) as Y.Array<any>;
-    systemFieldType.delete(POSITIONS_INDEX);
-    systemFieldType.insert(POSITIONS_INDEX, [newPositions]);
+    systemFieldType.delete(SystemFieldIndex.Positions);
+    systemFieldType.insert(SystemFieldIndex.Positions, [newPositions]);
 };
 
 export const setRecordUpdatedInfo = (recordSyncElement: RecordSyncElement, info: AITableRecordUpdatedInfo) => {
     const systemFieldType = recordSyncElement.get(0) as Y.Array<any>;
-    systemFieldType.delete(UPDATED_AT_INDEX, 2);
-    systemFieldType.insert(UPDATED_AT_INDEX, [info.updated_at, info.updated_by]);
+    systemFieldType.delete(SystemFieldIndex.UpdatedAt, 2);
+    systemFieldType.insert(SystemFieldIndex.UpdatedAt, [info.updated_at, info.updated_by]);
 };

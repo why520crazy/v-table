@@ -134,6 +134,7 @@ export interface UpdateTrackableEntity {
 
 export interface AITableRecord {
     _id: string;
+    short_id: string;
     created_at: NumberFieldValue;
     created_by: string;
     updated_at: NumberFieldValue;
