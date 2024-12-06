@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.20](https://github.com/worktile/ai-table/compare/0.0.19...0.0.20) (2024-12-06)
+
+
+### Bug Fixes
+
+* **grid:** #WIK-16750  the remove icon  should be red on hover ([#177](https://github.com/worktile/ai-table/issues/177)) ([9a4113a](https://github.com/worktile/ai-table/commit/9a4113a29c8b77730e0913162f45738d277775a6)), closes [#WIK-16750](https://github.com/worktile/ai-table/issues/WIK-16750)
+
+
+
 ## [0.0.19](https://github.com/worktile/ai-table/compare/0.0.18...0.0.19) (2024-12-02)
 
 
