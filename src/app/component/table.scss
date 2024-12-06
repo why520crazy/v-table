@@ -1,0 +1,7 @@
+@use 'ngx-tethys/styles/variables.scss';
+
+.remove-icon {
+    &:hover {
+        color: variables.$danger !important;
+    }
+}

@@ -1,0 +1,12 @@
+@use 'ngx-tethys/styles/variables.scss';
+
+.field-menu {
+    .remove-field {
+        &:hover {
+            .thy-icon {
+                color: variables.$danger;
+            }
+            color: variables.$danger !important;
+        }
+    }
+}
