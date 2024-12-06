@@ -3,6 +3,8 @@
 @use 'ngx-tethys/styles/variables.scss';
 @use '../components/cell-editors/cell-editor.scss';
 @use '../components/cell-views/select/option.scss';
+@use '../components/field-menu/field-menu.scss';
+
 .ai-table-dom-grid {
     display: table;
     width: 100%;

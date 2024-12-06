@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '../packages/grid/src/styles/styles.scss';
-@import './app/app.component.scss';
+@forward '../packages/grid/src/styles/styles.scss';
+@forward './app/app.component.scss';
+@forward './app/component/table.scss';
