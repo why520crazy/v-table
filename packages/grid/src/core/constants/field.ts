@@ -5,7 +5,7 @@ export const FieldOptions: AITableFieldOption[] = [
         type: AITableFieldType.text,
         name: '单行文本',
         icon: 'font',
-        width: 300
+        width: 200
     },
     // 多行文本
     {
@@ -37,7 +37,13 @@ export const FieldOptions: AITableFieldOption[] = [
     },
     {
         type: AITableFieldType.member,
-        name: '成员',
+        name: '单个成员',
+        icon: 'user',
+        width: 200
+    },
+    {
+        type: AITableFieldType.member,
+        name: '多个成员',
         icon: 'user',
         width: 200,
         settings: {
