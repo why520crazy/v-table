@@ -26,6 +26,8 @@ export class AITableGridFieldService {
             placement: 'bottomLeft',
             manualClosure: true,
             originActiveClass: undefined,
+            height: 'auto',
+            panelClass: 'ai-table-field-property-editor-panel',
             initialState: {
                 aiTable,
                 aiEditField: field,
