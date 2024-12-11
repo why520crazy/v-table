@@ -13,7 +13,7 @@ import { AITableFieldMenuItem } from '../../types/field';
 import { NgClass } from '@angular/common';
 
 @Component({
-    selector: 'field-menu',
+    selector: 'ai-table-field-menu',
     templateUrl: './field-menu.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +30,7 @@ import { NgClass } from '@angular/common';
         NgClass
     ]
 })
-export class FieldMenu extends ThyDropdownAbstractMenu {
+export class AITableFieldMenu extends ThyDropdownAbstractMenu {
     @Input({ required: true }) fieldId!: string;
 
     @Input({ required: true }) aiTable!: AITable;

@@ -1,5 +1,5 @@
 import { CommonModule, NgClass, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ThyAction } from 'ngx-tethys/action';
 import { ThyAvatarModule } from 'ngx-tethys/avatar';
@@ -14,7 +14,7 @@ import { ThyRate } from 'ngx-tethys/rate';
 import { ThyStopPropagationDirective } from 'ngx-tethys/shared';
 import { ThyTag } from 'ngx-tethys/tag';
 import { ProgressEditorComponent, SelectOptionComponent } from './components';
-import { FieldMenu } from './components/field-menu/field-menu.component';
+import { AITableFieldMenu } from './components/field-menu/field-menu.component';
 import { AITableFieldPropertyEditor } from './components/field-property-editor/field-property-editor.component';
 import { AITableField } from './core';
 import { AITableGridBase } from './grid-base.component';
@@ -22,7 +22,6 @@ import { IsSelectRecordPipe, MemberSettingPipe, SelectOptionPipe, SelectOptionsP
 import { AITableGridEventService } from './services/event.service';
 import { AITableGridFieldService } from './services/field.service';
 import { AITableGridSelectionService } from './services/selection.service';
-import { buildGridData } from './utils';
 
 @Component({
     selector: 'ai-table-dom-grid',
@@ -48,7 +47,7 @@ import { buildGridData } from './utils';
         ThyDatePickerFormatPipe,
         ThyFlexibleText,
         ThyStopPropagationDirective,
-        FieldMenu,
+        AITableFieldMenu,
         ThyAction,
         ThyDropdownDirective,
         ThyDropdownMenuComponent,

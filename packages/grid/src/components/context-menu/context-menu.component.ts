@@ -12,7 +12,7 @@ import { AITable } from '../../core';
 import { AITableContextMenuItem } from '../../types';
 
 @Component({
-    selector: 'context-menu',
+    selector: 'ai-table-context-menu',
     templateUrl: './context-menu.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,

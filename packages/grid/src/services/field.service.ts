@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ThyPopover } from 'ngx-tethys/popover';
 import { AITableFieldPropertyEditor } from '../components';
-import { FieldMenu } from '../components/field-menu/field-menu.component';
+import { AITableFieldMenu } from '../components/field-menu/field-menu.component';
 import { AITable } from '../core';
 import { AIFieldConfig, AITableEditFieldOptions, AITableFieldMenuOptions } from '../types';
 
@@ -38,7 +38,7 @@ export class AITableGridFieldService {
 
     openFieldMenu(aiTable: AITable, options: AITableFieldMenuOptions) {
         const { origin, editOrigin, position, fieldId, fieldMenus } = options;
-        const ref = this.thyPopover.open(FieldMenu, {
+        const ref = this.thyPopover.open(AITableFieldMenu, {
             origin,
             originPosition: position,
             placement: 'bottomLeft',
