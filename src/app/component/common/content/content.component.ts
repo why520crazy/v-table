@@ -110,8 +110,8 @@ export class DemoTableContent {
     contextMenus: AITableContextMenuItem[] = [
         {
             ...RemoveRecordsItem,
-            disabled: (aiTable: AITable, targetName: string) => false,
-            hidden: (aiTable: AITable, targetname: string) => this.tableService.readonly()
+            disabled: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => false,
+            hidden: (aiTable: AITable, targetname: string, position: { x: number; y: number }) => this.tableService.readonly()
         }
     ];
 

@@ -239,7 +239,8 @@ export class AITableGridEventService {
             initialState: {
                 aiTable,
                 contextMenus,
-                targetName
+                targetName,
+                position
             }
         });
         return ref;

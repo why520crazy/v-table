@@ -37,9 +37,9 @@ export interface AITableContextMenuItem {
     type: string;
     name?: string;
     icon?: string;
-    exec?: (aiTable: AITable, targetName: string) => void;
-    hidden?: (aiTable: AITable, targetName: string) => boolean;
-    disabled?: (aiTable: AITable, targetName: string) => boolean;
+    exec?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => void;
+    hidden?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => boolean;
+    disabled?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => boolean;
 }
 
 export interface AITableContextMenuOptions {

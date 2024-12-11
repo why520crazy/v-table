@@ -35,9 +35,11 @@ export class ContextMenu extends ThyDropdownAbstractMenu {
 
     targetName = input.required<string>();
 
+    position = input.required<{ x: number; y: number }>();
+
     execute(menu: AITableContextMenuItem) {
-        if ((menu.disabled && !menu.disabled(this.aiTable(), this.targetName())) || !menu.disabled) {
-            menu.exec && menu.exec(this.aiTable(), this.targetName());
+        if ((menu.disabled && !menu.disabled(this.aiTable(), this.targetName(), this.position())) || !menu.disabled) {
+            menu.exec && menu.exec(this.aiTable(), this.targetName(), this.position());
         }
     }
 }
