@@ -1,5 +1,6 @@
 import { AITable, AITableRecordMenuItem } from '@ai-table/grid';
-import { Actions, AIViewTable } from '@ai-table/state';
+import { Actions } from '../action';
+import { AIViewTable } from '../types';
 
 export const RemoveRecordsItem: AITableRecordMenuItem = {
     type: 'removeRecords',

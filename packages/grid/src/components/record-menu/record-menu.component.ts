@@ -1,7 +1,5 @@
-import { AITable, AITableRecordMenuItem } from '@ai-table/grid';
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-
 import {
     ThyDropdownAbstractMenu,
     ThyDropdownMenuComponent,
@@ -10,6 +8,8 @@ import {
     ThyDropdownMenuItemNameDirective
 } from 'ngx-tethys/dropdown';
 import { ThyIcon } from 'ngx-tethys/icon';
+import { AITable } from '../../core';
+import { AITableRecordMenuItem } from '../../types';
 
 @Component({
     selector: 'record-menu',
