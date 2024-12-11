@@ -1,3 +1,4 @@
+import { ElementRef } from '@angular/core';
 import { AITable, Coordinate } from '../core';
 
 export enum AITableRowType {
@@ -30,4 +31,20 @@ export interface AITableRowHeadsConfig {
     rowStartIndex: number;
     rowStopIndex: number;
     aiTable: AITable;
+}
+
+export interface AITableContextMenuItem {
+    type: string;
+    name?: string;
+    icon?: string;
+    exec?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => void;
+    hidden?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => boolean;
+    disabled?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => boolean;
+}
+
+export interface AITableContextMenuOptions {
+    origin: ElementRef<any> | HTMLElement;
+    position: { x: number; y: number };
+    menuItems: AITableContextMenuItem[];
+    targetName: string;
 }

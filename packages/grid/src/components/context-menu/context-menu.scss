@@ -1,0 +1,12 @@
+@use 'ngx-tethys/styles/variables.scss';
+
+.context-menu {
+    .remove-record {
+        &:hover {
+            .thy-icon {
+                color: variables.$danger;
+            }
+            color: variables.$danger !important;
+        }
+    }
+}

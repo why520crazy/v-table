@@ -7,8 +7,9 @@ import { debounceTime, fromEvent, Subject } from 'rxjs';
 import { AbstractEditCellEditor } from '../components';
 import { GRID_CELL_EDITOR_MAP } from '../constants';
 import { AITable, AITableFieldType } from '../core';
-import { AITableGridCellRenderSchema, AITableOpenEditOptions } from '../types';
+import { AITableContextMenuOptions, AITableGridCellRenderSchema, AITableOpenEditOptions } from '../types';
 import { getCellHorizontalPosition, getEditorBoxOffset, getEditorSpace, getHoverEditorBoxOffset, getHoverEditorSpace } from '../utils';
+import { AITableContextMenu } from '../components/context-menu/context-menu.component';
 
 @Injectable()
 export class AITableGridEventService {
@@ -226,5 +227,22 @@ export class AITableGridEventService {
             return null;
         }
         return null;
+    }
+
+    openContextMenu(aiTable: AITable, options: AITableContextMenuOptions) {
+        const { origin, position, menuItems, targetName } = options;
+        const ref = this.thyPopover.open(AITableContextMenu, {
+            origin: origin as HTMLElement,
+            originPosition: position,
+            placement: 'bottomLeft',
+            insideClosable: true,
+            initialState: {
+                aiTable,
+                menuItems,
+                targetName,
+                position
+            }
+        });
+        return ref;
     }
 }

@@ -2,7 +2,7 @@ import { Signal, WritableSignal } from '@angular/core';
 import { Dictionary } from 'ngx-tethys/types';
 import { AITable, AITableField, AITableFieldType, AITableRecord, Coordinate, FieldValue, UpdateFieldValueOptions } from '../core';
 import { AITableFieldMenuItem } from './field';
-import { AITableLinearRow } from './row';
+import { AITableLinearRow, AITableContextMenuItem } from './row';
 
 export interface AITableGridCellRenderSchema {
     editor?: any;

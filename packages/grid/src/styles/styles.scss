@@ -4,6 +4,7 @@
 @use '../components/cell-editors/cell-editor.scss';
 @use '../components/cell-views/select/option.scss';
 @use '../components/field-menu/field-menu.scss';
+@use '../components/context-menu/context-menu.scss';
 
 .ai-table-dom-grid {
     display: table;

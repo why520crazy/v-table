@@ -3,6 +3,7 @@ import {
     AddRecordOptions,
     AIFieldConfig,
     AITable,
+    AITableContextMenuItem,
     AITableDomGrid,
     AITableField,
     AITableFieldType,
@@ -23,6 +24,7 @@ import {
     buildRemoveFieldItem,
     DividerMenuItem,
     EditFieldPropertyItem,
+    RemoveRecordsItem,
     updateFieldValue,
     withState,
     YjsAITable
@@ -104,6 +106,14 @@ export class DemoTableContent {
             ]
         };
     });
+
+    contextMenuItems: AITableContextMenuItem[] = [
+        {
+            ...RemoveRecordsItem,
+            disabled: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => false,
+            hidden: (aiTable: AITable, targetname: string, position: { x: number; y: number }) => this.tableService.readonly()
+        }
+    ];
 
     iconRegistry = inject(ThyIconRegistry);
 
