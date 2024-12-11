@@ -1,0 +1,12 @@
+@for (menu of recordMenus(); track $index) {
+    <a
+        thyDropdownMenuItem
+        href="javascript:;"
+        [ngClass]="{ 'remove-record': !menu.disabled }"
+        (click)="execute(menu)"
+        [thyDisabled]="!!menu.disabled"
+    >
+        <thy-icon thyIconName="menu.icon"></thy-icon>
+        <span>{{ menu.name }}</span>
+    </a>
+}

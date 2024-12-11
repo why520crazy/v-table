@@ -23,6 +23,7 @@ import {
     buildRemoveFieldItem,
     DividerMenuItem,
     EditFieldPropertyItem,
+    RemoveRecordsItem,
     updateFieldValue,
     withState,
     YjsAITable
@@ -101,7 +102,8 @@ export class DemoTableContent {
                     }),
                     hidden: () => readonly
                 }
-            ]
+            ],
+            recordMenus: [{ ...RemoveRecordsItem, disabled: false }]
         };
     });
 

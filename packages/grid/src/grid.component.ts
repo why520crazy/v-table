@@ -195,6 +195,8 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         const _targetName = e.event.target.name();
 
         const { targetName, fieldId, recordId } = getDetailByTargetName(_targetName);
+        if (mouseEvent.button === AITableMouseDownType.Right && recordId && fieldId) return;
+
         switch (targetName) {
             case AI_TABLE_FIELD_HEAD:
                 mouseEvent.preventDefault();
@@ -214,6 +216,32 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             default:
                 this.aiTableGridSelectionService.clearSelection();
         }
+    }
+
+    stageContextmenu(e: KoEventObject<MouseEvent>) {
+        const mouseEvent = e.event.evt;
+        mouseEvent.preventDefault();
+
+        const _targetName = e.event.target.name();
+        const { fieldId, recordId } = getDetailByTargetName(_targetName);
+        if (!recordId || !fieldId) return;
+
+        const position = {
+            x: mouseEvent.x,
+            y: mouseEvent.y
+        };
+
+        let selectedRecordIds = [...this.aiTable.selection().selectedRecords.keys()];
+        if (!selectedRecordIds.length) {
+            selectedRecordIds = [recordId];
+        }
+
+        this.aiTableGridFieldService.openRecordMenu(this.aiTable, {
+            origin: this.containerElement(),
+            recordMenus: this.recordMenus(),
+            position,
+            selectedRecordIds
+        });
     }
 
     stageClick(e: KoEventObject<MouseEvent>) {

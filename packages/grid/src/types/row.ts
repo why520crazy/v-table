@@ -1,4 +1,5 @@
-import { AITable, Coordinate } from '../core';
+import { ElementRef } from '@angular/core';
+import { AITable, AITableRecord, Coordinate } from '../core';
 
 export enum AITableRowType {
     add = 'add',
@@ -30,4 +31,19 @@ export interface AITableRowHeadsConfig {
     rowStartIndex: number;
     rowStopIndex: number;
     aiTable: AITable;
+}
+
+export interface AITableRecordMenuItem {
+    type: string;
+    name?: string;
+    icon?: string;
+    exec?: (aiTable: AITable, selectedRecordIds: string[]) => void;
+    disabled?: boolean;
+}
+
+export interface AITableRecordMenuOptions {
+    origin: ElementRef<any> | HTMLElement;
+    position: { x: number; y: number };
+    recordMenus: AITableRecordMenuItem[];
+    selectedRecordIds: string[];
 }

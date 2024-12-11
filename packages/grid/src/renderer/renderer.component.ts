@@ -50,6 +50,8 @@ export class AITableRenderer {
 
     koMousedown = output<KoEventObject<MouseEvent>>();
 
+    koContextmenu = output<KoEventObject<MouseEvent>>();
+
     koWheel = output<KoEventObject<WheelEvent>>();
 
     koClick = output<KoEventObject<MouseEvent>>();
@@ -207,6 +209,10 @@ export class AITableRenderer {
 
     stageMousedown(e: KoEventObject<MouseEvent>) {
         this.koMousedown.emit(e as KoEventObject<MouseEvent>);
+    }
+
+    stageContextmenu(e: KoEventObject<MouseEvent>) {
+        this.koContextmenu.emit(e as KoEventObject<MouseEvent>);
     }
 
     stageClick(e: KoEventObject<MouseEvent>) {
