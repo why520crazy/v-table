@@ -237,7 +237,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             y: mouseEvent.y
         };
         const contextMenus = this.aiContextMenus();
-        if (contextMenus.every((item) => !!(item.hidden && item.hidden(this.aiTable, targetName, position)))) {
+        if (!contextMenus.length || contextMenus.every((item) => !!(item.hidden && item.hidden(this.aiTable, targetName, position)))) {
             return;
         }
 
