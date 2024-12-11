@@ -45,6 +45,6 @@ export interface AITableContextMenuItem {
 export interface AITableContextMenuOptions {
     origin: ElementRef<any> | HTMLElement;
     position: { x: number; y: number };
-    contextMenus: AITableContextMenuItem[];
+    menuItems: AITableContextMenuItem[];
     targetName: string;
 }

@@ -28,10 +28,10 @@ import { AITableContextMenuItem } from '../../types';
         NgClass
     ]
 })
-export class ContextMenu extends ThyDropdownAbstractMenu {
+export class AITableContextMenu extends ThyDropdownAbstractMenu {
     aiTable = input.required<AITable>();
 
-    contextMenus = input.required<AITableContextMenuItem[]>();
+    menuItems = input.required<AITableContextMenuItem[]>();
 
     targetName = input.required<string>();
 

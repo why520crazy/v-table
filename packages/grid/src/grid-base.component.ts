@@ -47,7 +47,7 @@ export class AITableGridBase implements OnInit {
 
     aiFields = model.required<AITableFields>();
 
-    aiContextMenus = input<AITableContextMenuItem[]>([]);
+    aiContextMenuItems = input<AITableContextMenuItem[]>([]);
 
     aiFieldConfig = input<AIFieldConfig>();
 

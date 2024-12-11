@@ -1,4 +1,4 @@
-@for (menu of contextMenus(); track $index) {
+@for (menu of menuItems(); track $index) {
     @if ((menu.hidden && !menu.hidden(aiTable(), targetName(), position())) || !menu.hidden) {
         @let disabled = !!(menu.disabled && menu.disabled(aiTable(), targetName(), position()));
         <a

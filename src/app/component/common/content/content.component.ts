@@ -107,7 +107,7 @@ export class DemoTableContent {
         };
     });
 
-    contextMenus: AITableContextMenuItem[] = [
+    contextMenuItems: AITableContextMenuItem[] = [
         {
             ...RemoveRecordsItem,
             disabled: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => false,
