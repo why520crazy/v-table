@@ -1,0 +1,15 @@
+@for (menu of contextMenus(); track $index) {
+    @if ((menu.hidden && !menu.hidden(aiTable(), targetName())) || !menu.hidden) {
+        @let disabled = !!(menu.disabled && menu.disabled(aiTable(), targetName()));
+        <a
+            thyDropdownMenuItem
+            href="javascript:;"
+            [ngClass]="{ 'remove-record': !disabled }"
+            (click)="execute(menu)"
+            [thyDisabled]="disabled"
+        >
+            <thy-icon thyIconName="menu.icon"></thy-icon>
+            <span>{{ menu.name }}</span>
+        </a>
+    }
+}

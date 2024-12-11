@@ -33,7 +33,7 @@ import {
 import { AITableGridEventService } from './services/event.service';
 import { AI_TABLE_GRID_FIELD_SERVICE_MAP, AITableGridFieldService } from './services/field.service';
 import { AITableGridSelectionService } from './services/selection.service';
-import { AIFieldConfig, AITableFieldMenuItem, AITableRecordMenuItem, AITableReferences } from './types';
+import { AIFieldConfig, AITableFieldMenuItem, AITableContextMenuItem, AITableReferences } from './types';
 import { AITableFieldPropertyEditor } from './components';
 
 @Component({
@@ -46,6 +46,8 @@ export class AITableGridBase implements OnInit {
     aiRecords = model.required<AITableRecords>();
 
     aiFields = model.required<AITableFields>();
+
+    aiContextMenus = input<AITableContextMenuItem[]>([]);
 
     aiFieldConfig = input<AIFieldConfig>();
 
@@ -77,10 +79,6 @@ export class AITableGridBase implements OnInit {
 
     fieldMenus: Signal<AITableFieldMenuItem[]> = computed(() => {
         return this.aiFieldConfig()?.fieldMenus || [];
-    });
-
-    recordMenus: Signal<AITableRecordMenuItem[]> = computed(() => {
-        return this.aiFieldConfig()?.recordMenus || [];
     });
 
     mouseoverRef!: ThyPopoverRef<any>;

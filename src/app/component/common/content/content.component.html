@@ -29,6 +29,7 @@
             @case ('canvas') {
                 <ai-table-grid
                     [aiReadonly]="tableService.readonly()"
+                    [aiContextMenus]="contextMenus"
                     [(aiRecords)]="tableService.records"
                     [(aiFields)]="tableService.fields"
                     [aiFieldConfig]="aiFieldConfig()"

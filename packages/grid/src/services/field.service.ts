@@ -3,8 +3,7 @@ import { ThyPopover } from 'ngx-tethys/popover';
 import { AITableFieldPropertyEditor } from '../components';
 import { FieldMenu } from '../components/field-menu/field-menu.component';
 import { AITable } from '../core';
-import { AIFieldConfig, AITableEditFieldOptions, AITableFieldMenuOptions, AITableRecordMenuOptions } from '../types';
-import { RecordMenu } from '../components/record-menu/record-menu.component';
+import { AIFieldConfig, AITableEditFieldOptions, AITableFieldMenuOptions } from '../types';
 
 export const AI_TABLE_GRID_FIELD_SERVICE_MAP = new WeakMap<AITable, AITableGridFieldService>();
 
@@ -51,22 +50,6 @@ export class AITableGridFieldService {
                 aiTable,
                 fieldId,
                 fieldMenus
-            }
-        });
-        return ref;
-    }
-
-    openRecordMenu(aiTable: AITable, options: AITableRecordMenuOptions) {
-        const { origin, position, recordMenus, selectedRecordIds } = options;
-        const ref = this.thyPopover.open(RecordMenu, {
-            origin: origin as HTMLElement,
-            originPosition: position,
-            placement: 'bottomLeft',
-            insideClosable: true,
-            initialState: {
-                aiTable,
-                recordMenus,
-                selectedRecordIds
             }
         });
         return ref;

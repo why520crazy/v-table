@@ -219,28 +219,32 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     }
 
     stageContextmenu(e: KoEventObject<MouseEvent>) {
+        if (this.aiReadonly()) {
+            return;
+        }
+
+        const targetName = e.event.target.name();
+        const { fieldId, recordId } = getDetailByTargetName(targetName);
+        if (!recordId || !fieldId) return;
+
+        const contextMenus = this.aiContextMenus();
+        if (contextMenus.every((item) => !!(item.hidden && item.hidden(this.aiTable, targetName)))) {
+            return;
+        }
+
         const mouseEvent = e.event.evt;
         mouseEvent.preventDefault();
-
-        const _targetName = e.event.target.name();
-        const { fieldId, recordId } = getDetailByTargetName(_targetName);
-        if (!recordId || !fieldId) return;
 
         const position = {
             x: mouseEvent.x,
             y: mouseEvent.y
         };
 
-        let selectedRecordIds = [...this.aiTable.selection().selectedRecords.keys()];
-        if (!selectedRecordIds.length) {
-            selectedRecordIds = [recordId];
-        }
-
-        this.aiTableGridFieldService.openRecordMenu(this.aiTable, {
+        this.aiTableGridEventService.openContextMenu(this.aiTable, {
             origin: this.containerElement(),
-            recordMenus: this.recordMenus(),
+            contextMenus,
             position,
-            selectedRecordIds
+            targetName
         });
     }
 
