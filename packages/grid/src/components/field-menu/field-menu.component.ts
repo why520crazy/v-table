@@ -30,7 +30,7 @@ import { NgClass } from '@angular/common';
         NgClass
     ]
 })
-export class FieldMenu extends ThyDropdownAbstractMenu {
+export class AITableFieldMenu extends ThyDropdownAbstractMenu {
     @Input({ required: true }) fieldId!: string;
 
     @Input({ required: true }) aiTable!: AITable;
