@@ -195,7 +195,10 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         const _targetName = e.event.target.name();
 
         const { targetName, fieldId, recordId } = getDetailByTargetName(_targetName);
-        if (mouseEvent.button === AITableMouseDownType.Right && recordId && fieldId) return;
+        const hasCheckedRecords = !!this.aiTable.selection().selectedRecords.size;
+        if (mouseEvent.button === AITableMouseDownType.Right && recordId && fieldId && hasCheckedRecords) {
+            return;
+        }
 
         switch (targetName) {
             case AI_TABLE_FIELD_HEAD:
