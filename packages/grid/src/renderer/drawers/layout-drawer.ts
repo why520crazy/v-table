@@ -46,10 +46,9 @@ export class Layout extends Drawer {
         return this.columnIndex === this.columnCount - 1;
     }
 
-    protected renderAddFieldBlank({ style, isHoverRow, isCheckedRow }: Pick<AITableCell, 'isHoverRow' | 'isCheckedRow' | 'style'>) {
+    protected renderAddFieldBlank({ isHoverRow, isCheckedRow }: Pick<AITableCell, 'isHoverRow' | 'isCheckedRow' | 'style'>) {
         const rowHeight = this.rowHeight;
-        const fill =
-            style?.fill || (isCheckedRow ? this.colors.itemActiveBgColor : isHoverRow ? this.colors.gray80 : this.colors.transparent);
+        const fill = isCheckedRow ? this.colors.itemActiveBgColor : isHoverRow ? this.colors.gray80 : this.colors.transparent;
         const addFieldBlankX = this.x + this.columnWidth + AI_TABLE_OFFSET;
         this.rect({
             x: addFieldBlankX,
