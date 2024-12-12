@@ -41,7 +41,16 @@
 
 <thy-dropdown-menu #menu>
     @for (item of fieldOptions; track $index) {
-        <a thyDropdownMenuItem href="javascript:;" (click)="selectFieldType(item)">
+        @let isSelectedField = aiEditField().type === item.type;
+        @let isSameMultipleMode = (item.settings! | fieldIsMultiple) === (aiEditField().settings! | fieldIsMultiple);
+        <a
+            thyDropdownMenuItem
+            href="javascript:;"
+            [ngClass]="{
+                active: isSelectedField && isSameMultipleMode
+            }"
+            (click)="selectFieldType(item)"
+        >
             <thy-icon [thyIconName]="item.icon!"></thy-icon>
             <span thyDropdownMenuItemName>{{ item.name }}</span>
         </a>

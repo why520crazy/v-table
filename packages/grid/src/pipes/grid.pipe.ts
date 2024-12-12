@@ -73,3 +73,16 @@ export class MemberSettingPipe implements PipeTransform {
         return settings as MemberSettings;
     }
 }
+
+@Pipe({
+    name: 'fieldIsMultiple',
+    standalone: true
+})
+export class AITableFieldIsMultiplePipe implements PipeTransform {
+    transform(settings: AITableFieldSettings) {
+        if (settings && settings.hasOwnProperty('is_multiple')) {
+            return !!(settings as SelectSettings | MemberSettings).is_multiple;
+        }
+        return false;
+    }
+}
