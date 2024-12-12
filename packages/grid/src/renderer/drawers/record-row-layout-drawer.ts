@@ -83,7 +83,7 @@ export class RecordRowLayout extends Layout {
         });
 
         // 延伸到 FIELD_ADD_BUTTON
-        super.renderAddFieldBlank({ style, isHoverRow });
+        super.renderAddFieldBlank({ isHoverRow });
         const rowHeight = this.rowHeight;
         const startX = this.x + this.columnWidth;
         const lineWidth =
