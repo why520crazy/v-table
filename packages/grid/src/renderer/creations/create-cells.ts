@@ -80,9 +80,12 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
                     const isCheckedRow = aiTable.selection().selectedRecords.has(row._id);
                     const isSelected = aiTable.selection().selectedFields.has(field._id);
                     const isHoverRow = isHover && targetName !== AI_TABLE_FIELD_HEAD;
-                    if (isCheckedRow || isSelected) {
+                    const activeCell = AITable.getActiveCell(aiTable);
+                    const activeCellRecordId = activeCell?.recordId;
+
+                    if (isCheckedRow || isSelected || (recordId === activeCellRecordId && field._id !== activeCell?.fieldId)) {
                         background = colors.itemActiveBgColor;
-                    } else if (isHoverRow) {
+                    } else if (isHoverRow && activeCellRecordId !== recordId) {
                         background = colors.gray80;
                     }
                     recordRowLayout.init({
