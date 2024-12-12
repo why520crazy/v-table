@@ -1,4 +1,4 @@
-import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, TemplateRef, booleanAttribute, computed, inject, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ThyButton } from 'ngx-tethys/button';
@@ -25,6 +25,7 @@ import {
     getFieldOptionByField,
     SetFieldOptions
 } from '../../core';
+import { AITableFieldIsMultiplePipe } from '../../pipes';
 
 @Component({
     selector: 'ai-table-field-property-editor',
@@ -34,6 +35,7 @@ import {
     imports: [
         NgIf,
         NgForOf,
+        NgClass,
         FormsModule,
         ThyIcon,
         ThyInput,
@@ -51,7 +53,8 @@ import {
         ThyFormModule,
         ThyListItem,
         NgTemplateOutlet,
-        ThyAutofocusDirective
+        ThyAutofocusDirective,
+        AITableFieldIsMultiplePipe
     ],
     host: {
         class: 'field-property-editor d-block pl-5 pr-5 pb-5 pt-4'
