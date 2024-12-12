@@ -11,8 +11,8 @@ import { AITableCell } from '../../types';
 import { Layout } from './layout-drawer';
 
 export class AddRowLayout extends Layout {
-    override renderAddFieldBlank({ isHoverRow }: Pick<AITableCell, 'isHoverRow'>) {
-        super.renderAddFieldBlank({ isHoverRow });
+    override renderAddFieldBlank({ isHoverRow, isCheckedRow }: Pick<AITableCell, 'isHoverRow' | 'isCheckedRow'>) {
+        super.renderAddFieldBlank({ isHoverRow, isCheckedRow });
         const rowHeight = this.rowHeight;
         const defaultWidth = AI_TABLE_FIELD_ADD_BUTTON_WIDTH;
         const width = this.containerWidth - this.x < defaultWidth ? defaultWidth : this.containerWidth - this.x;
@@ -76,7 +76,7 @@ export class AddRowLayout extends Layout {
         });
     }
 
-    private renderLastCell({ isHoverRow }: Pick<AITableCell, 'isHoverRow'>) {
+    private renderLastCell({ isHoverRow, isCheckedRow }: Pick<AITableCell, 'isHoverRow' | 'isCheckedRow'>) {
         if (!this.isLast) return;
         const width = this.columnWidth;
         if (!this.isFirst) {
@@ -85,7 +85,7 @@ export class AddRowLayout extends Layout {
                 isHoverRow
             });
         }
-        this.renderAddFieldBlank({ isHoverRow });
+        this.renderAddFieldBlank({ isHoverRow, isCheckedRow });
     }
 
     private renderCommonCell({ isHoverRow }: Pick<AITableCell, 'isHoverRow'>) {
@@ -96,7 +96,7 @@ export class AddRowLayout extends Layout {
         });
     }
 
-    render({ isHoverRow }: Pick<AITableCell, 'isHoverRow'>) {
+    render({ isHoverRow, isCheckedRow }: Pick<AITableCell, 'isHoverRow' | 'isCheckedRow'>) {
         this.renderFirstCell({
             isHoverRow
         });
@@ -104,7 +104,8 @@ export class AddRowLayout extends Layout {
             isHoverRow
         });
         this.renderLastCell({
-            isHoverRow
+            isHoverRow,
+            isCheckedRow
         });
     }
 }

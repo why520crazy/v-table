@@ -58,6 +58,7 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
             switch (type) {
                 case AITableRowType.add: {
                     const isHoverRow = isHover && targetName === AI_TABLE_ROW_ADD_BUTTON;
+                    const isCheckedRow = aiTable.selection().selectedRecords.has(row._id);
                     addRowLayout.init({
                         x,
                         y,
@@ -69,7 +70,8 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
                         containerWidth: coordinate.containerWidth
                     });
                     addRowLayout.render({
-                        isHoverRow
+                        isHoverRow,
+                        isCheckedRow
                     });
                     break;
                 }
