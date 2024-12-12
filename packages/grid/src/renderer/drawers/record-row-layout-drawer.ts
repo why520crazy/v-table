@@ -66,7 +66,7 @@ export class RecordRowLayout extends Layout {
     }
 
     // 尾列
-    private renderLastCell({ style, isHoverRow }: Pick<AITableCell, 'style' | 'isHoverRow'>) {
+    private renderLastCell({ style, isHoverRow, isCheckedRow }: Pick<AITableCell, 'style' | 'isHoverRow' | 'isCheckedRow'>) {
         if (!this.isLast || this.isFirst) return;
 
         const { fill, stroke } = style;
@@ -83,7 +83,7 @@ export class RecordRowLayout extends Layout {
         });
 
         // 延伸到 FIELD_ADD_BUTTON
-        super.renderAddFieldBlank({ isHoverRow });
+        super.renderAddFieldBlank({ isHoverRow, isCheckedRow });
         const rowHeight = this.rowHeight;
         const startX = this.x + this.columnWidth;
         const lineWidth =
@@ -118,7 +118,7 @@ export class RecordRowLayout extends Layout {
         const { row, style, isCheckedRow, isHoverRow } = config;
         this.renderFirstCell({ row, style, isCheckedRow, isHoverRow });
         this.renderCommonCell({ style });
-        this.renderLastCell({ style, isHoverRow });
+        this.renderLastCell({ style, isCheckedRow, isHoverRow });
     }
 }
 
