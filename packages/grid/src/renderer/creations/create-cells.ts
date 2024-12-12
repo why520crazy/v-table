@@ -77,12 +77,17 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
                 }
                 case AITableRowType.record: {
                     let background = colors.white;
+                    const fieldId = field._id;
                     const isCheckedRow = aiTable.selection().selectedRecords.has(row._id);
-                    const isSelected = aiTable.selection().selectedFields.has(field._id);
+                    const isSelected = aiTable.selection().selectedFields.has(fieldId);
                     const isHoverRow = isHover && targetName !== AI_TABLE_FIELD_HEAD;
-                    if (isCheckedRow || isSelected) {
+                    const activeCell = AITable.getActiveCell(aiTable);
+                    const isSiblingActiveCell = recordId === activeCell?.recordId && fieldId !== activeCell?.fieldId;
+                    const isActiveCell = recordId === activeCell?.recordId;
+
+                    if (isCheckedRow || isSelected || isSiblingActiveCell) {
                         background = colors.itemActiveBgColor;
-                    } else if (isHoverRow) {
+                    } else if (isHoverRow && !isActiveCell) {
                         background = colors.gray80;
                     }
                     recordRowLayout.init({
@@ -109,7 +114,7 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
                     const realX = x + offset + AI_TABLE_OFFSET;
                     const realY = y + AI_TABLE_OFFSET;
                     const style = { fontWeight: DEFAULT_FONT_STYLE };
-                    const cellValue = AITableQueries.getFieldValue(aiTable, [recordId, field._id]);
+                    const cellValue = AITableQueries.getFieldValue(aiTable, [recordId, fieldId]);
                     const transformValue = transformCellValue(aiTable, field, cellValue);
                     const render = {
                         aiTable,

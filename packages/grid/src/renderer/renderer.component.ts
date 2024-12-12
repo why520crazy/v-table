@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
 import Konva from 'konva';
 import { StageConfig } from 'konva/lib/Stage';
 import { KoContainer, KoEventObject, KoShape, KoStage } from '../angular-konva';
-import { AI_TABLE_FIELD_ADD_BUTTON_WIDTH, AI_TABLE_ROW_HEAD_WIDTH } from '../constants';
+import { AI_TABLE_ROW_HEAD_WIDTH } from '../constants';
 import { AITable } from '../core';
 import { AITableRendererConfig } from '../types';
 import { getVisibleRangeInfo } from '../utils';
@@ -10,12 +10,10 @@ import {
     AITableAddField,
     AITableCells,
     AITableColumnHeads,
-    AITableFieldHead,
     AITableFrozenCells,
     AITableFrozenColumnHeads,
     AITableFrozenPlaceholderCells,
     AITableHoverRowHeads,
-    AITableIcon,
     AITableOtherRows,
     AITablePlaceholderCells
 } from './components';
