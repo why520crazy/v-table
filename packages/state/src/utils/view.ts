@@ -12,7 +12,7 @@ export function createDefaultPositions(
 ) {
     const positions: Positions = {};
     const position = getPosition(data, activeId, index);
-    const maxPosition = data[data.length - 1].positions[activeId];
+    const maxPosition = data.length ? data[data.length - 1].positions[activeId] : -1;
     views.forEach((element) => {
         positions[element._id] = element._id === activeId ? position : maxPosition + 1;
     });
