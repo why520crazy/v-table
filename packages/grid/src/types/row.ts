@@ -1,4 +1,4 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, ViewContainerRef } from '@angular/core';
 import { AITable, Coordinate } from '../core';
 
 export enum AITableRowType {
@@ -47,4 +47,5 @@ export interface AITableContextMenuOptions {
     position: { x: number; y: number };
     menuItems: AITableContextMenuItem[];
     targetName: string;
+    viewContainerRef: ViewContainerRef;
 }

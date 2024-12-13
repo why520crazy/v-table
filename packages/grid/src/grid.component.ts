@@ -5,11 +5,13 @@ import {
     computed,
     effect,
     ElementRef,
+    inject,
     OnDestroy,
     OnInit,
     Signal,
     signal,
-    viewChild
+    viewChild,
+    ViewContainerRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, fromEvent } from 'rxjs';
@@ -56,6 +58,8 @@ import { AITableContextMenu } from './components';
 })
 export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private contextmenuRef!: ThyPopoverRef<AITableContextMenu> | null;
+
+    private viewContainerRef = inject(ViewContainerRef);
 
     timer!: number | null;
 
@@ -256,7 +260,8 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             origin: this.containerElement(),
             menuItems,
             position,
-            targetName
+            targetName,
+            viewContainerRef: this.viewContainerRef
         });
     }
 
