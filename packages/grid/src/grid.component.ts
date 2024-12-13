@@ -255,7 +255,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             return;
         }
 
-        this.contextmenuRef = this.aiTableGridEventService.openContextMenu(this.aiTable, {
+        this.aiTableGridEventService.openContextMenu(this.aiTable, {
             origin: this.containerElement(),
             menuItems,
             position,
@@ -413,7 +413,6 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             )
             .subscribe(() => {
                 this.aiTableGridSelectionService.clearSelection();
-                this.closeContextMenu();
             });
     }
 
@@ -508,13 +507,6 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             if (editingCell && MOUSEOVER_EDIT_TYPE.includes(this.aiTable.fieldsMap()[editingCell.fieldId].type)) {
                 this.aiTableGridEventService.closeCellEditor();
             }
-        }
-    }
-
-    private closeContextMenu() {
-        if (this.contextmenuRef) {
-            this.contextmenuRef.close();
-            this.contextmenuRef = null;
         }
     }
 }
