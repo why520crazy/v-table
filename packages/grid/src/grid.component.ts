@@ -58,8 +58,6 @@ import { AITableContextMenu } from './components';
     providers: [AITableGridEventService, AITableGridFieldService, AITableGridSelectionService]
 })
 export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
-    private contextmenuRef!: ThyPopoverRef<AITableContextMenu> | null;
-
     private viewContainerRef = inject(ViewContainerRef);
 
     timer!: number | null;
