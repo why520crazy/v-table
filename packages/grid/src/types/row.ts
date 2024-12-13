@@ -1,5 +1,6 @@
 import { ElementRef, ViewContainerRef } from '@angular/core';
 import { AITable, Coordinate } from '../core';
+import { AITableGridSelectionService } from '../services/selection.service';
 
 export enum AITableRowType {
     add = 'add',
@@ -37,7 +38,12 @@ export interface AITableContextMenuItem {
     type: string;
     name?: string;
     icon?: string;
-    exec?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => void;
+    exec?: (
+        aiTable: AITable,
+        targetName: string,
+        position: { x: number; y: number },
+        aiTableGridSelectionService: AITableGridSelectionService
+    ) => void;
     hidden?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => boolean;
     disabled?: (aiTable: AITable, targetName: string, position: { x: number; y: number }) => boolean;
 }

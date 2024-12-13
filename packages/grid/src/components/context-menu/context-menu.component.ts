@@ -42,8 +42,7 @@ export class AITableContextMenu extends ThyDropdownAbstractMenu {
 
     execute(menu: AITableContextMenuItem) {
         if ((menu.disabled && !menu.disabled(this.aiTable(), this.targetName(), this.position())) || !menu.disabled) {
-            menu.exec && menu.exec(this.aiTable(), this.targetName(), this.position());
-            this.aiTableGridSelectionService.clearSelection();
+            menu.exec && menu.exec(this.aiTable(), this.targetName(), this.position(), this.aiTableGridSelectionService);
         }
     }
 }
