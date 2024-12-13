@@ -137,7 +137,6 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         afterNextRender(() => {
             this.setContainerRect();
             this.bindGlobalMousedown();
-            this.bindGlobalContextmenu();
             this.containerResizeListener();
             this.bindWheel();
         });
@@ -416,12 +415,6 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                 this.aiTableGridSelectionService.clearSelection();
                 this.closeContextMenu();
             });
-    }
-
-    private bindGlobalContextmenu() {
-        fromEvent<MouseEvent>(document, 'contextmenu', { passive: false }).subscribe((e) => {
-            e.preventDefault();
-        });
     }
 
     private resetScrolling = () => {
