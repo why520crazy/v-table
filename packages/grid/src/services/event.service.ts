@@ -230,12 +230,13 @@ export class AITableGridEventService {
     }
 
     openContextMenu(aiTable: AITable, options: AITableContextMenuOptions) {
-        const { origin, position, menuItems, targetName } = options;
+        const { origin, position, menuItems, targetName, viewContainerRef } = options;
         const ref = this.thyPopover.open(AITableContextMenu, {
             origin: origin as HTMLElement,
             originPosition: position,
             placement: 'bottomLeft',
             insideClosable: true,
+            viewContainerRef,
             initialState: {
                 aiTable,
                 menuItems,

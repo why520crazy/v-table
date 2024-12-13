@@ -5,11 +5,13 @@ import {
     computed,
     effect,
     ElementRef,
+    inject,
     OnDestroy,
     OnInit,
     Signal,
     signal,
-    viewChild
+    viewChild,
+    ViewContainerRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, fromEvent } from 'rxjs';
@@ -23,7 +25,7 @@ import {
     AI_TABLE_FIELD_HEAD_HEIGHT,
     AI_TABLE_FIELD_HEAD_MORE,
     AI_TABLE_FIELD_HEAD_SELECT_CHECKBOX,
-    AI_TABLE_POPOVER_LEFT_OFFSET,
+    AI_TABLE_PROHIBIT_CLEAR_SELECTION_CLASS,
     AI_TABLE_ROW_ADD_BUTTON,
     AI_TABLE_ROW_HEAD_WIDTH,
     AI_TABLE_ROW_SELECT_CHECKBOX,
@@ -54,6 +56,8 @@ import { getMousePosition } from './utils/position';
     providers: [AITableGridEventService, AITableGridFieldService, AITableGridSelectionService]
 })
 export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
+    private viewContainerRef = inject(ViewContainerRef);
+
     timer!: number | null;
 
     resizeObserver!: ResizeObserver;
@@ -195,7 +199,14 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         const _targetName = e.event.target.name();
 
         const { targetName, fieldId, recordId } = getDetailByTargetName(_targetName);
-        if (mouseEvent.button === AITableMouseDownType.Right && recordId && fieldId) return;
+        if (
+            mouseEvent.button === AITableMouseDownType.Right &&
+            recordId &&
+            fieldId &&
+            this.aiTable.selection().selectedRecords.has(recordId)
+        ) {
+            return;
+        }
 
         switch (targetName) {
             case AI_TABLE_FIELD_HEAD:
@@ -245,7 +256,8 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             origin: this.containerElement(),
             menuItems,
             position,
-            targetName
+            targetName,
+            viewContainerRef: this.viewContainerRef
         });
     }
 
@@ -388,7 +400,12 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private bindGlobalMousedown() {
         fromEvent<MouseEvent>(document, 'mousedown', { passive: true })
             .pipe(
-                filter((e) => e.target instanceof Element && !this.containerElement().contains(e.target)),
+                filter(
+                    (e) =>
+                        e.target instanceof Element &&
+                        !this.containerElement().contains(e.target) &&
+                        !(e.target.closest(AI_TABLE_PROHIBIT_CLEAR_SELECTION_CLASS) && this.aiTable.selection().selectedRecords.size > 0)
+                ),
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe(() => {

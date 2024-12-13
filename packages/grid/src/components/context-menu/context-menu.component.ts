@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import {
     ThyDropdownAbstractMenu,
     ThyDropdownMenuComponent,
@@ -10,6 +10,7 @@ import {
 import { ThyIcon } from 'ngx-tethys/icon';
 import { AITable } from '../../core';
 import { AITableContextMenuItem } from '../../types';
+import { AITableGridSelectionService } from '../../services/selection.service';
 
 @Component({
     selector: 'ai-table-context-menu',
@@ -29,6 +30,8 @@ import { AITableContextMenuItem } from '../../types';
     ]
 })
 export class AITableContextMenu extends ThyDropdownAbstractMenu {
+    private aiTableGridSelectionService = inject(AITableGridSelectionService);
+
     aiTable = input.required<AITable>();
 
     menuItems = input.required<AITableContextMenuItem[]>();
@@ -39,7 +42,7 @@ export class AITableContextMenu extends ThyDropdownAbstractMenu {
 
     execute(menu: AITableContextMenuItem) {
         if ((menu.disabled && !menu.disabled(this.aiTable(), this.targetName(), this.position())) || !menu.disabled) {
-            menu.exec && menu.exec(this.aiTable(), this.targetName(), this.position());
+            menu.exec && menu.exec(this.aiTable(), this.targetName(), this.position(), this.aiTableGridSelectionService);
         }
     }
 }
