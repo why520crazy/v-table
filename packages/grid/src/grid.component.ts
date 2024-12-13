@@ -399,7 +399,12 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private bindGlobalMousedown() {
         fromEvent<MouseEvent>(document, 'mousedown', { passive: true })
             .pipe(
-                filter((e) => e.target instanceof Element && !this.containerElement().contains(e.target)),
+                filter(
+                    (e) =>
+                        e.target instanceof Element &&
+                        !this.containerElement().contains(e.target) &&
+                        !(e.target.closest('.remove-record') && this.aiTable.selection().selectedRecords.size > 0)
+                ),
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe(() => {

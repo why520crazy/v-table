@@ -71,7 +71,7 @@ export class AITableHoverRowHeads {
             }
 
             let isHoverRow;
-            if (pointRowIndex > -1) {
+            if (pointRowIndex > -1 && !!context.linearRows().length && pointRowIndex < context.linearRows().length) {
                 const { type: pointRowType, _id: pointRecordId } = context.linearRows()[pointRowIndex];
                 isHoverRow = recordId === pointRecordId && pointRowType === AITableRowType.record && targetName !== AI_TABLE_FIELD_HEAD;
             }
