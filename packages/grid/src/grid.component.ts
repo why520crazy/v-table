@@ -43,8 +43,6 @@ import { AITableGridSelectionService } from './services/selection.service';
 import { AITableMouseDownType, AITableRendererConfig, ScrollActionOptions } from './types';
 import { buildGridLinearRows, getColumnIndicesMap, getDetailByTargetName, handleMouseStyle, isWindows } from './utils';
 import { getMousePosition } from './utils/position';
-import { ThyPopoverRef } from 'ngx-tethys/popover';
-import { AITableContextMenu } from './components';
 
 @Component({
     selector: 'ai-table-grid',
