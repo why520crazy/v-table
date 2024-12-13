@@ -23,7 +23,6 @@ import {
     AI_TABLE_FIELD_HEAD_HEIGHT,
     AI_TABLE_FIELD_HEAD_MORE,
     AI_TABLE_FIELD_HEAD_SELECT_CHECKBOX,
-    AI_TABLE_POPOVER_LEFT_OFFSET,
     AI_TABLE_ROW_ADD_BUTTON,
     AI_TABLE_ROW_HEAD_WIDTH,
     AI_TABLE_ROW_SELECT_CHECKBOX,
@@ -41,6 +40,8 @@ import { AITableGridSelectionService } from './services/selection.service';
 import { AITableMouseDownType, AITableRendererConfig, ScrollActionOptions } from './types';
 import { buildGridLinearRows, getColumnIndicesMap, getDetailByTargetName, handleMouseStyle, isWindows } from './utils';
 import { getMousePosition } from './utils/position';
+import { ThyPopoverRef } from 'ngx-tethys/popover';
+import { AITableContextMenu } from './components';
 
 @Component({
     selector: 'ai-table-grid',
@@ -54,6 +55,8 @@ import { getMousePosition } from './utils/position';
     providers: [AITableGridEventService, AITableGridFieldService, AITableGridSelectionService]
 })
 export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
+    private contextmenuRef!: ThyPopoverRef<AITableContextMenu> | null;
+
     timer!: number | null;
 
     resizeObserver!: ResizeObserver;
@@ -130,6 +133,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         afterNextRender(() => {
             this.setContainerRect();
             this.bindGlobalMousedown();
+            this.bindGlobalContextmenu();
             this.containerResizeListener();
             this.bindWheel();
         });
@@ -248,7 +252,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             return;
         }
 
-        this.aiTableGridEventService.openContextMenu(this.aiTable, {
+        this.contextmenuRef = this.aiTableGridEventService.openContextMenu(this.aiTable, {
             origin: this.containerElement(),
             menuItems,
             position,
@@ -400,7 +404,14 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             )
             .subscribe(() => {
                 this.aiTableGridSelectionService.clearSelection();
+                this.closeContextMenu();
             });
+    }
+
+    private bindGlobalContextmenu() {
+        fromEvent<MouseEvent>(document, 'contextmenu', { passive: false }).subscribe((e) => {
+            e.preventDefault();
+        });
     }
 
     private resetScrolling = () => {
@@ -494,6 +505,13 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             if (editingCell && MOUSEOVER_EDIT_TYPE.includes(this.aiTable.fieldsMap()[editingCell.fieldId].type)) {
                 this.aiTableGridEventService.closeCellEditor();
             }
+        }
+    }
+
+    private closeContextMenu() {
+        if (this.contextmenuRef) {
+            this.contextmenuRef.close();
+            this.contextmenuRef = null;
         }
     }
 }

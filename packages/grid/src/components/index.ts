@@ -8,3 +8,4 @@ export * from './cell-editors/select/select-editor.component';
 export * from './cell-editors/text/text-editor.component';
 export * from './cell-views/select/option.component';
 export * from './field-property-editor/field-property-editor.component';
+export * from './context-menu/context-menu.component';
