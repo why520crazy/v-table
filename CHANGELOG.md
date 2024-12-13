@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.21](https://github.com/worktile/ai-table/compare/0.0.20...0.0.21) (2024-12-13)
+
+
+### Bug Fixes
+
+* **field-property-editor:** add max-height and add overflow-y: auto for field-property-editor-panel #WIK-16855 ([#180](https://github.com/worktile/ai-table/issues/180)) ([d6571ff](https://github.com/worktile/ai-table/commit/d6571ffbdd2a25e3e87012bd876d9f37e7e230fe)), closes [#WIK-16855](https://github.com/worktile/ai-table/issues/WIK-16855)
+* **file-menu:** assign insideClosable when open FieldMenu component #WIK-16898 ([#179](https://github.com/worktile/ai-table/issues/179)) ([ae9f2c8](https://github.com/worktile/ai-table/commit/ae9f2c8c1489cb5d18a9561a299f78b42bc7a263)), closes [#WIK-16898](https://github.com/worktile/ai-table/issues/WIK-16898)
+* **grid:** do not use the last field's style to draw field blanks #WIK-16973 ([#185](https://github.com/worktile/ai-table/issues/185)) ([5531991](https://github.com/worktile/ai-table/commit/5531991cf51c8472a70f077f8c4aad07ad943249)), closes [#WIK-16973](https://github.com/worktile/ai-table/issues/WIK-16973)
+* **grid:** fix error when table is no data and click add record button #WIK-16981 ([#189](https://github.com/worktile/ai-table/issues/189)) ([9cf8886](https://github.com/worktile/ai-table/commit/9cf8886901eb0c03e55d2c325547800ebebf8c8d)), closes [#WIK-16981](https://github.com/worktile/ai-table/issues/WIK-16981)
+
+
+### Features
+
+* **file:** distinguish single member field and multiple member field ([#181](https://github.com/worktile/ai-table/issues/181)) ([a095ccf](https://github.com/worktile/ai-table/commit/a095ccfe4aa7beda6daaa0eb4a19d366fb20f729))
+* **grid:** activate type in the secondary menu of current field #WIK-16975 ([#184](https://github.com/worktile/ai-table/issues/184)) ([92d71a9](https://github.com/worktile/ai-table/commit/92d71a9afc49a4f7c68e87d2c01784ab3731d82a)), closes [#WIK-16975](https://github.com/worktile/ai-table/issues/WIK-16975)
+* **grid:** support activate status when a single cell contextmenu is opened #WIK-16969 ([#188](https://github.com/worktile/ai-table/issues/188)) ([40a3ec3](https://github.com/worktile/ai-table/commit/40a3ec32d4324db914dd3d71f599336bd4565280)), closes [#WIK-16969](https://github.com/worktile/ai-table/issues/WIK-16969)
+* **grid:** support open context menu and support delete records #WIK-16846 ([#182](https://github.com/worktile/ai-table/issues/182)) ([36b34c5](https://github.com/worktile/ai-table/commit/36b34c571f0002b969805684aef90c71f02480ef)), closes [#WIK-16846](https://github.com/worktile/ai-table/issues/WIK-16846)
+* **grid:** support the active style of the row where the active cell is located #WIK-16965 ([#187](https://github.com/worktile/ai-table/issues/187)) ([ea23b96](https://github.com/worktile/ai-table/commit/ea23b9603190674384044bf6070893a5f27cea61)), closes [#WIK-16965](https://github.com/worktile/ai-table/issues/WIK-16965)
+
+
+
 ## [0.0.20](https://github.com/worktile/ai-table/compare/0.0.19...0.0.20) (2024-12-06)
 
 
