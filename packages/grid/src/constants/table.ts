@@ -23,6 +23,8 @@ export const AI_TABLE_FIELD_ADD_BUTTON_WIDTH = 100; // 添加列宽度
 export const AI_TABLE_FIELD_HEAD_ICON_GAP_SIZE = 8; // 字段表列头图标的间距
 export const AI_TABLE_FIELD_HEAD_MORE = 'AI_TABLE_FIELD_HEAD_MORE'; // 更多图标名称
 
+export const AI_TABLE_PROHIBIT_CLEAR_SELECTION_CLASS = '.ai-table-prohibit-clear-selection';
+
 export const AI_TABLE_ICON_COMMON_SIZE = 16; // 表格图标的通用尺寸
 export const AI_TABLE_CELL = 'AI_TABLE_CELL'; // 单元格标识
 // 因为 dom 的边距 12 是不包含 边框的，所以加上边框 2px  才能跟 编辑里面的内容对其；

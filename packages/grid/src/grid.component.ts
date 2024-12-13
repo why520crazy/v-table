@@ -25,6 +25,7 @@ import {
     AI_TABLE_FIELD_HEAD_HEIGHT,
     AI_TABLE_FIELD_HEAD_MORE,
     AI_TABLE_FIELD_HEAD_SELECT_CHECKBOX,
+    AI_TABLE_PROHIBIT_CLEAR_SELECTION_CLASS,
     AI_TABLE_ROW_ADD_BUTTON,
     AI_TABLE_ROW_HEAD_WIDTH,
     AI_TABLE_ROW_SELECT_CHECKBOX,
@@ -407,7 +408,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                     (e) =>
                         e.target instanceof Element &&
                         !this.containerElement().contains(e.target) &&
-                        !(e.target.closest('.remove-record') && this.aiTable.selection().selectedRecords.size > 0)
+                        !(e.target.closest(AI_TABLE_PROHIBIT_CLEAR_SELECTION_CLASS) && this.aiTable.selection().selectedRecords.size > 0)
                 ),
                 takeUntilDestroyed(this.destroyRef)
             )
