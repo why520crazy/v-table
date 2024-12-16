@@ -33,7 +33,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } 
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ThyAction } from 'ngx-tethys/action';
-import { DateHelperService, ThyDatePickerFormatPipe } from 'ngx-tethys/date-picker';
+import { ThyDatePickerFormatPipe } from 'ngx-tethys/date-picker';
 import { ThyIconRegistry } from 'ngx-tethys/icon';
 import { ThyPopoverModule } from 'ngx-tethys/popover';
 import { ThySegment, ThySegmentEvent, ThySegmentItem } from 'ngx-tethys/segment';
@@ -56,6 +56,8 @@ const LOCAL_STORAGE_AI_TABLE_DATA = 'ai-table-demo-data';
     }
 })
 export class DemoTableContent {
+    private datePickerFormatPipe = new ThyDatePickerFormatPipe();
+
     aiTable!: AIViewTable;
 
     plugins = [withState, withRemoveView];
@@ -66,20 +68,17 @@ export class DemoTableContent {
             fieldRenderers: {
                 [AITableFieldType.date]: {
                     transform: (field: AITableField, value: DateFieldValue) => {
-                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                        return datePickerFormatPipe.transform(value.timestamp as any);
+                        return this.datePickerFormatPipe.transform(value.timestamp as any);
                     }
                 },
                 [AITableFieldType.createdAt]: {
                     transform: (field: AITableField, value: DateFieldValue) => {
-                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                        return datePickerFormatPipe.transform(value.timestamp as any);
+                        return this.datePickerFormatPipe.transform(value.timestamp as any);
                     }
                 },
                 [AITableFieldType.updatedAt]: {
                     transform: (field: AITableField, value: DateFieldValue) => {
-                        const datePickerFormatPipe = new ThyDatePickerFormatPipe(this.dateHelperService);
-                        return datePickerFormatPipe.transform(value.timestamp as any);
+                        return this.datePickerFormatPipe.transform(value.timestamp as any);
                     }
                 }
             },
@@ -120,8 +119,6 @@ export class DemoTableContent {
     sanitizer = inject(DomSanitizer);
 
     tableService = inject(TableService);
-
-    dateHelperService = inject(DateHelperService);
 
     references = signal(getReferences());
 
