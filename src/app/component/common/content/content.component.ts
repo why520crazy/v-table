@@ -40,6 +40,7 @@ import { ThySegment, ThySegmentEvent, ThySegmentItem } from 'ngx-tethys/segment'
 import { withRemoveView } from '../../../plugins/view.plugin';
 import { TABLE_SERVICE_MAP, TableService } from '../../../service/table.service';
 import { getBigData, getCanvasDefaultValue, getDefaultValue, getReferences } from '../../../utils/utils';
+import { getUnixTime } from 'date-fns';
 
 const LOCAL_STORAGE_DATA_MODE = 'ai-table-demo-data-mode';
 const LOCAL_STORAGE_RENDER_MODE = 'ai-table-demo-render-mode';
@@ -175,7 +176,7 @@ export class DemoTableContent {
 
     addRecord(data: AddRecordOptions) {
         const member = 'member_01';
-        const time = new Date().getTime();
+        const time = getUnixTime(new Date());
         addRecords(this.aiTable, data, { created_by: member, created_at: time, updated_by: member, updated_at: time });
     }
 
