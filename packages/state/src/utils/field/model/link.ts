@@ -1,0 +1,28 @@
+import { isEmpty } from '../../common';
+import { AITableFilterCondition, AITableFilterOperation } from '../../../types';
+import { Field } from './field';
+import { FieldValue, LinkFieldValue } from '@ai-table/grid';
+
+export class LinkField extends Field {
+    override isMeetFilter(condition: AITableFilterCondition<string>, cellValue: FieldValue) {
+        const cellTextValue = this.cellValueToString(cellValue);
+        switch (condition.operation) {
+            case AITableFilterOperation.empty:
+                return isEmpty(cellTextValue);
+            case AITableFilterOperation.exists:
+                return !isEmpty(cellTextValue);
+            case AITableFilterOperation.contain:
+                return !isEmpty(cellTextValue) && this.stringInclude(cellTextValue, condition.value);
+            default:
+                return super.isMeetFilter(condition, cellTextValue);
+        }
+    }
+
+    override eq(cv1: LinkFieldValue | null, cv2: LinkFieldValue | null): boolean {
+        return this.cellValueToString(cv1) === this.cellValueToString(cv2);
+    }
+
+    cellValueToString(cellValue: LinkFieldValue | null): string {
+        return cellValue?.text || '';
+    }
+}
