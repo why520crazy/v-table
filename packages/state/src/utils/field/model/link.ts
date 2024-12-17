@@ -1,7 +1,7 @@
 import { isEmpty } from '../../common';
 import { AITableFilterCondition, AITableFilterOperation } from '../../../types';
 import { Field } from './field';
-import { FieldValue, LinkFieldValue } from '@ai-table/grid';
+import { AITableField, FieldValue, LinkFieldValue } from '@ai-table/grid';
 
 export class LinkField extends Field {
     override isMeetFilter(condition: AITableFilterCondition<string>, cellValue: FieldValue) {
@@ -20,6 +20,12 @@ export class LinkField extends Field {
 
     override eq(cv1: LinkFieldValue | null, cv2: LinkFieldValue | null): boolean {
         return this.cellValueToString(cv1) === this.cellValueToString(cv2);
+    }
+
+    override compare(cellValue1: FieldValue, cellValue2: FieldValue, field: AITableField): number {
+        const cellTextValue1 = this.cellValueToString(cellValue1);
+        const cellTextValue2 = this.cellValueToString(cellValue2);
+        return super.compare(cellTextValue1, cellTextValue2, field);
     }
 
     cellValueToString(cellValue: LinkFieldValue | null): string {
