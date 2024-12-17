@@ -98,6 +98,8 @@ export enum AITableSelectOptionStyle {
 
 export type TextFieldValue = string;
 
+export type LinkFieldValue = { url: string; text: string };
+
 export type SelectFieldValue = Id[]; // 数字
 
 export type NumberFieldValue = number;
@@ -112,6 +114,7 @@ export type RateFieldValue = 1 | 2 | 3 | 4 | 5;
 
 export type FieldValue =
     | TextFieldValue
+    | LinkFieldValue
     | SelectFieldValue
     | NumberFieldValue
     | DateFieldValue
