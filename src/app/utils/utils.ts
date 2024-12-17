@@ -9,10 +9,18 @@ export function sortDataByView(data: AITableViewRecords | AITableViewFields, act
     return data;
 }
 
-export const getDefaultTrackableEntity = () => {
-    const member = 'member_01';
-    const time = new Date('2024-10-01').getTime();
-    return { created_by: member, created_at: time, updated_by: member, updated_at: time };
+export const getDefaultTrackableEntity = (options?: {
+    [AITableFieldType.createdBy]?: string;
+    [AITableFieldType.createdAt]?: string;
+    [AITableFieldType.updatedBy]?: string;
+    [AITableFieldType.updatedAt]?: string;
+}) => {
+    return {
+        created_by: options?.[AITableFieldType.createdBy] || 'member_01',
+        created_at: new Date(options?.[AITableFieldType.createdAt] || '2024-12-15').getTime() / 1000,
+        updated_by: options?.[AITableFieldType.updatedBy] || 'member_01',
+        updated_at: new Date(options?.[AITableFieldType.updatedAt] || '2024-12-17').getTime() / 1000
+    };
 };
 
 export function getDefaultValue() {
@@ -24,7 +32,7 @@ export function getDefaultValue() {
             {
                 _id: 'row-1',
                 short_id: `row-short-id-${1}`,
-                ...getDefaultTrackableEntity(),
+                ...getDefaultTrackableEntity({ updated_at: '2024-12-19' }),
                 positions: {
                     view1: 0,
                     view2: 1
@@ -36,18 +44,18 @@ export function getDefaultValue() {
                     'column-21': ['66b31d0c8097a908f74bcd8a'],
                     'column-22': ['66b31d0c8097a908f74bcd8a'],
                     'column-3': 1,
-                    'column-4': { timestamp: 1682235946 },
+                    'column-4': { timestamp: 1734636127 },
                     'column-5': ['member_01'],
                     'column-6': 10,
                     'column-7': 3,
                     'column-8': {
                         url: 'https://www.baidu.com',
                         text: '百度链接'
-                    },
-                    'column-9': ['member_01'],
-                    'column-10': 1682235946,
-                    'column-11': ['member_02'],
-                    'column-12': 1720490727
+                    }
+                    // 'column-9': ['member_01'],
+                    // 'column-10': 1682235946,
+                    // 'column-11': ['member_02'],
+                    // 'column-12': 1720490727
                 }
             },
             {
@@ -69,11 +77,11 @@ export function getDefaultValue() {
                     'column-5': ['member_01', 'member_02'],
                     'column-6': 50,
                     'column-7': 1,
-                    'column-8': {},
-                    'column-9': ['member_01'],
-                    'column-10': 1682235946,
-                    'column-11': ['member_02'],
-                    'column-12': 1720490727
+                    'column-8': {}
+                    // 'column-9': ['member_01'],
+                    // 'column-10': 1682235946,
+                    // 'column-11': ['member_02'],
+                    // 'column-12': 1720490727
                 }
             },
             {
@@ -110,11 +118,11 @@ export function getDefaultValue() {
                     'column-5': [],
                     'column-6': 100,
                     'column-7': 1,
-                    'column-8': {},
-                    'column-9': [],
-                    'column-10': 1682235946,
-                    'column-11': ['member_02'],
-                    'column-12': 1720490727
+                    'column-8': {}
+                    // 'column-9': [],
+                    // 'column-10': 1682235946,
+                    // 'column-11': ['member_02'],
+                    // 'column-12': 1720490727
                 }
             }
         ],
@@ -419,7 +427,7 @@ export function getCanvasDefaultValue() {
             {
                 _id: 'row-1',
                 short_id: `row-short-id-${1}`,
-                ...getDefaultTrackableEntity(),
+                ...getDefaultTrackableEntity({ updated_at: '2024-12-19' }),
                 positions: {
                     view1: 0,
                     view2: 1
@@ -435,7 +443,7 @@ export function getCanvasDefaultValue() {
                     'column-112': ['tag_1'],
                     'column-20': ['66b31d0c8097a908f74bcd8a'],
                     'column-3': 1,
-                    'column-4': { timestamp: 1682235946 },
+                    'column-4': { timestamp: 1734636127 },
                     'column-5': ['member_01'],
                     'column-6': 10,
                     'column-7': 5,
@@ -443,10 +451,10 @@ export function getCanvasDefaultValue() {
                         url: 'https://www.baidu.com',
                         text: '百度链接'
                     },
-                    'column-9': ['member_01'],
-                    'column-10': { timestamp: 1682235946 },
-                    'column-11': ['member_02'],
-                    'column-12': { timestamp: 1720490727 },
+                    // 'column-9': ['member_01'],
+                    // 'column-10': { timestamp: 1682235946 },
+                    // 'column-11': ['member_02'],
+                    // 'column-12': { timestamp: 1720490727 },
                     'column-21': ['66b31d0c8097a908f74bcd8a'],
                     'column-22': ['66b31d0c8097a908f74bcd8b', '66b31d0c8097a908f74bcd8a'],
                     'column-23': ['66b31d0c8097a908f74bcd8e', '66b31d0c8097a908f74bcd8a', '66b31d0c8097a908f74bcd8b']
@@ -474,10 +482,10 @@ export function getCanvasDefaultValue() {
                     'column-6': 50,
                     'column-7': 4,
                     'column-8': {},
-                    'column-9': ['member_01'],
-                    'column-10': { timestamp: 1682235946 },
-                    'column-11': ['member_02'],
-                    'column-12': { timestamp: 1720490727 },
+                    // 'column-9': ['member_01'],
+                    // 'column-10': { timestamp: 1682235946 },
+                    // 'column-11': ['member_02'],
+                    // 'column-12': { timestamp: 1720490727 },
                     'column-21': ['66b31d0c8097a908f74bcd8a'],
                     'column-22': ['66b31d0c8097a908f74bcd8b', '66b31d0c8097a908f74bcd8a'],
                     'column-23': ['66b31d0c8097a908f74bcd8e', '66b31d0c8097a908f74bcd8a', '66b31d0c8097a908f74bcd8b']
@@ -510,10 +518,10 @@ export function getCanvasDefaultValue() {
                     'column-6': 100,
                     'column-7': 3,
                     'column-8': {},
-                    'column-9': [],
-                    'column-10': { timestamp: 1727254598 },
-                    'column-11': ['member_02'],
-                    'column-12': { timestamp: 1720490727 },
+                    // 'column-9': [],
+                    // 'column-10': { timestamp: 1727254598 },
+                    // 'column-11': ['member_02'],
+                    // 'column-12': { timestamp: 1720490727 },
                     'column-21': ['66b31d0c8097a908f74bcd8a'],
                     'column-22': ['66b31d0c8097a908f74bcd8b', '66b31d0c8097a908f74bcd8a'],
                     'column-23': ['66b31d0c8097a908f74bcd8e', '66b31d0c8097a908f74bcd8a', '66b31d0c8097a908f74bcd8b']
@@ -990,11 +998,11 @@ export function getBigData() {
                 'column-5': ['member_01', 'member_02'],
                 'column-6': 50,
                 'column-7': 3,
-                'column-8': {},
-                'column-9': ['member_01'],
-                'column-10': { timestamp: 1682235946 },
-                'column-11': ['member_02'],
-                'column-12': { timestamp: 1720490727 }
+                'column-8': {}
+                // 'column-9': ['member_01'],
+                // 'column-10': { timestamp: 1682235946 },
+                // 'column-11': ['member_02'],
+                // 'column-12': { timestamp: 1720490727 }
             }
         });
     }

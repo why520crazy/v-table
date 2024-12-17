@@ -1,9 +1,8 @@
-import { AITable, AITableRecord, FieldValue } from '@ai-table/grid';
+import { AITableFieldType, AITableRecord, FieldValue, isSystemField, SystemFieldTypes } from '@ai-table/grid';
 import {
     AITableFilterCondition,
     AITableFilterConditions,
     AITableFilterLogical,
-    AITableFilterOperation,
     AITableView,
     AITableViewField,
     AITableViewFields,
@@ -11,7 +10,6 @@ import {
     AIViewTable
 } from '../../types';
 import { ViewOperationMap } from '../field/model';
-import { isEmpty } from '../common';
 
 export function getFilteredRecords(aiTable: AIViewTable, records: AITableViewRecords, fields: AITableViewFields, activeView: AITableView) {
     const { conditions, condition_logical } = activeView.settings || {};
@@ -24,7 +22,7 @@ export function getFilteredRecords(aiTable: AIViewTable, records: AITableViewRec
     }
     const recordsWillHidden = aiTable.recordsWillHidden();
     return records.filter((record) => {
-        if(recordsWillHidden && recordsWillHidden.length && recordsWillHidden.includes(record._id)){
+        if (recordsWillHidden && recordsWillHidden.length && recordsWillHidden.includes(record._id)) {
             return true;
         }
         return checkConditions(fields, record, { conditions: illegalConditions, condition_logical });
@@ -49,8 +47,8 @@ function checkConditions(fields: AITableViewFields, record: AITableRecord, filte
 }
 
 function doFilterOperations(fields: AITableViewFields, record: AITableRecord, condition: AITableFilterCondition) {
-    const field = fields.find((item) => item._id === condition.field_id);
-    const cellValue = record.values[condition.field_id];
+    const { field, cellValue } = getFilterValue(fields, record, condition);
+
     try {
         return field && doFilter(condition, field, cellValue);
     } catch (error) {
@@ -59,13 +57,6 @@ function doFilterOperations(fields: AITableViewFields, record: AITableRecord, co
 }
 
 export function doFilter(condition: AITableFilterCondition, field: AITableViewField, cellValue: FieldValue) {
-    if (condition.operation === AITableFilterOperation.empty) {
-        return isEmpty(cellValue);
-    }
-    if (condition.operation === AITableFilterOperation.exists) {
-        return !isEmpty(cellValue);
-    }
-
     return ViewOperationMap[field.type].isMeetFilter(condition, cellValue);
 }
 
@@ -80,4 +71,23 @@ export function getDefaultRecordDataByFilter(
         //...
     }
     return recordValues;
+}
+
+export function getFilterValue(fields: AITableViewFields, record: AITableRecord, condition: AITableFilterCondition) {
+    const field = fields.find((item) => item._id === condition.field_id);
+    let cellValue = null;
+    if (field && isSystemField(field)) {
+        if ([AITableFieldType.createdAt, AITableFieldType.updatedAt].includes(field.type)) {
+            cellValue = { timestamp: record[field.type as SystemFieldTypes] };
+        } else {
+            cellValue = record[field.type as SystemFieldTypes];
+        }
+    } else {
+        cellValue = record.values[condition.field_id];
+    }
+
+    return {
+        field,
+        cellValue
+    };
 }
