@@ -65,6 +65,7 @@ export class DemoTableContent {
 
     aiFieldConfig: Signal<AIFieldConfig> = computed(() => {
         const readonly = this.tableService.readonly();
+        const onlyOneField = this.tableService.fields().length === 1;
         return {
             fieldRenderers: {
                 [AITableFieldType.date]: {
@@ -94,14 +95,14 @@ export class DemoTableContent {
                     hidden: (aiTable: AITable, field: Signal<AITableField>) => false,
                     disabled: (aiTable: AITable, field: Signal<AITableField>) => false
                 },
-                { ...DividerMenuItem, hidden: () => readonly },
+                { ...DividerMenuItem, hidden: () => readonly || onlyOneField },
                 {
                     ...buildRemoveFieldItem(() => {
                         const member = 'member_03';
                         const time = new Date().getTime();
                         return { updated_at: time, updated_by: member };
                     }),
-                    hidden: () => readonly
+                    hidden: () => readonly || onlyOneField
                 }
             ]
         };
