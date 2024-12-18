@@ -11,9 +11,11 @@ export class RateField extends Field {
             case AITableFilterOperation.exists:
                 return !isEmpty(cellValue);
             case AITableFilterOperation.in:
-                return !isEmpty(cellValue) && condition.value.includes(cellValue.toString());
+                const isContain = condition.value.some((item) => String(item) === String(cellValue));
+                return !isEmpty(cellValue) && isContain;
             case AITableFilterOperation.nin:
-                return isEmpty(cellValue) || !condition.value.includes(cellValue.toString());
+                const noContain = condition.value.every((item) => String(item) !== String(cellValue));
+                return isEmpty(cellValue) || noContain;
             default:
                 return super.isMeetFilter(condition, cellValue);
         }
