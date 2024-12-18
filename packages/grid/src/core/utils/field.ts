@@ -47,7 +47,7 @@ export function getFieldOptionByField(field: Partial<AITableField>) {
 export function isSameFieldOption(fieldOption: AITableFieldOption, field: Partial<AITableField>): boolean {
     return (
         fieldOption.type === field.type &&
-        (fieldOption.type === AITableFieldType.select
+        (fieldOption.type === AITableFieldType.select || fieldOption.type === AITableFieldType.member
             ? !!(fieldOption.settings as IsMultiple)?.is_multiple === !!(field.settings as IsMultiple)?.is_multiple
             : true)
     );
