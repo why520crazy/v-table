@@ -24,7 +24,7 @@ export function getDefaultFieldValue(field: AITableField) {
         return [];
     }
     if (isNumberFiled(field)) {
-        return 0;
+        return null;
     }
     return '';
 }
