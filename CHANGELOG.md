@@ -2,25 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
-## [0.0.22](https://github.com/worktile/ai-table/compare/0.0.21...0.0.22) (2024-12-18)
-
-
-### Bug Fixes
-
-* **app:** use 10-bit timestamp ([#196](https://github.com/worktile/ai-table/issues/196)) ([5c33e88](https://github.com/worktile/ai-table/commit/5c33e882e765afb5dd1ee357b33af8cba9809317))
-* **grid:**  the default value of a numeric field should not display 0 ([#198](https://github.com/worktile/ai-table/issues/198)) ([0574af9](https://github.com/worktile/ai-table/commit/0574af939554189f5be5d1216217e122e87973d6))
-* **grid:** should create correct default name and show correct type when add multiple member ([#197](https://github.com/worktile/ai-table/issues/197)) ([9863899](https://github.com/worktile/ai-table/commit/9863899658c2179d4164757e4af8248fd25bd68f))
-* **grid:** should show icon in front of action button ([#199](https://github.com/worktile/ai-table/issues/199)) ([e1c418e](https://github.com/worktile/ai-table/commit/e1c418e66457e0b8964f6e64f56768641ef06ec3))
-* **state:** the in and nin filter logic of rate fied does not take effect ([#193](https://github.com/worktile/ai-table/issues/193)) ([2f0a8e0](https://github.com/worktile/ai-table/commit/2f0a8e0eec01c0fe5a3470be9b5d11c67b3da81d))
-
-
-### Features
-
-* **state:** support filter and sort by link field ([#195](https://github.com/worktile/ai-table/issues/195)) ([fe6ef2e](https://github.com/worktile/ai-table/commit/fe6ef2e61349540e1e32e4ee0380c36155e504d4))
-* **state:** support filter by system, such as created_at, updated_at ([#194](https://github.com/worktile/ai-table/issues/194)) ([70d3f07](https://github.com/worktile/ai-table/commit/70d3f074d3f7bcbeec7133234cc0ca37ecd328ea))
-
-
-
 ## [0.0.21](https://github.com/worktile/ai-table/compare/0.0.20...0.0.21) (2024-12-13)
 
 
