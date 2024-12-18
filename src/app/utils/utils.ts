@@ -1,5 +1,6 @@
 import { AITableFieldType, AITableReferences, AITableSelectOptionStyle } from '@ai-table/grid';
 import { AITableViewFields, AITableViewRecords } from '@ai-table/state';
+import { getUnixTime } from 'date-fns';
 
 export function sortDataByView(data: AITableViewRecords | AITableViewFields, activeViewId: string) {
     const hasPositions = data.every((item) => item.positions && item.positions);
@@ -17,9 +18,9 @@ export const getDefaultTrackableEntity = (options?: {
 }) => {
     return {
         created_by: options?.[AITableFieldType.createdBy] || 'member_01',
-        created_at: new Date(options?.[AITableFieldType.createdAt] || '2024-12-15').getTime() / 1000,
+        created_at: getUnixTime(new Date(options?.[AITableFieldType.createdAt] || '2024-12-15')),
         updated_by: options?.[AITableFieldType.updatedBy] || 'member_01',
-        updated_at: new Date(options?.[AITableFieldType.updatedAt] || '2024-12-17').getTime() / 1000
+        updated_at: getUnixTime(new Date(options?.[AITableFieldType.updatedAt] || '2024-12-17'))
     };
 };
 
