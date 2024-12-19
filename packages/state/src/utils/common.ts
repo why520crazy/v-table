@@ -11,7 +11,7 @@ export function isEmpty(value: any) {
         return Reflect.ownKeys(value).length === 0;
     }
 
-    return isUndefinedOrNull(value) || value == '';
+    return isUndefinedOrNull(value) || value === '';
 }
 
 export function isPathEqual(path: Path, another: Path): boolean {
@@ -25,4 +25,3 @@ export function sortByViewPosition(data: AITableViewRecords | AITableViewFields,
     }
     return data;
 }
-
