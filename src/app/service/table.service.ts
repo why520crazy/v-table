@@ -69,6 +69,10 @@ export class TableService {
         };
     });
 
+    keywords = computed(() => {
+        return this.activeView().settings?.keywords;
+    });
+
     initData(views: AITableView[]) {
         this.views = signal(views);
     }
