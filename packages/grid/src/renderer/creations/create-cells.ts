@@ -6,7 +6,7 @@ import {
     DEFAULT_FONT_STYLE
 } from '../../constants';
 import { AITable, AITableQueries, RendererContext } from '../../core';
-import { AITableAreaType, AITableCellsDrawerConfig, AITableRender, AITableRowType } from '../../types';
+import { AITableCellsDrawerConfig, AITableRender, AITableRowType } from '../../types';
 import { getCellHorizontalPosition, transformCellValue } from '../../utils';
 import { addRowLayout } from '../drawers/add-row-layout-drawer';
 import { cellDrawer } from '../drawers/cell-drawer';
@@ -85,7 +85,15 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
                     const isSiblingActiveCell = recordId === activeCell?.recordId && fieldId !== activeCell?.fieldId;
                     const isActiveCell = recordId === activeCell?.recordId;
 
-                    if (isCheckedRow || isSelected || isSiblingActiveCell) {
+                    let matchedCellsMap: { [key: string]: boolean } = {};
+                    aiTable.matchedCells().forEach((key) => {
+                        matchedCellsMap[key] = true;
+                    });
+                    const isMatchedCell = matchedCellsMap[`${recordId}-${fieldId}`];
+
+                    if (isMatchedCell && !isActiveCell) {
+                        background = colors.itemMatchBgColor;
+                    } else if (isCheckedRow || isSelected || isSiblingActiveCell) {
                         background = colors.itemActiveBgColor;
                     } else if (isHoverRow && !isActiveCell) {
                         background = colors.gray80;
