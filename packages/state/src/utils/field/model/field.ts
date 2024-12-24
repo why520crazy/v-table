@@ -1,4 +1,4 @@
-import { AITableField, FieldValue } from '@ai-table/grid';
+import { AITableField, AITableReferences, FieldValue } from '@ai-table/grid';
 import { AITableFilterCondition, AITableFilterOperation } from '../../../types';
 import { isEmpty } from '../../common';
 import { isEqual } from 'lodash';
@@ -71,5 +71,13 @@ export abstract class Field {
 
         // test pinyin sort
         return str1 === str2 ? 0 : zhIntlCollator ? zhIntlCollator.compare(str1, str2) : str1.localeCompare(str2, 'zh-CN') > 0 ? 1 : -1;
+    }
+
+    cellFullText(transformValue: any, field: AITableField, references?: AITableReferences): string[] {
+        let fullText: string[] = [];
+        if (!isEmpty(transformValue)) {
+            fullText.push(String(transformValue));
+        }
+        return fullText;
     }
 }

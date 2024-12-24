@@ -1,7 +1,7 @@
 import { isEmpty } from '../../common';
 import { AITableFilterCondition, AITableFilterOperation } from '../../../types';
 import { Field } from './field';
-import { AITableField, AITableSelectOption, SelectFieldValue, SelectSettings } from '@ai-table/grid';
+import { AITableField, AITableSelectField, AITableSelectOption, SelectFieldValue, SelectSettings } from '@ai-table/grid';
 import { Id } from 'ngx-tethys/types';
 
 export class SelectField extends Field {
@@ -39,11 +39,24 @@ export class SelectField extends Field {
     }
 
     findOptionById(field: AITableField, id: Id): AITableSelectOption | null {
-        return (field.settings as SelectSettings).options.find(option => option._id === id) || null;
+        return (field.settings as SelectSettings).options.find((option) => option._id === id) || null;
     }
 
     arrayValueToString(cellValues: string[] | null): string | null {
         return cellValues && cellValues.length ? cellValues.join(', ') : null;
+    }
+
+    override cellFullText(transformValue: string[], field: AITableField): string[] {
+        let cellText: string[] = [];
+        if (transformValue && Array.isArray(transformValue) && transformValue.length) {
+            transformValue.forEach((optionId) => {
+                const item = (field as AITableSelectField).settings?.options?.find((option) => option._id === optionId);
+                if (item?.text) {
+                    cellText.push(item.text);
+                }
+            });
+        }
+        return cellText;
     }
 }
 

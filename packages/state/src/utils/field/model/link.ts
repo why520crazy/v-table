@@ -39,4 +39,12 @@ export class LinkField extends Field {
         }
         return '';
     }
+
+    override cellFullText(transformValue: LinkFieldValue, field: AITableField): string[] {
+        let fullText: string[] = [];
+        if (!isEmpty(transformValue?.text)) {
+            fullText.push(transformValue.text);
+        }
+        return fullText;
+    }
 }
