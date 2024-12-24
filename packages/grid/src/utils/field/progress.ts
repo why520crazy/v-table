@@ -1,5 +1,4 @@
-import { isEmpty } from 'lodash';
-import { AITableField } from '../../index';
+import { AITableField, isEmpty } from '../../index';
 import { Field } from './field';
 
 export class ProgressField extends Field {
