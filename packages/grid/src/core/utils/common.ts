@@ -10,6 +10,7 @@ export function createAITable(records: WritableSignal<AITableRecords>, fields: W
             selectedFields: new Map(),
             selectedCells: new Map()
         }),
+        matchedCells: signal([]),
         recordsMap: computed(() => {
             return records().reduce(
                 (object, item) => {
