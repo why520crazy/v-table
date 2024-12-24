@@ -45,7 +45,62 @@ export class TableService {
     router = inject(Router);
 
     activeView = computed(() => {
-        return this.views().find((view) => view._id === this.activeViewId()) as AITableView;
+        const settings = {
+            condition_logical: 'and',
+            conditions: [
+                // 评分
+                // {
+                //     field_id: 'column-7',
+                //     operation: 'nin', //in 、nin 、exists、empty
+                //     value: [3, '4']
+                // }
+                // 链接
+                // {
+                //     field_id: 'column-8',
+                //     operation: 'contain', // 'exists', //'empty',
+                //     value: '百'
+                // }
+                // 更新时间（系统日期）
+                // {
+                //     field_id: 'column-12',
+                //     operation: 'exists', // empty 、 exists
+                //     value: null
+                // }
+                // {
+                //     field_id: 'column-12',
+                //     operation: 'between',
+                //     value: [1734513044, 1734685844] // 2024-12-18 ~2024-12-20
+                // }
+                // {
+                //     field_id: 'column-12',
+                //     operation: 'gt', // eq、gt、lt
+                //     // value: 1734376927 // 2024/12/17
+                //     value: 1734463327 // 2024/12/18
+                //     // value: 1734549727 // 2024/12/19
+                // }
+                // 自定义日期
+                // {
+                //     field_id: 'column-4',
+                //     operation: 'lt',
+                //     value: 1734636127 // 2024/12/20
+                // }
+                // {
+                //     field_id: 'column-4',
+                //     operation: 'empty',
+                //     value: null
+                // }
+                // {
+                //     field_id: 'column-4',
+                //     operation: 'between',
+                //     value: [1733944927, 1734722527] // 2024-12-12 ~2024-12-21
+                // }
+            ],
+            is_keep_sort: true,
+            sorts: [{ direction: -1, sort_by: 'column-3' }],
+            keywords: '3'
+        };
+        const view = this.views().find((view) => view._id === this.activeViewId()) as AITableView;
+        return { ...view, settings };
     });
 
     activeViewShortId = computed(() => {
@@ -53,11 +108,11 @@ export class TableService {
     });
 
     renderRecords = computed(() => {
-        return buildRecordsByView(this.aiTable, this.records(), this.fields(), this.activeView()) as AITableViewRecords;
+        return buildRecordsByView(this.aiTable, this.records(), this.fields(), this.activeView() as AITableView) as AITableViewRecords;
     });
 
     renderFields = computed(() => {
-        return buildFieldsByView(this.aiTable, this.fields(), this.activeView()) as AITableViewFields;
+        return buildFieldsByView(this.aiTable, this.fields(), this.activeView() as AITableView) as AITableViewFields;
     });
 
     aiBuildRenderDataFn: Signal<() => AITableValue> = computed(() => {
@@ -67,6 +122,10 @@ export class TableService {
                 fields: this.renderFields()
             };
         };
+    });
+
+    keywords = computed(() => {
+        return this.activeView().settings?.keywords;
     });
 
     initData(views: AITableView[]) {
@@ -120,7 +179,7 @@ export class TableService {
         }
         this.provider = getProvider(this.sharedType.doc!, room, isDevMode());
         this.provider.connect();
-        this.provider.once('synced', () => {
+        this.provider.once('sync', () => {
             if (this.provider!.synced && [...this.sharedType!.doc!.store.clients.keys()].length === 0) {
                 console.log('init shared type');
                 const value = getCanvasDefaultValue();
