@@ -2,6 +2,7 @@ import { AITableFieldType } from '../../index';
 import { Field } from './field';
 import { LinkField } from './link';
 import { MemberField } from './member';
+import { ProgressField } from './progress';
 import { SelectField } from './select';
 import { TextField } from './text';
 
@@ -16,7 +17,7 @@ export const ViewOperationMap: Record<AITableFieldType, Field> = {
     [AITableFieldType.rate]: new TextField(),
     [AITableFieldType.link]: new LinkField(),
     [AITableFieldType.member]: new MemberField(),
-    [AITableFieldType.progress]: new TextField(),
+    [AITableFieldType.progress]: new ProgressField(),
     [AITableFieldType.createdBy]: new MemberField(),
     [AITableFieldType.updatedBy]: new MemberField()
 };

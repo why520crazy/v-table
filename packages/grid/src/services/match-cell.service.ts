@@ -12,6 +12,10 @@ export class AITableGridMatchCellService {
     }
 
     findMatchedCells(keywords: string, references: AITableReferences) {
+        if (!keywords) {
+            this.clearMatchedCells();
+            return;
+        }
         let matchedCells: string[] = [];
         this.aiTable.records().forEach((record) => {
             this.aiTable.fields().forEach((field) => {
@@ -21,6 +25,10 @@ export class AITableGridMatchCellService {
             });
         });
         this.aiTable.matchedCells.set([...matchedCells]);
+    }
+
+    private clearMatchedCells() {
+        this.aiTable.matchedCells.set([]);
     }
 
     private isCellMatchKeywords(aiTable: AITable, field: AITableField, recordId: string, keywords: string, references: AITableReferences) {

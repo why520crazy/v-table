@@ -150,9 +150,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         });
         effect(
             () => {
-                if (this.aiKeywords()) {
-                    this.aiTableGridMatchCellService.findMatchedCells(this.aiKeywords()!, this.aiReferences());
-                }
+                this.aiTableGridMatchCellService.findMatchedCells(this.aiKeywords()!, this.aiReferences());
             },
             { allowSignalWrites: true }
         );
