@@ -91,7 +91,7 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
                     });
                     const isMatchedCell = matchedCellsMap[`${recordId}-${fieldId}`];
 
-                    if (isMatchedCell && !isActiveCell) {
+                    if (isMatchedCell) {
                         background = colors.itemMatchBgColor;
                     } else if (isCheckedRow || isSelected || isSiblingActiveCell) {
                         background = colors.itemActiveBgColor;
