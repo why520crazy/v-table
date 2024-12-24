@@ -60,6 +60,10 @@ export class TableService {
         return buildFieldsByView(this.aiTable, this.fields(), this.activeView()) as AITableViewFields;
     });
 
+    keywords = computed(() => {
+        return this.activeView().settings?.keywords;
+    });
+
     aiBuildRenderDataFn: Signal<() => AITableValue> = computed(() => {
         return () => {
             return {
@@ -120,7 +124,7 @@ export class TableService {
         }
         this.provider = getProvider(this.sharedType.doc!, room, isDevMode());
         this.provider.connect();
-        this.provider.once('synced', () => {
+        this.provider.once('sync', () => {
             if (this.provider!.synced && [...this.sharedType!.doc!.store.clients.keys()].length === 0) {
                 console.log('init shared type');
                 const value = getCanvasDefaultValue();
