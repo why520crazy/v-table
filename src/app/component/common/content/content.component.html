@@ -33,6 +33,7 @@
                     [(aiRecords)]="tableService.records"
                     [(aiFields)]="tableService.fields"
                     [aiFieldConfig]="aiFieldConfig()"
+                    [aiKeywords]="tableService.keywords()"
                     [aiPlugins]="plugins"
                     [aiReferences]="references()"
                     (aiAddRecord)="addRecord($event)"

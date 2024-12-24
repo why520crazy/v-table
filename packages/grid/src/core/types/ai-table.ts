@@ -9,10 +9,11 @@ export interface AITable {
     fields: WritableSignal<AITableFields>;
     context?: RendererContext;
     selection: WritableSignal<AITableSelection>;
+    matchedCells: WritableSignal<string[]>; // [`${recordId}-${fieldId}`]
     recordsMap: Signal<{ [kay: string]: AITableRecord }>;
     fieldsMap: Signal<{ [kay: string]: AITableField }>;
     recordsWillHidden: WritableSignal<string[]>;
-    recordsWillMove: WritableSignal<string[]>
+    recordsWillMove: WritableSignal<string[]>;
 }
 
 export type AIPlugin = (aiTable: AITable) => AITable;

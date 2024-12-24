@@ -49,7 +49,7 @@ export enum AITableFilterOperation {
     notContain = 'not_contain'
 }
 
-export type ViewSettings = AITableFilterConditions & AITableSortOptions;
+export type ViewSettings = AITableSearchOptions & AITableFilterConditions & AITableSortOptions;
 
 export interface AITableView {
     _id: string;
@@ -76,6 +76,10 @@ export interface AITableSortOptions {
         sort_by: Id;
         direction: Direction;
     }[];
+}
+
+export interface AITableSearchOptions {
+    keywords?: string;
 }
 
 export type AITableViews = AITableView[];
