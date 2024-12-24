@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.23](https://github.com/worktile/ai-table/compare/0.0.22...0.0.23) (2024-12-24)
+
+
+### Bug Fixes
+
+* **app:** fix keywords attribute ([#206](https://github.com/worktile/ai-table/issues/206)) ([e89e92c](https://github.com/worktile/ai-table/commit/e89e92c31b7a015c6ac11ae629cd8316f2693f75))
+* **state:** when the value of the field is 0, it should not be considered empty ([#202](https://github.com/worktile/ai-table/issues/202)) ([e6e9dd0](https://github.com/worktile/ai-table/commit/e6e9dd057ce7ef767a558edeb86b4ede3fa51729))
+
+
+### Features
+
+* **grid:** support highlight the cell which match the keywords ([#205](https://github.com/worktile/ai-table/issues/205)) ([38bdb14](https://github.com/worktile/ai-table/commit/38bdb147b8142907d672680cab8390a501a52db0))
+
+
+
 ## [0.0.22](https://github.com/worktile/ai-table/compare/0.0.21...0.0.22) (2024-12-18)
 
 
