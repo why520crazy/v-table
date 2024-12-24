@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.24](https://github.com/worktile/ai-table/compare/0.0.23...0.0.24) (2024-12-24)
+
+
+### Features
+
+* **grid:** support clear matchedCells when keywords is null and search by progress ([#209](https://github.com/worktile/ai-table/issues/209)) ([5428652](https://github.com/worktile/ai-table/commit/5428652ea1ec32e978574102afc67670da6402b1))
+
+
+
 ## [0.0.23](https://github.com/worktile/ai-table/compare/0.0.22...0.0.23) (2024-12-24)
 
 
