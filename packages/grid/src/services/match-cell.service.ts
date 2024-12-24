@@ -27,7 +27,8 @@ export class AITableGridMatchCellService {
     private isCellMatchKeywords(aiTable: AITable, field: AITableField, recordId: string, keywords: string, references: AITableReferences) {
         const cellValue = AITableQueries.getFieldValue(aiTable, [recordId, field._id]);
         const transformValue = transformCellValue(aiTable, field, cellValue);
-        let cellFullText: string[] = ViewOperationMap[field.type].cellFullText(transformValue, field, references);
+        const fieldMethod = ViewOperationMap[field.type];
+        let cellFullText: string[] = fieldMethod.cellFullText(transformValue, field, references);
 
         try {
             return keywords && cellFullText.length && cellFullText.some((item) => item.toLowerCase().includes(keywords.toLowerCase()));
