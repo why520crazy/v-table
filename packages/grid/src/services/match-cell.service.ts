@@ -12,6 +12,11 @@ export class AITableGridMatchCellService {
     }
 
     findMatchedCells(keywords: string, references: AITableReferences) {
+        if (!keywords) {
+            this.aiTable.matchedCells.set([]);
+            return;
+        }
+
         let matchedCells: string[] = [];
         this.aiTable.records().forEach((record) => {
             this.aiTable.fields().forEach((field) => {
