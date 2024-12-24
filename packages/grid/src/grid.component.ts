@@ -43,6 +43,7 @@ import { AITableGridSelectionService } from './services/selection.service';
 import { AITableMouseDownType, AITableRendererConfig, ScrollActionOptions } from './types';
 import { buildGridLinearRows, getColumnIndicesMap, getDetailByTargetName, handleMouseStyle, isWindows } from './utils';
 import { getMousePosition } from './utils/position';
+import { AITableGridMatchCellService } from './services/match-cell.service';
 
 @Component({
     selector: 'ai-table-grid',
@@ -53,7 +54,7 @@ import { getMousePosition } from './utils/position';
         class: 'ai-table-grid'
     },
     imports: [AITableRenderer],
-    providers: [AITableGridEventService, AITableGridFieldService, AITableGridSelectionService]
+    providers: [AITableGridEventService, AITableGridFieldService, AITableGridSelectionService, AITableGridMatchCellService]
 })
 export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private viewContainerRef = inject(ViewContainerRef);
@@ -147,6 +148,14 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                 this.toggleHoverCellEditor();
             }
         });
+        effect(
+            () => {
+                if (this.aiKeywords()) {
+                    this.aiTableGridMatchCellService.findMatchedCells(this.aiKeywords()!, this.aiReferences());
+                }
+            },
+            { allowSignalWrites: true }
+        );
     }
 
     override ngOnInit(): void {
