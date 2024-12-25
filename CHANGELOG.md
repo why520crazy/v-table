@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.25](https://github.com/worktile/ai-table/compare/0.0.24...0.0.25) (2024-12-25)
+
+
+### Features
+
+* **grid:** add references param for cell editor and fix aiTableGridEventService init params error ([#211](https://github.com/worktile/ai-table/issues/211)) ([fd1d642](https://github.com/worktile/ai-table/commit/fd1d642812908c0818e549e8068d7276211d167a))
+
+
+
 ## [0.0.24](https://github.com/worktile/ai-table/compare/0.0.23...0.0.24) (2024-12-24)
 
 
