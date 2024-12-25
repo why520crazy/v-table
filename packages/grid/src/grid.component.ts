@@ -352,6 +352,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                 coordinate: this.coordinate(),
                 fieldId: fieldId!,
                 recordId: recordId!,
+                references: this.aiReferences(),
                 updateFieldValue: (value: UpdateFieldValueOptions<any>) => {
                     this.aiUpdateFieldValue.emit(value);
                 }
@@ -500,6 +501,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                     coordinate: this.coordinate(),
                     fieldId: fieldId!,
                     recordId: recordId!,
+                    references: this.aiReferences(),
                     isHoverEdit: true,
                     updateFieldValue: (value: UpdateFieldValueOptions<any>) => {
                         this.aiUpdateFieldValue.emit(value);

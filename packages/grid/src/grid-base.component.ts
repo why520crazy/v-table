@@ -118,7 +118,7 @@ export class AITableGridBase implements OnInit {
     }
 
     initService() {
-        this.aiTableGridEventService.initialize(this.aiTable, this.aiFieldConfig()?.fieldPropertyEditor);
+        this.aiTableGridEventService.initialize(this.aiTable, this.aiFieldConfig()?.fieldRenderers);
         this.aiTableGridSelectionService.initialize(this.aiTable);
         this.aiTableGridMatchCellService.initialize(this.aiTable);
         this.aiTableGridEventService.registerEvents(this.elementRef.nativeElement);
