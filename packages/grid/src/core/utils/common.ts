@@ -17,7 +17,7 @@ export function createAITable(records: WritableSignal<AITableRecords>, fields: W
                     object[item._id] = item;
                     return object;
                 },
-                {} as { [kay: string]: AITableRecord }
+                {} as { [key: string]: AITableRecord }
             );
         }),
         fieldsMap: computed(() => {
@@ -26,11 +26,12 @@ export function createAITable(records: WritableSignal<AITableRecords>, fields: W
                     object[item._id] = item;
                     return object;
                 },
-                {} as { [kay: string]: AITableField }
+                {} as { [key: string]: AITableField }
             );
         }),
         recordsWillHidden: signal([]),
-        recordsWillMove: signal([])
+        recordsWillMove: signal([]),
+        references: signal({ members: {} })
     };
     return aiTable;
 }

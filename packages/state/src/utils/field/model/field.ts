@@ -1,4 +1,4 @@
-import { AITableField, FieldValue } from '@ai-table/grid';
+import { AITableField, AITableReferences, FieldValue } from '@ai-table/grid';
 import { AITableFilterCondition, AITableFilterOperation } from '../../../types';
 import { isEmpty } from '../../common';
 import { isEqual } from 'lodash';
@@ -10,7 +10,7 @@ export abstract class Field {
         return str.toLowerCase().includes(searchStr.trim().toLowerCase());
     }
 
-    abstract cellValueToString(cellValue: FieldValue, field: AITableField): string | null;
+    abstract cellValueToString(cellValue: FieldValue, field: AITableField, references?: AITableReferences): string | null;
 
     isMeetFilter(condition: AITableFilterCondition, cellValue: FieldValue) {
         switch (condition.operation) {
@@ -42,7 +42,7 @@ export abstract class Field {
         return isEqual(cv1, cv2);
     }
 
-    compare(cellValue1: FieldValue, cellValue2: FieldValue, field: AITableField): number {
+    compare(cellValue1: FieldValue, cellValue2: FieldValue, field: AITableField, references?: AITableReferences): number {
         if (this.eq(cellValue1, cellValue2)) {
             return 0;
         }
@@ -53,8 +53,8 @@ export abstract class Field {
             return 1;
         }
 
-        let str1 = this.cellValueToString(cellValue1, field);
-        let str2 = this.cellValueToString(cellValue2, field);
+        let str1 = this.cellValueToString(cellValue1, field, references);
+        let str2 = this.cellValueToString(cellValue2, field, references);
 
         if (str1 === str2) {
             return 0;

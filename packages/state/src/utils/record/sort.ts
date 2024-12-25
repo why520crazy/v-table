@@ -27,7 +27,8 @@ export function sortRecordsBySortInfo(aiTable: AITable, records: AITableViewReco
 
                 const cellValue1 = AITableQueries.getFieldValue(aiTable, [prev._id, field._id]);
                 const cellValue2 = AITableQueries.getFieldValue(aiTable, [current._id, field._id]);
-                const res = fieldMethod.compare(cellValue1, cellValue2, field);
+                const references = aiTable.references();
+                const res = fieldMethod.compare(cellValue1, cellValue2, field, references);
                 return res * rule.direction;
             }, 0);
         });

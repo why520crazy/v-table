@@ -208,7 +208,7 @@ export class DemoTableContent {
                     object[item._id] = item;
                     return object;
                 },
-                {} as { [kay: string]: AITableView }
+                {} as { [key: string]: AITableView }
             );
         });
         this.aiTable.onChange = () => {

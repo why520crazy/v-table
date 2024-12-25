@@ -10,6 +10,7 @@ import {
     AIViewTable
 } from '../../types';
 import { ViewOperationMap } from '../field/model';
+import { isEmpty } from '../common';
 
 export function getFilteredRecords(aiTable: AIViewTable, records: AITableViewRecords, fields: AITableViewFields, activeView: AITableView) {
     const { conditions, condition_logical } = activeView.settings || {};
@@ -73,7 +74,7 @@ export function getDefaultRecordDataByFilter(
     return recordValues;
 }
 
-export function getFilterValue(fields: AITableViewFields, record: AITableRecord, condition: AITableFilterCondition) {
+function getFilterValue(fields: AITableViewFields, record: AITableRecord, condition: AITableFilterCondition) {
     const field = fields.find((item) => item._id === condition.field_id);
     let cellValue = null;
     if (field && isSystemField(field)) {
@@ -84,6 +85,10 @@ export function getFilterValue(fields: AITableViewFields, record: AITableRecord,
         }
     } else {
         cellValue = record.values[condition.field_id];
+    }
+
+    if (field && [AITableFieldType.createdBy, AITableFieldType.updatedBy, AITableFieldType.member].includes(field.type)) {
+        cellValue = Array.isArray(cellValue) ? cellValue : isEmpty(cellValue) ? [] : [cellValue];
     }
 
     return {

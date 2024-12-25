@@ -6,6 +6,7 @@ import { DateField } from './date';
 import { NumberField } from './number';
 import { RateField } from './rate';
 import { LinkField } from './link';
+import { MemberField } from './member';
 
 export const ViewOperationMap: Record<AITableFieldType, Field> = {
     [AITableFieldType.text]: new TextField(),
@@ -17,8 +18,8 @@ export const ViewOperationMap: Record<AITableFieldType, Field> = {
     [AITableFieldType.number]: new NumberField(),
     [AITableFieldType.rate]: new RateField(),
     [AITableFieldType.link]: new LinkField(),
-    [AITableFieldType.member]: new SelectField(),
+    [AITableFieldType.member]: new MemberField(),
     [AITableFieldType.progress]: new NumberField(),
-    [AITableFieldType.createdBy]: new SelectField(),
-    [AITableFieldType.updatedBy]: new SelectField()
+    [AITableFieldType.createdBy]: new MemberField(),
+    [AITableFieldType.updatedBy]: new MemberField()
 };
