@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, Input, OnInit, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, Input, OnInit, output } from '@angular/core';
 import { ThyPopoverRef } from 'ngx-tethys/popover';
 import { AITable, AITableField, AITableQueries, UpdateFieldValueOptions } from '../../core';
+import { AITableReferences } from '../../types';
 
 @Component({
     selector: 'abstract-edit-cell',
@@ -14,6 +15,8 @@ export abstract class AbstractEditCellEditor<TValue, TFieldType extends AITableF
     @Input({ required: true }) fieldId!: string;
 
     @Input({ required: true }) recordId!: string;
+
+    @Input({ required: true }) references!: AITableReferences;
 
     updateFieldValue = output<UpdateFieldValueOptions<TValue>>();
 

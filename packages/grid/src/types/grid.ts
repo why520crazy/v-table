@@ -112,6 +112,7 @@ export interface AITableOpenEditOptions {
     recordId: string;
     fieldId: string;
     coordinate: Coordinate;
+    references: AITableReferences;
     container?: HTMLDivElement;
     isHoverEdit?: boolean;
     updateFieldValue: (options: UpdateFieldValueOptions<any>) => void;

@@ -151,7 +151,7 @@ export class AITableGridEventService {
     }
 
     openCellEditor(aiTable: AITable, options: AITableOpenEditOptions) {
-        const { container, recordId, fieldId, isHoverEdit } = options;
+        const { container, recordId, fieldId, isHoverEdit, references } = options;
         const component = this.getEditorComponent(this.aiTable.fieldsMap()[fieldId].type);
         const offsetOriginPosition = this.getOriginPosition(aiTable, options);
         this.cellEditorPopoverRef = this.thyPopover.open(component, {
@@ -165,6 +165,7 @@ export class AITableGridEventService {
             initialState: {
                 fieldId: fieldId,
                 recordId: recordId,
+                references,
                 aiTable: aiTable
             },
             panelClass: 'grid-cell-editor',
