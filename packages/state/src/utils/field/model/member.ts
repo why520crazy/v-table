@@ -20,19 +20,19 @@ export class MemberField extends Field {
     }
 
     cellValueToString(cellValue: MemberFieldValue, field: AITableField, references: AITableReferences): string | null {
-        let memberDisplayNames: string[] = [];
+        let names: string[] = [];
         if (cellValue?.length && references) {
             for (let index = 0; index < cellValue.length; index++) {
                 const userInfo = references?.members[cellValue[index]];
                 if (!userInfo) {
                     continue;
                 }
-                if (userInfo.display_name) {
-                    memberDisplayNames.push(userInfo.display_name);
+                if (userInfo.name) {
+                    names.push(userInfo.name);
                 }
             }
         }
-        return memberDisplayNames && memberDisplayNames.length ? memberDisplayNames.join(', ') : null;
+        return names && names.length ? names.join(', ') : null;
     }
 }
 
