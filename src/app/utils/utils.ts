@@ -1017,41 +1017,49 @@ export function getReferences(): AITableReferences {
             member_01: {
                 uid: 'member_01',
                 display_name: 'admin',
+                name: 'admin',
                 avatar: 'https://web.on-premises-alpha.pingcode.live/pc-avatar/c04446a4-bfcc-4a05-846c-e3241e1b68df_80x80.png'
             },
             member_02: {
                 uid: 'member_02',
                 display_name: 'member',
+                name: 'member',
                 avatar: ''
             },
             member_03: {
                 uid: 'member_03',
                 display_name: 'Maple13',
+                name: 'Maple13',
                 avatar: ''
             },
             member_04: {
                 uid: 'member_04',
                 display_name: 'canvas',
+                name: 'canvas',
                 avatar: ''
             },
             member_05: {
                 uid: 'member_05',
-                display_name: 'svg',
+                display_name: '虾米',
+                name: 'xiami',
                 avatar: ''
             },
             member_06: {
                 uid: 'member_06',
                 display_name: 'html',
+                name: 'html',
                 avatar: ''
             },
             member_07: {
                 uid: 'member_07',
                 display_name: 'css',
+                name: 'css',
                 avatar: ''
             },
             member_08: {
                 uid: 'member_08',
                 display_name: 'Angular',
+                name: 'Angular',
                 avatar: ''
             }
         }

@@ -30,6 +30,7 @@ export interface AIFieldConfig {
 export interface AITableUserInfo {
     uid?: string;
     display_name?: string;
+    name?: string;
     avatar?: string;
 }
 

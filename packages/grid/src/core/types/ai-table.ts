@@ -1,6 +1,6 @@
 import { Signal, WritableSignal } from '@angular/core';
 import { Colors } from '../../constants/colors';
-import { AITableSelection } from '../../types';
+import { AITableReferences, AITableSelection } from '../../types';
 import { RendererContext } from '../context';
 import { AITableField, AITableFields, AITableRecord, AITableRecords } from './core';
 
@@ -10,10 +10,11 @@ export interface AITable {
     context?: RendererContext;
     selection: WritableSignal<AITableSelection>;
     matchedCells: WritableSignal<string[]>; // [`${recordId}-${fieldId}`]
-    recordsMap: Signal<{ [kay: string]: AITableRecord }>;
-    fieldsMap: Signal<{ [kay: string]: AITableField }>;
+    recordsMap: Signal<{ [key: string]: AITableRecord }>;
+    fieldsMap: Signal<{ [key: string]: AITableField }>;
     recordsWillHidden: WritableSignal<string[]>;
     recordsWillMove: WritableSignal<string[]>;
+    references: WritableSignal<AITableReferences>;
 }
 
 export type AIPlugin = (aiTable: AITable) => AITable;
