@@ -27,8 +27,8 @@ export class MemberField extends Field {
                 if (!userInfo) {
                     continue;
                 }
-                if (userInfo.name) {
-                    names.push(userInfo.name);
+                if (userInfo.display_name_pinyin) {
+                    names.push(userInfo.display_name_pinyin);
                 }
             }
         }
