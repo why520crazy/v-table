@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.26](https://github.com/worktile/ai-table/compare/0.0.25...0.0.26) (2024-12-26)
+
+
+### Features
+
+* **state:** support filter and sort by member, created_by, updated_by ([#213](https://github.com/worktile/ai-table/issues/213)) ([950068a](https://github.com/worktile/ai-table/commit/950068ad9b196faaae0edff43d8ec4ea1613eced))
+
+
+
 ## [0.0.25](https://github.com/worktile/ai-table/compare/0.0.24...0.0.25) (2024-12-25)
 
 
