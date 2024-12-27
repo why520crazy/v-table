@@ -71,8 +71,9 @@ export class AITableGridEventService {
     }
 
     private getEditorComponent(type: AITableFieldType) {
-        if (this.aiFieldRenderers && this.aiFieldRenderers[type]) {
-            return this.aiFieldRenderers[type]!.editor;
+        const filedRenderSchema = this.aiFieldRenderers && this.aiFieldRenderers[type];
+        if (filedRenderSchema && filedRenderSchema.editor) {
+            return filedRenderSchema.editor;
         }
         return GRID_CELL_EDITOR_MAP[type];
     }
