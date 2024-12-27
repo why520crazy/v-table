@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.28](https://github.com/worktile/ai-table/compare/0.0.27...0.0.28) (2024-12-27)
+
+
+### Bug Fixes
+
+* **field-render:** fix date editing error #WIK-17072 ([#217](https://github.com/worktile/ai-table/issues/217)) ([381235a](https://github.com/worktile/ai-table/commit/381235a65d47b6500cc043a19dccf455e3956402)), closes [#WIK-17072](https://github.com/worktile/ai-table/issues/WIK-17072)
+
+
+
 ## [0.0.27](https://github.com/worktile/ai-table/compare/0.0.26...0.0.27) (2024-12-26)
 
 
