@@ -1,5 +1,4 @@
 export * from './build';
-export * from './field/model';
 export * from './field/add-fields';
 export * from './field/remove-field';
 export * from './field/sort-fields';

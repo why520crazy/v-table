@@ -1,9 +1,9 @@
-import { Field } from './field';
-import { DateFieldValue } from '@ai-table/grid';
 import { fromUnixTime, subDays } from 'date-fns';
-import { isArray, TinyDate } from 'ngx-tethys/util';
-import { AITableFilterCondition, AITableFilterOperation } from '../../../types'
-import { isEmpty } from '../../common';
+import { isArray, isEmpty, TinyDate } from 'ngx-tethys/util';
+import { Field } from './field';
+import { AITableFilterCondition, AITableFilterOperation } from '../../../types';
+import { DateFieldValue } from '../../../core';
+import { compareNumber } from '../operate';
 
 export class DateField extends Field {
     override isMeetFilter(condition: AITableFilterCondition<string>, cellValue: DateFieldValue) {
@@ -24,6 +24,12 @@ export class DateField extends Field {
             default:
                 return super.isMeetFilter(condition, cellValue);
         }
+    }
+
+    override compare(cellValue1: DateFieldValue, cellValue2: DateFieldValue): number {
+        const value1 = cellValueToSortValue(cellValue1);
+        const value2 = cellValueToSortValue(cellValue2);
+        return compareNumber(value1, value2);
     }
 
     getTimeRange(value: string | number | number[]) {
@@ -55,26 +61,8 @@ export class DateField extends Field {
                 ];
         }
     }
+}
 
-    cellValueToString(_cellValue: DateFieldValue): string | null {
-        return null;
-    }
-
-    static _compare(cellValue1: DateFieldValue, cellValue2: DateFieldValue): number {
-        if (isEmpty(cellValue1?.timestamp) && isEmpty(cellValue2?.timestamp)) {
-            return 0;
-        }
-        if (isEmpty(cellValue1?.timestamp)) {
-            return -1;
-        }
-        if (isEmpty(cellValue2?.timestamp)) {
-            return 1;
-        }
-
-        return cellValue1.timestamp === cellValue2.timestamp ? 0 : cellValue1.timestamp > cellValue2.timestamp ? 1 : -1;
-    }
-
-    override compare(cellValue1: DateFieldValue, cellValue2: DateFieldValue): number {
-        return DateField._compare(cellValue1, cellValue2);
-    }
+function cellValueToSortValue(cellValue: DateFieldValue): number {
+    return cellValue?.timestamp;
 }
