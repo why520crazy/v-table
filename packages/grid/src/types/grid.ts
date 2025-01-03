@@ -1,8 +1,17 @@
 import { Signal, WritableSignal } from '@angular/core';
 import { Dictionary } from 'ngx-tethys/types';
-import { AITable, AITableField, AITableFieldType, AITableRecord, Coordinate, FieldValue, UpdateFieldValueOptions } from '../core';
+import {
+    AIRecordFieldPosition,
+    AITable,
+    AITableField,
+    AITableFieldType,
+    AITableRecord,
+    Coordinate,
+    FieldValue,
+    UpdateFieldValueOptions
+} from '../core';
 import { AITableFieldMenuItem } from './field';
-import { AITableLinearRow, AITableContextMenuItem } from './row';
+import { AITableLinearRow } from './row';
 
 export interface AITableGridCellRenderSchema {
     editor?: any;
@@ -16,9 +25,10 @@ export interface AITableGridData {
 }
 
 export interface AITableSelection {
-    selectedRecords: Map<string, boolean>;
-    selectedFields: Map<string, boolean>;
-    selectedCells: Map<string, {}>;
+    selectedRecords: Set<string>; // `${recordId}`
+    selectedFields: Set<string>; // `${fieldId}`
+    selectedCells: Set<string>; // `${recordId}:${fieldId}`
+    activeCell: AIRecordFieldPosition | null;
 }
 
 export interface AIFieldConfig {

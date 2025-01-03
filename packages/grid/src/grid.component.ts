@@ -34,7 +34,7 @@ import {
     DEFAULT_SCROLL_STATE,
     MOUSEOVER_EDIT_TYPE
 } from './constants';
-import { AITable, Coordinate, RendererContext, UpdateFieldValueOptions } from './core';
+import { AIRecordFieldPosition, AITable, Coordinate, RendererContext, UpdateFieldValueOptions } from './core';
 import { AITableGridBase } from './grid-base.component';
 import { AITableRenderer } from './renderer/renderer.component';
 import { AITableGridEventService } from './services/event.service';
@@ -58,6 +58,10 @@ import { AITableGridMatchCellService } from './services/match-cell.service';
 })
 export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private viewContainerRef = inject(ViewContainerRef);
+
+    private isSelecting = false;
+
+    private selectionStart: AIRecordFieldPosition | null = null;
 
     timer!: number | null;
 
@@ -198,6 +202,17 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             handleMouseStyle(curMousePosition.realTargetName, curMousePosition.areaType, this.containerElement());
             context!.setPointPosition(curMousePosition);
             this.timer = null;
+
+            if (this.isSelecting) {
+                const { fieldId, recordId } = getDetailByTargetName(curMousePosition.realTargetName);
+                if (fieldId && recordId) {
+                    const startCell = this.selectionStart;
+                    const endCell: AIRecordFieldPosition = [recordId, fieldId];
+                    if (startCell && !!startCell.length) {
+                        this.aiTableGridSelectionService.selectCells(startCell, endCell);
+                    }
+                }
+            }
         });
     }
 
@@ -210,7 +225,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             mouseEvent.button === AITableMouseDownType.Right &&
             recordId &&
             fieldId &&
-            this.aiTable.selection().selectedRecords.has(recordId)
+            (this.aiTable.selection().selectedRecords.has(recordId) || this.aiTable.selection().selectedCells.has(`${recordId}:${fieldId}`))
         ) {
             return;
         }
@@ -224,7 +239,9 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             case AI_TABLE_CELL:
                 if (!recordId || !fieldId) return;
                 this.aiTableGridEventService.closeCellEditor();
-                this.aiTableGridSelectionService.selectCell(recordId, fieldId);
+                const selectionStart: AIRecordFieldPosition = [recordId, fieldId];
+                this.dragSelectionState(true, selectionStart);
+                this.aiTableGridSelectionService.selectCells(selectionStart);
                 return;
             case AI_TABLE_ROW_ADD_BUTTON:
             case AI_TABLE_FIELD_ADD_BUTTON:
@@ -234,6 +251,10 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             default:
                 this.aiTableGridSelectionService.clearSelection();
         }
+    }
+
+    stageMouseup(e: KoEventObject<MouseEvent>) {
+        this.dragSelectionState(false, null);
     }
 
     stageContextmenu(e: KoEventObject<MouseEvent>) {
@@ -412,13 +433,22 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                     (e) =>
                         e.target instanceof Element &&
                         !this.containerElement().contains(e.target) &&
-                        !(e.target.closest(AI_TABLE_PROHIBIT_CLEAR_SELECTION_CLASS) && this.aiTable.selection().selectedRecords.size > 0)
+                        !(
+                            e.target.closest(AI_TABLE_PROHIBIT_CLEAR_SELECTION_CLASS) &&
+                            AITable.getSelectedRecordIds(this.aiTable).length > 0
+                        )
                 ),
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe(() => {
+                this.dragSelectionState(false, null);
                 this.aiTableGridSelectionService.clearSelection();
             });
+    }
+
+    private dragSelectionState(isSelecting: boolean, selectionStart: AIRecordFieldPosition | null) {
+        this.isSelecting = isSelecting;
+        this.selectionStart = selectionStart;
     }
 
     private resetScrolling = () => {

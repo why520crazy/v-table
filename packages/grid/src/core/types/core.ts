@@ -195,4 +195,6 @@ export type IdPath = [string];
 
 export type AIFieldValueIdPath = [string, string];
 
+export type AIRecordFieldPosition = [string, string];
+
 export type Path = NumberPath | IdPath | AIFieldValueIdPath;

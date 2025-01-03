@@ -20,7 +20,7 @@ export class AITableGridMatchCellService {
         this.aiTable.records().forEach((record) => {
             this.aiTable.fields().forEach((field) => {
                 if (this.isCellMatchKeywords(this.aiTable, field, record._id, keywords, references)) {
-                    matchedCells.push(`${record._id}-${field._id}`);
+                    matchedCells.push(`${record._id}:${field._id}`);
                 }
             });
         });
