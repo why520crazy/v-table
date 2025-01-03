@@ -8,7 +8,8 @@ export function createAITable(records: WritableSignal<AITableRecords>, fields: W
         selection: signal({
             selectedRecords: new Map(),
             selectedFields: new Map(),
-            selectedCells: new Map()
+            selectedCells: new Set(),
+            activeCell: null
         }),
         matchedCells: signal([]),
         recordsMap: computed(() => {

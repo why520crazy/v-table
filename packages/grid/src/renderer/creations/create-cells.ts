@@ -82,17 +82,25 @@ export const createCells = (config: AITableCellsDrawerConfig) => {
                     const isSelected = aiTable.selection().selectedFields.has(fieldId);
                     const isHoverRow = isHover && targetName !== AI_TABLE_FIELD_HEAD;
                     const activeCell = AITable.getActiveCell(aiTable);
-                    const isSiblingActiveCell = recordId === activeCell?.recordId && fieldId !== activeCell?.fieldId;
-                    const isActiveCell = recordId === activeCell?.recordId;
+                    const selectedCells = aiTable.selection().selectedCells;
+                    const isSiblingActiveCell =
+                        selectedCells.size === 1 &&
+                        selectedCells.has(`${activeCell?.recordId}:${activeCell?.fieldId}`) &&
+                        recordId === activeCell?.recordId &&
+                        fieldId !== activeCell?.fieldId;
+                    const isActiveCell = recordId === activeCell?.recordId && fieldId === activeCell?.fieldId;
 
                     let matchedCellsMap: { [key: string]: boolean } = {};
                     aiTable.matchedCells().forEach((key) => {
                         matchedCellsMap[key] = true;
                     });
                     const isMatchedCell = matchedCellsMap[`${recordId}-${fieldId}`];
+                    const isSelectedCell = selectedCells.has(`${recordId}:${fieldId}`);
 
                     if (isMatchedCell) {
                         background = colors.itemMatchBgColor;
+                    } else if (isSelectedCell && !isActiveCell) {
+                        background = colors.itemActiveBgColor;
                     } else if (isCheckedRow || isSelected || isSiblingActiveCell) {
                         background = colors.itemActiveBgColor;
                     } else if (isHoverRow && !isActiveCell) {

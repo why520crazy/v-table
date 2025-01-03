@@ -1,12 +1,6 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import {
-    ThyDropdownAbstractMenu,
-    ThyDropdownMenuComponent,
-    ThyDropdownMenuItemDirective,
-    ThyDropdownMenuItemIconDirective,
-    ThyDropdownMenuItemNameDirective
-} from 'ngx-tethys/dropdown';
+import { ThyDropdownAbstractMenu, ThyDropdownMenuItemDirective } from 'ngx-tethys/dropdown';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { AITable } from '../../core';
 import { AITableContextMenuItem } from '../../types';
@@ -20,14 +14,7 @@ import { AITableGridSelectionService } from '../../services/selection.service';
     host: {
         class: 'context-menu'
     },
-    imports: [
-        ThyDropdownMenuComponent,
-        ThyDropdownMenuItemDirective,
-        ThyDropdownMenuItemNameDirective,
-        ThyDropdownMenuItemIconDirective,
-        ThyIcon,
-        NgClass
-    ]
+    imports: [ThyDropdownMenuItemDirective, ThyIcon, NgClass]
 })
 export class AITableContextMenu extends ThyDropdownAbstractMenu {
     private aiTableGridSelectionService = inject(AITableGridSelectionService);

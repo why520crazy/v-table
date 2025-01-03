@@ -44,13 +44,13 @@
                 </span>
             </div>
             @for (field of gridData().fields; track field._id) {
+                <!-- [ngClass]="{
+                        highlight: aiTable.selection().selectedCells.has(record._id) || aiTable.selection().selectedFields.has(field._id),
+                        selected: aiTable.selection().selectedCells.get(record._id)?.hasOwnProperty(field._id)
+                    }" -->
                 <div
                     #cell
                     class="grid-cell"
-                    [ngClass]="{
-                        highlight: aiTable.selection().selectedCells.has(record._id) || aiTable.selection().selectedFields.has(field._id),
-                        selected: aiTable.selection().selectedCells.get(record._id)?.hasOwnProperty(field._id)
-                    }"
                     [attr.type]="[field.type]"
                     [attr.fieldId]="[field._id]"
                     [attr.recordId]="[record._id]"

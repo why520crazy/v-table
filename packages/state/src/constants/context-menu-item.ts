@@ -1,4 +1,4 @@
-import { AITable, AITableContextMenuItem, AITableGridSelectionService, getDetailByTargetName } from '@ai-table/grid';
+import { AITable, AITableContextMenuItem, AITableGridSelectionService } from '@ai-table/grid';
 import { Actions } from '../action';
 import { AIViewTable } from '../types';
 
@@ -12,11 +12,7 @@ export const RemoveRecordsItem: AITableContextMenuItem = {
         position: { x: number; y: number },
         aiTableGridSelectionService: AITableGridSelectionService
     ) => {
-        let selectedRecordIds = [...aiTable.selection().selectedRecords.keys()];
-        if (!selectedRecordIds.length) {
-            const recordId = getDetailByTargetName(targetName).recordId as string;
-            selectedRecordIds = [recordId];
-        }
+        let selectedRecordIds = AITable.getSelectedRecordIds(aiTable);
 
         selectedRecordIds.forEach((id: string) => {
             Actions.removeRecord(aiTable as AIViewTable, [id]);

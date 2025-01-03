@@ -16,7 +16,11 @@ export const createActiveCellBorder = (config: AITableCellsConfig) => {
     let activeCellBorder: RectConfig | null = null;
     let frozenActiveCellBorder: RectConfig | null = null;
 
-    if (activeCell != null) {
+    if (
+        activeCell != null &&
+        aiTable.context!.visibleRowsIndexMap().has(activeCell.recordId) &&
+        aiTable.context!.visibleColumnsMap().has(activeCell.fieldId)
+    ) {
         const { fieldId } = activeCell;
         const { rowIndex, columnIndex } = AITable.getCellIndex(aiTable, activeCell)!;
 

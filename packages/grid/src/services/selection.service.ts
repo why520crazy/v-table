@@ -15,17 +15,13 @@ export class AITableGridSelectionService {
         this.aiTable.selection.set({
             selectedRecords: new Map(),
             selectedFields: new Map(),
-            selectedCells: new Map()
+            selectedCells: new Set(),
+            activeCell: null
         });
     }
 
-    selectCell(recordId: string, fieldId: string) {
-        const fields = this.aiTable.selection().selectedCells.get(recordId);
-        if (fields?.hasOwnProperty(fieldId)) {
-            return;
-        }
-        this.clearSelection();
-        this.aiTable.selection().selectedCells.set(recordId, { [fieldId]: true });
+    setActiveCell(recordId: string, fieldId: string) {
+        this.aiTable.selection().activeCell = { recordId, fieldId };
     }
 
     selectField(fieldId: string) {
@@ -45,7 +41,8 @@ export class AITableGridSelectionService {
         this.aiTable.selection.set({
             selectedRecords: this.aiTable.selection().selectedRecords,
             selectedFields: new Map(),
-            selectedCells: new Map()
+            selectedCells: new Set(),
+            activeCell: null
         });
     }
 
@@ -70,7 +67,7 @@ export class AITableGridSelectionService {
         if (cellDom) {
             const fieldId = cellDom.getAttribute('fieldId');
             const recordId = cellDom.getAttribute('recordId');
-            fieldId && recordId && this.selectCell(recordId, fieldId);
+            fieldId && recordId && this.selectCells(recordId, fieldId);
         }
         if (colDom && !fieldAction) {
             const fieldId = colDom.getAttribute('fieldId');
@@ -79,5 +76,42 @@ export class AITableGridSelectionService {
         if (!cellDom && !colDom && !checkbox) {
             this.clearSelection();
         }
+    }
+
+    selectCells(startRecordId: string, startFieldId: string, endRecordId?: string, endFieldId?: string) {
+        if (
+            !this.aiTable.context!.visibleRowsIndexMap().has(startRecordId) ||
+            !this.aiTable.context!.visibleColumnsMap().has(startFieldId)
+        ) {
+            return;
+        }
+
+        const selectedCells = new Set<string>();
+        if (!endRecordId || !endFieldId) {
+            selectedCells.add(`${startRecordId}:${startFieldId}`);
+        } else {
+            const startRowIndex = this.aiTable.context!.visibleRowsIndexMap().get(startRecordId)!;
+            const endRowIndex = this.aiTable.context!.visibleRowsIndexMap().get(endRecordId)!;
+            const startColIndex = this.aiTable.context!.visibleColumnsMap().get(startFieldId)!;
+            const endColIndex = this.aiTable.context!.visibleColumnsMap().get(endFieldId)!;
+
+            const minRowIndex = Math.min(startRowIndex, endRowIndex);
+            const maxRowIndex = Math.max(startRowIndex, endRowIndex);
+            const minColIndex = Math.min(startColIndex, endColIndex);
+            const maxColIndex = Math.max(startColIndex, endColIndex);
+
+            const rows = this.aiTable.context!.linearRows();
+            const fields = AITable.getVisibleFields(this.aiTable);
+
+            for (let i = minRowIndex; i <= maxRowIndex; i++) {
+                for (let j = minColIndex; j <= maxColIndex; j++) {
+                    selectedCells.add(`${rows[i]._id}:${fields[j]._id}`);
+                }
+            }
+        }
+
+        this.clearSelection();
+        this.setActiveCell(startRecordId, startFieldId);
+        this.aiTable.selection().selectedCells = selectedCells;
     }
 }

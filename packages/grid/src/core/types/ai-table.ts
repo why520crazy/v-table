@@ -30,19 +30,18 @@ export const AITable = {
         return aiTable.records();
     },
     getActiveCell(aiTable: AITable): { recordId: string; fieldId: string } | null {
-        const selection = aiTable.selection();
-        let selectedCells = [];
-        for (let [recordId, fieldIds] of selection.selectedCells.entries()) {
-            for (let fieldId of Object.keys(fieldIds)) {
-                if ((fieldIds as { [key: string]: boolean })[fieldId]) {
-                    selectedCells.push({
-                        recordId,
-                        fieldId
-                    });
-                }
-            }
+        return aiTable.selection().activeCell;
+    },
+    getSelectedRecordIds(aiTable: AITable): string[] {
+        const selectedRecords = aiTable.selection().selectedRecords;
+        const selectedCells = aiTable.selection().selectedCells;
+        if (selectedRecords.size > 0) {
+            return [...selectedRecords.keys()];
+        } else if (selectedCells.size > 0) {
+            return [...selectedCells].map((item) => item.split(':')[0]);
+        } else {
+            return [];
         }
-        return selectedCells ? selectedCells[0] : null;
     },
     isCellVisible(aiTable: AITable, cell: { recordId: string; fieldId: string }) {
         const visibleRowIndexMap = aiTable.context!.visibleRowsIndexMap();
