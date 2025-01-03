@@ -1,4 +1,4 @@
-import { AITableField, AITableRecord } from '@ai-table/grid';
+import { AITableField, AITableFilterCondition, AITableRecord } from '@ai-table/grid';
 import { Id } from 'ngx-tethys/types';
 
 export class Positions {
@@ -32,23 +32,6 @@ export enum AITableFilterLogical {
     or = 'or'
 }
 
-export enum AITableFilterOperation {
-    eq = 'eq',
-    gte = 'gte',
-    lte = 'lte',
-    gt = 'gt',
-    lt = 'lt',
-    in = 'in',
-    contain = 'contain',
-    ne = 'ne',
-    nin = 'nin',
-    between = 'between',
-    besides = 'besides',
-    empty = 'empty',
-    exists = 'exists',
-    notContain = 'not_contain'
-}
-
 export type ViewSettings = AITableSearchOptions & AITableFilterConditions & AITableSortOptions;
 
 export interface AITableView {
@@ -57,12 +40,6 @@ export interface AITableView {
     name: string;
     emoji_icon?: string;
     settings?: ViewSettings;
-}
-
-export interface AITableFilterCondition<TValue = unknown> {
-    field_id: Id;
-    operation: AITableFilterOperation;
-    value: TValue;
 }
 
 export interface AITableFilterConditions<TValue = unknown> {
