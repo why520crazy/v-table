@@ -2,7 +2,7 @@ import { Signal, WritableSignal } from '@angular/core';
 import { Dictionary } from 'ngx-tethys/types';
 import { AITable, AITableField, AITableFieldType, AITableRecord, Coordinate, FieldValue, UpdateFieldValueOptions } from '../core';
 import { AITableFieldMenuItem } from './field';
-import { AITableLinearRow, AITableContextMenuItem } from './row';
+import { AITableLinearRow } from './row';
 
 export interface AITableGridCellRenderSchema {
     editor?: any;
@@ -30,8 +30,8 @@ export interface AIFieldConfig {
 export interface AITableUserInfo {
     uid?: string;
     display_name?: string;
-    display_name_pinyin?: string;
     avatar?: string;
+    [key: string]: any;
 }
 
 export interface AITableReferences {

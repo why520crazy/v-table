@@ -20,9 +20,15 @@ export class MemberField extends Field {
         }
     }
 
-    override compare(cellValue1: FieldValue, cellValue2: FieldValue, field: AITableField, references: AITableReferences): number {
-        const value1 = cellValueToSortValue(cellValue1, field, references);
-        const value2 = cellValueToSortValue(cellValue2, field, references);
+    override compare(
+        cellValue1: FieldValue,
+        cellValue2: FieldValue,
+        field: AITableField,
+        references: AITableReferences,
+        sortKey: string
+    ): number {
+        const value1 = cellValueToSortValue(cellValue1, field, references, sortKey);
+        const value2 = cellValueToSortValue(cellValue2, field, references, sortKey);
         return compareString(value1, value2);
     }
 
@@ -43,18 +49,24 @@ export class MemberField extends Field {
     }
 }
 
-function cellValueToSortValue(cellValue: MemberFieldValue, field: AITableField, references: AITableReferences): string | null {
-    let names: string[] = [];
+function cellValueToSortValue(
+    cellValue: MemberFieldValue,
+    field: AITableField,
+    references: AITableReferences,
+    sortKey: string
+): string | null {
+    let values: string[] = [];
     if (cellValue?.length && references) {
         for (let index = 0; index < cellValue.length; index++) {
             const userInfo = references?.members[cellValue[index]];
             if (!userInfo) {
                 continue;
             }
-            if (userInfo.display_name_pinyin) {
-                names.push(userInfo.display_name_pinyin);
+            const value = (sortKey && userInfo[sortKey]) || userInfo.display_name;
+            if (value) {
+                values.push(value);
             }
         }
     }
-    return names && names.length ? names.join(', ') : null;
+    return values && values.length ? values.join(', ') : null;
 }
