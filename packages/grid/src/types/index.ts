@@ -6,3 +6,4 @@ export * from './field';
 export * from './grid';
 export * from './layout';
 export * from './row';
+export * from './view';

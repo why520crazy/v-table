@@ -1,9 +1,9 @@
+import { FieldValue } from '../../../core';
 import { AITableFilterCondition, AITableFilterOperation } from '../../../types';
+import { compareNumber, isEmpty } from '../../index';
 import { Field } from './field';
-import { FieldValue } from '@ai-table/grid';
-import { isEmpty } from '../../common';
 
-export class NumberField extends Field {
+export class ProgressField extends Field {
     override isMeetFilter(condition: AITableFilterCondition<number>, cellValue: FieldValue) {
         switch (condition.operation) {
             case AITableFilterOperation.empty:
@@ -27,24 +27,15 @@ export class NumberField extends Field {
         }
     }
 
-    cellValueToString(_cellValue: FieldValue): string | null {
-        return null;
-    }
-
-    static _compare(cellValue1: number, cellValue2: number): number {
-        if (isEmpty(cellValue1) && isEmpty(cellValue2)) {
-            return 0;
-        }
-        if (isEmpty(cellValue1)) {
-            return -1;
-        }
-        if (isEmpty(cellValue2)) {
-            return 1;
-        }
-        return cellValue1 === cellValue2 ? 0 : cellValue1 > cellValue2 ? 1 : -1;
-    }
-
     override compare(cellValue1: number, cellValue2: number): number {
-        return NumberField._compare(cellValue1, cellValue2);
+        return compareNumber(cellValue1, cellValue2);
+    }
+
+    override cellFullText(transformValue: number): string[] {
+        let fullText: string[] = [];
+        if (!isEmpty(transformValue)) {
+            fullText.push(`${transformValue}%`);
+        }
+        return fullText;
     }
 }

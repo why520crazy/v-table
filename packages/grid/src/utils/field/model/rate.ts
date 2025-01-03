@@ -1,7 +1,8 @@
-import { isEmpty } from '../../common';
+import { RateFieldValue } from '../../../core';
 import { AITableFilterCondition, AITableFilterOperation } from '../../../types';
+import { isEmpty } from '../../common';
+import { compareNumber } from '../operate';
 import { Field } from './field';
-import { RateFieldValue } from '@ai-table/grid';
 
 export class RateField extends Field {
     override isMeetFilter(condition: AITableFilterCondition<string[]>, cellValue: RateFieldValue | string) {
@@ -21,24 +22,7 @@ export class RateField extends Field {
         }
     }
 
-    cellValueToString(_cellValue: RateFieldValue): string | null {
-        return null;
-    }
-
-    static _compare(cellValue1: number, cellValue2: number): number {
-        if (isEmpty(cellValue1) && isEmpty(cellValue2)) {
-            return 0;
-        }
-        if (isEmpty(cellValue1)) {
-            return -1;
-        }
-        if (isEmpty(cellValue2)) {
-            return 1;
-        }
-        return cellValue1 === cellValue2 ? 0 : cellValue1 > cellValue2 ? 1 : -1;
-    }
-
     override compare(cellValue1: number, cellValue2: number): number {
-        return RateField._compare(cellValue1, cellValue2);
+        return compareNumber(cellValue1, cellValue2);
     }
 }
