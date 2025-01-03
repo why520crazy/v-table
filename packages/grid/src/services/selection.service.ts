@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AITable } from '../core';
+import { AIRecordFieldPosition, AITable } from '../core';
 
 @Injectable()
 export class AITableGridSelectionService {
@@ -13,15 +13,15 @@ export class AITableGridSelectionService {
 
     clearSelection() {
         this.aiTable.selection.set({
-            selectedRecords: new Map(),
-            selectedFields: new Map(),
+            selectedRecords: new Set(),
+            selectedFields: new Set(),
             selectedCells: new Set(),
             activeCell: null
         });
     }
 
-    setActiveCell(recordId: string, fieldId: string) {
-        this.aiTable.selection().activeCell = { recordId, fieldId };
+    setActiveCell(activeCell: AIRecordFieldPosition) {
+        this.aiTable.selection().activeCell = activeCell;
     }
 
     selectField(fieldId: string) {
@@ -29,18 +29,18 @@ export class AITableGridSelectionService {
             return;
         }
         this.clearSelection();
-        this.aiTable.selection().selectedFields.set(fieldId, true);
+        this.aiTable.selection().selectedFields.add(fieldId);
     }
 
     selectRecord(recordId: string) {
         if (this.aiTable.selection().selectedRecords.has(recordId)) {
             this.aiTable.selection().selectedRecords.delete(recordId);
         } else {
-            this.aiTable.selection().selectedRecords.set(recordId, true);
+            this.aiTable.selection().selectedRecords.add(recordId);
         }
         this.aiTable.selection.set({
             selectedRecords: this.aiTable.selection().selectedRecords,
-            selectedFields: new Map(),
+            selectedFields: new Set(),
             selectedCells: new Set(),
             activeCell: null
         });
@@ -67,7 +67,7 @@ export class AITableGridSelectionService {
         if (cellDom) {
             const fieldId = cellDom.getAttribute('fieldId');
             const recordId = cellDom.getAttribute('recordId');
-            fieldId && recordId && this.selectCells(recordId, fieldId);
+            fieldId && recordId && this.selectCells([recordId, fieldId]);
         }
         if (colDom && !fieldAction) {
             const fieldId = colDom.getAttribute('fieldId');
@@ -78,7 +78,9 @@ export class AITableGridSelectionService {
         }
     }
 
-    selectCells(startRecordId: string, startFieldId: string, endRecordId?: string, endFieldId?: string) {
+    selectCells(startCell: AIRecordFieldPosition, endCell?: AIRecordFieldPosition) {
+        const [startRecordId, startFieldId] = startCell;
+
         if (
             !this.aiTable.context!.visibleRowsIndexMap().has(startRecordId) ||
             !this.aiTable.context!.visibleColumnsMap().has(startFieldId)
@@ -87,9 +89,10 @@ export class AITableGridSelectionService {
         }
 
         const selectedCells = new Set<string>();
-        if (!endRecordId || !endFieldId) {
+        if (!endCell || !endCell.length) {
             selectedCells.add(`${startRecordId}:${startFieldId}`);
         } else {
+            const [endRecordId, endFieldId] = endCell;
             const startRowIndex = this.aiTable.context!.visibleRowsIndexMap().get(startRecordId)!;
             const endRowIndex = this.aiTable.context!.visibleRowsIndexMap().get(endRecordId)!;
             const startColIndex = this.aiTable.context!.visibleColumnsMap().get(startFieldId)!;
@@ -111,7 +114,7 @@ export class AITableGridSelectionService {
         }
 
         this.clearSelection();
-        this.setActiveCell(startRecordId, startFieldId);
+        this.setActiveCell(startCell);
         this.aiTable.selection().selectedCells = selectedCells;
     }
 }
