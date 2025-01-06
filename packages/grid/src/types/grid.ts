@@ -1,7 +1,7 @@
 import { Signal, WritableSignal } from '@angular/core';
 import { Dictionary } from 'ngx-tethys/types';
 import {
-    AIRecordFieldPosition,
+    AIRecordFieldIdPath,
     AITable,
     AITableField,
     AITableFieldType,
@@ -28,7 +28,7 @@ export interface AITableSelection {
     selectedRecords: Set<string>; // `${recordId}`
     selectedFields: Set<string>; // `${fieldId}`
     selectedCells: Set<string>; // `${recordId}:${fieldId}`
-    activeCell: AIRecordFieldPosition | null;
+    activeCell: AIRecordFieldIdPath | null;
 }
 
 export interface AIFieldConfig {
