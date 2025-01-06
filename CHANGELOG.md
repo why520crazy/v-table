@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.29](https://github.com/worktile/ai-table/compare/0.0.28...0.0.29) (2025-01-06)
+
+
+### Features
+
+* **grid:** support drag select cells and support right click selected areas to delete records ([#220](https://github.com/worktile/ai-table/issues/220)) ([fc1295e](https://github.com/worktile/ai-table/commit/fc1295ef9826bd03b497a470f038e649668d66d6))
+
+
+
 ## [0.0.28](https://github.com/worktile/ai-table/compare/0.0.27...0.0.28) (2024-12-27)
 
 
