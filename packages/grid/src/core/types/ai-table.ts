@@ -2,7 +2,7 @@ import { Signal, WritableSignal } from '@angular/core';
 import { Colors } from '../../constants/colors';
 import { AITableReferences, AITableSelection } from '../../types';
 import { RendererContext } from '../context';
-import { AIRecordFieldPosition, AITableField, AITableFields, AITableRecord, AITableRecords } from './core';
+import { AIRecordFieldIdPath, AITableField, AITableFields, AITableRecord, AITableRecords } from './core';
 
 export interface AITable {
     records: WritableSignal<AITableRecords>;
@@ -29,10 +29,10 @@ export const AITable = {
     getVisibleRows(aiTable: AITable): AITableRecords {
         return aiTable.records();
     },
-    getActiveCell(aiTable: AITable): AIRecordFieldPosition | null {
+    getActiveCell(aiTable: AITable): AIRecordFieldIdPath | null {
         return aiTable.selection().activeCell;
     },
-    getSelectedRecordIds(aiTable: AITable): string[] {
+    getActiveRecordIds(aiTable: AITable): string[] {
         const selectedRecords = aiTable.selection().selectedRecords;
         const selectedCells = aiTable.selection().selectedCells;
         let selectedRecordIds: string[] = [];
@@ -45,7 +45,7 @@ export const AITable = {
         }
         return selectedRecordIds;
     },
-    isCellVisible(aiTable: AITable, cell: AIRecordFieldPosition): boolean {
+    isCellVisible(aiTable: AITable, cell: AIRecordFieldIdPath): boolean {
         const visibleRowIndexMap = aiTable.context!.visibleRowsIndexMap();
         const visibleColumnIndexMap = aiTable.context!.visibleColumnsMap();
         let isVisible = false;
@@ -55,7 +55,7 @@ export const AITable = {
         }
         return isVisible;
     },
-    getCellIndex(aiTable: AITable, cell: AIRecordFieldPosition): { rowIndex: number; columnIndex: number } | null {
+    getCellIndex(aiTable: AITable, cell: AIRecordFieldIdPath): { rowIndex: number; columnIndex: number } | null {
         const visibleRowIndexMap = aiTable.context!.visibleRowsIndexMap();
         const visibleColumnIndexMap = aiTable.context!.visibleColumnsMap();
         if (AITable.isCellVisible(aiTable, cell)) {

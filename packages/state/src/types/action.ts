@@ -1,4 +1,4 @@
-import { AIFieldValueIdPath, AITableField, AITableRecord, AITableRecordUpdatedInfo, IdPath, NumberPath } from '@ai-table/grid';
+import { AIRecordFieldIdPath, AITableField, AITableRecord, AITableRecordUpdatedInfo, IdPath, NumberPath } from '@ai-table/grid';
 import { AITableView, AITableViewRecord, Positions, RemovePositions } from './view';
 
 export enum ActionName {
@@ -25,7 +25,7 @@ export enum ExecuteType {
 
 export type UpdateFieldValueAction = {
     type: ActionName.UpdateFieldValue;
-    path: AIFieldValueIdPath;
+    path: AIRecordFieldIdPath;
     fieldValue: any;
     newFieldValue: any;
 };

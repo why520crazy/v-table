@@ -22,7 +22,7 @@ import {
     getValuesByCustomFieldValues,
     SystemFieldIndex
 } from '../utils/translate';
-import { AIFieldValueIdPath, AITableField, AITableQueries, IdPath, NumberPath } from '@ai-table/grid';
+import { AIRecordFieldIdPath, AITableField, AITableQueries, IdPath, NumberPath } from '@ai-table/grid';
 
 export default function translateArrayEvent(aiTable: AIViewTable, sharedType: SharedType, event: Y.YEvent<any>): AITableAction[] {
     let offset = 0;
@@ -124,7 +124,7 @@ export default function translateArrayEvent(aiTable: AIViewTable, sharedType: Sh
                                 } else {
                                     const recordId = getSharedRecordId(sharedRecords, recordIndex);
                                     const fieldId = getSharedMapValueId(sharedFields, fieldIndex);
-                                    const path = [recordId, fieldId] as AIFieldValueIdPath;
+                                    const path = [recordId, fieldId] as AIRecordFieldIdPath;
                                     const fieldValue = AITableQueries.getFieldValue(aiTable, path);
                                     // To exclude insert triggered by field inserts.
                                     if (fieldValue !== item) {

@@ -3,7 +3,7 @@ import {
     AITable,
     AITableField,
     AITableRecord,
-    AIFieldValueIdPath,
+    AIRecordFieldIdPath,
     IdPath,
     NumberPath,
     AITableFieldType,
@@ -28,7 +28,7 @@ export const AITableQueries = {
         }
         throw new Error(`can not find the field path: ${JSON.stringify({ ...(field || {}) })}`);
     },
-    getFieldValue(aiTable: AITable, path: AIFieldValueIdPath): any {
+    getFieldValue(aiTable: AITable, path: AIRecordFieldIdPath): any {
         if (!aiTable) {
             throw new Error(`aiTable does not exist`);
         }

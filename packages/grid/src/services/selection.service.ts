@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AIRecordFieldPosition, AITable } from '../core';
+import { AIRecordFieldIdPath, AITable } from '../core';
 
 @Injectable()
 export class AITableGridSelectionService {
@@ -20,7 +20,7 @@ export class AITableGridSelectionService {
         });
     }
 
-    setActiveCell(activeCell: AIRecordFieldPosition) {
+    setActiveCell(activeCell: AIRecordFieldIdPath) {
         this.aiTable.selection().activeCell = activeCell;
     }
 
@@ -78,7 +78,7 @@ export class AITableGridSelectionService {
         }
     }
 
-    selectCells(startCell: AIRecordFieldPosition, endCell?: AIRecordFieldPosition) {
+    selectCells(startCell: AIRecordFieldIdPath, endCell?: AIRecordFieldIdPath) {
         const [startRecordId, startFieldId] = startCell;
 
         if (

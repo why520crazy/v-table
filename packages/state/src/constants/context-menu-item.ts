@@ -12,7 +12,7 @@ export const RemoveRecordsItem: AITableContextMenuItem = {
         position: { x: number; y: number },
         aiTableGridSelectionService: AITableGridSelectionService
     ) => {
-        let selectedRecordIds = AITable.getSelectedRecordIds(aiTable);
+        let selectedRecordIds = AITable.getActiveRecordIds(aiTable);
 
         selectedRecordIds.forEach((id: string) => {
             Actions.removeRecord(aiTable as AIViewTable, [id]);

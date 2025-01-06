@@ -181,7 +181,7 @@ export interface AddFieldOptions {
 
 export interface UpdateFieldValueOptions<T = unknown> {
     value: T;
-    path: AIFieldValueIdPath;
+    path: AIRecordFieldIdPath;
 }
 
 export interface SetFieldOptions<T = unknown> {
@@ -193,8 +193,6 @@ export type NumberPath = [number];
 
 export type IdPath = [string];
 
-export type AIFieldValueIdPath = [string, string];
+export type AIRecordFieldIdPath = [string, string];
 
-export type AIRecordFieldPosition = [string, string];
-
-export type Path = NumberPath | IdPath | AIFieldValueIdPath;
+export type Path = NumberPath | IdPath | AIRecordFieldIdPath;
