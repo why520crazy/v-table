@@ -4,7 +4,13 @@ import { isEmpty } from '../../common';
 
 export abstract class Field {
     // 排序
-    abstract compare(cellValue1: FieldValue, cellValue2: FieldValue, field: AITableField, references?: AITableReferences): number;
+    abstract compare(
+        cellValue1: FieldValue,
+        cellValue2: FieldValue,
+        field: AITableField,
+        references?: AITableReferences,
+        sortKey?: string
+    ): number;
 
     // 筛选
     isMeetFilter(condition: AITableFilterCondition, cellValue: FieldValue) {
