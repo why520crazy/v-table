@@ -9,7 +9,7 @@ export interface AITable {
     fields: WritableSignal<AITableFields>;
     context?: RendererContext;
     selection: WritableSignal<AITableSelection>;
-    matchedCells: WritableSignal<string[]>; // [`${recordId}:${fieldId}`]
+    keywordsMatchedCells: WritableSignal<string[]>; // [`${recordId}:${fieldId}`]
     recordsMap: Signal<{ [key: string]: AITableRecord }>;
     fieldsMap: Signal<{ [key: string]: AITableField }>;
     recordsWillHidden: WritableSignal<string[]>;

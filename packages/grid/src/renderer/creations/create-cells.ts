@@ -145,17 +145,17 @@ const getCellBackground = (cell: AIRecordFieldIdPath, isHover: boolean, targetNa
     const [recordId, fieldId] = cell;
     let background = colors.white;
 
-    const _isSelectedRecord = isSelectedRecord(recordId, aiTable);
+    const _isHoverRecord = isHoverRecord(isHover, targetName);
+    const _isCheckedRecord = isSelectedRecord(recordId, aiTable);
     const _isSelectedField = isSelectedField(fieldId, aiTable);
-    const _isSiblingActiveCell = isSiblingActiveCell(cell, aiTable);
+    const _isSiblingCell = isSiblingCell(cell, aiTable);
     const _isActiveCell = isActiveCell(cell, aiTable);
     const _isSelectedCell = isSelectedCell(cell, aiTable);
-    const _isMatchedCell = isMatchedCell(cell, aiTable);
-    const _isHoverRecord = isHoverRecord(isHover, targetName);
+    const _isKeywordsMatchedCell = isKeywordsMatchedCell(cell, aiTable);
 
-    if (_isMatchedCell) {
+    if (_isKeywordsMatchedCell) {
         background = colors.itemMatchBgColor;
-    } else if (_isSelectedRecord || _isSelectedField || _isSiblingActiveCell || (_isSelectedCell && !_isActiveCell)) {
+    } else if (_isCheckedRecord || _isSelectedField || _isSiblingCell || (_isSelectedCell && !_isActiveCell)) {
         background = colors.itemActiveBgColor;
     } else if (_isHoverRecord && !_isActiveCell) {
         background = colors.gray80;
@@ -167,7 +167,7 @@ const getCellBackground = (cell: AIRecordFieldIdPath, isHover: boolean, targetNa
 const isActiveCell = (cell: AIRecordFieldIdPath, aiTable: AITable): boolean => {
     let isActive = false;
     const activeCell = AITable.getActiveCell(aiTable);
-    if (Array.isArray(activeCell) && !!activeCell.length) {
+    if (activeCell) {
         const [activeCellRecordId, activeCellFieldId] = activeCell;
         const [recordId, fieldId] = cell;
         if (recordId === activeCellRecordId && fieldId === activeCellFieldId) {
@@ -177,26 +177,18 @@ const isActiveCell = (cell: AIRecordFieldIdPath, aiTable: AITable): boolean => {
     return isActive;
 };
 
-const isSiblingActiveCell = (cell: AIRecordFieldIdPath, aiTable: AITable): boolean => {
-    let isSiblingCell = false;
+const isSiblingCell = (cell: AIRecordFieldIdPath, aiTable: AITable): boolean => {
+    const [recordId, fieldId] = cell;
     const activeCell = AITable.getActiveCell(aiTable);
-    if (Array.isArray(activeCell) && !!activeCell.length) {
-        const [recordId, fieldId] = cell;
-        const [activeCellRecordId, activeCellFieldId] = activeCell;
-        const selectedCells = aiTable.selection().selectedCells;
-        isSiblingCell =
-            selectedCells.size === 1 &&
-            selectedCells.has(`${activeCellRecordId}:${activeCellFieldId}`) &&
-            recordId === activeCellRecordId &&
-            fieldId !== activeCellFieldId;
-    }
+    const activeRecordIds = AITable.getActiveRecordIds(aiTable) || [];
+    const isSiblingCell = activeRecordIds.length === 1 && !!activeCell && recordId === activeCell[0] && fieldId !== activeCell[1];
     return isSiblingCell;
 };
 
-const isMatchedCell = (cell: AIRecordFieldIdPath, aiTable: AITable): boolean => {
+const isKeywordsMatchedCell = (cell: AIRecordFieldIdPath, aiTable: AITable): boolean => {
     const [recordId, fieldId] = cell;
     let matchedCellsMap: { [key: string]: boolean } = {};
-    aiTable.matchedCells().forEach((key) => {
+    aiTable.keywordsMatchedCells().forEach((key) => {
         matchedCellsMap[key] = true;
     });
     const isMatchedCell = matchedCellsMap[`${recordId}:${fieldId}`];

@@ -80,35 +80,22 @@ export class AITableGridSelectionService {
 
     selectCells(startCell: AIRecordFieldIdPath, endCell?: AIRecordFieldIdPath) {
         const [startRecordId, startFieldId] = startCell;
-
-        if (
-            !this.aiTable.context!.visibleRowsIndexMap().has(startRecordId) ||
-            !this.aiTable.context!.visibleColumnsMap().has(startFieldId)
-        ) {
-            return;
-        }
-
+        const records = this.aiTable.records();
+        const fields = this.aiTable.fields();
         const selectedCells = new Set<string>();
-        if (!endCell || !endCell.length) {
+
+        if (!endCell) {
             selectedCells.add(`${startRecordId}:${startFieldId}`);
         } else {
             const [endRecordId, endFieldId] = endCell;
-            const startRowIndex = this.aiTable.context!.visibleRowsIndexMap().get(startRecordId)!;
-            const endRowIndex = this.aiTable.context!.visibleRowsIndexMap().get(endRecordId)!;
-            const startColIndex = this.aiTable.context!.visibleColumnsMap().get(startFieldId)!;
-            const endColIndex = this.aiTable.context!.visibleColumnsMap().get(endFieldId)!;
-
-            const minRowIndex = Math.min(startRowIndex, endRowIndex);
-            const maxRowIndex = Math.max(startRowIndex, endRowIndex);
-            const minColIndex = Math.min(startColIndex, endColIndex);
-            const maxColIndex = Math.max(startColIndex, endColIndex);
-
-            const rows = this.aiTable.context!.linearRows();
-            const fields = AITable.getVisibleFields(this.aiTable);
+            const minRowIndex = records.findIndex((record) => record._id === startRecordId);
+            const maxRowIndex = records.findIndex((record) => record._id === endRecordId);
+            const minColIndex = fields.findIndex((field) => field._id === startFieldId);
+            const maxColIndex = fields.findIndex((field) => field._id === endFieldId);
 
             for (let i = minRowIndex; i <= maxRowIndex; i++) {
                 for (let j = minColIndex; j <= maxColIndex; j++) {
-                    selectedCells.add(`${rows[i]._id}:${fields[j]._id}`);
+                    selectedCells.add(`${records[i]._id}:${fields[j]._id}`);
                 }
             }
         }

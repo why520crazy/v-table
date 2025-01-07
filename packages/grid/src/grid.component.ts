@@ -41,9 +41,8 @@ import { AITableGridEventService } from './services/event.service';
 import { AITableGridFieldService } from './services/field.service';
 import { AITableGridSelectionService } from './services/selection.service';
 import { AITableMouseDownType, AITableRendererConfig, ScrollActionOptions } from './types';
-import { buildGridLinearRows, getColumnIndicesMap, getDetailByTargetName, handleMouseStyle, isWindows } from './utils';
+import { buildGridLinearRows, getColumnIndicesMap, getDetailByTargetName, handleMouseStyle, isCellMatchKeywords, isWindows } from './utils';
 import { getMousePosition } from './utils/position';
-import { AITableGridMatchCellService } from './services/match-cell.service';
 
 @Component({
     selector: 'ai-table-grid',
@@ -54,7 +53,7 @@ import { AITableGridMatchCellService } from './services/match-cell.service';
         class: 'ai-table-grid'
     },
     imports: [AITableRenderer],
-    providers: [AITableGridEventService, AITableGridFieldService, AITableGridSelectionService, AITableGridMatchCellService]
+    providers: [AITableGridEventService, AITableGridFieldService, AITableGridSelectionService]
 })
 export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private viewContainerRef = inject(ViewContainerRef);
@@ -154,7 +153,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         });
         effect(
             () => {
-                this.aiTableGridMatchCellService.findMatchedCells(this.aiKeywords()!, this.aiReferences());
+                this.setKeywordsMatchedCells();
             },
             { allowSignalWrites: true }
         );
@@ -178,6 +177,24 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             scrollState: signal(DEFAULT_SCROLL_STATE),
             scrollAction: this.scrollAction
         });
+    }
+
+    private setKeywordsMatchedCells() {
+        const keywords = this.aiKeywords();
+        let matchedCells: string[] = [];
+
+        if (keywords) {
+            const references = this.aiReferences();
+            this.aiTable.records().forEach((record) => {
+                this.aiTable.fields().forEach((field) => {
+                    if (isCellMatchKeywords(this.aiTable, field, record._id, keywords, references)) {
+                        matchedCells.push(`${record._id}:${field._id}`);
+                    }
+                });
+            });
+        }
+
+        this.aiTable.keywordsMatchedCells.set(matchedCells);
     }
 
     stageMousemove(e: KoEventObject<MouseEvent>) {
@@ -433,10 +450,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
                     (e) =>
                         e.target instanceof Element &&
                         !this.containerElement().contains(e.target) &&
-                        !(
-                            e.target.closest(AI_TABLE_PREVENT_CLEAR_SELECTION_CLASS) &&
-                            AITable.getActiveRecordIds(this.aiTable).length > 0
-                        )
+                        !e.target.closest(AI_TABLE_PREVENT_CLEAR_SELECTION_CLASS)
                 ),
                 takeUntilDestroyed(this.destroyRef)
             )
