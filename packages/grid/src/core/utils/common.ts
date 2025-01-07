@@ -11,7 +11,7 @@ export function createAITable(records: WritableSignal<AITableRecords>, fields: W
             selectedCells: new Set(),
             activeCell: null
         }),
-        matchedCells: signal([]),
+        keywordsMatchedCells: signal(new Set()),
         recordsMap: computed(() => {
             return records().reduce(
                 (object, item) => {

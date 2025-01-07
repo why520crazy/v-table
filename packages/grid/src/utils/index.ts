@@ -11,3 +11,4 @@ export * from './text-measure';
 export * from './visible-range';
 export * from './field/model';
 export * from './field/operate';
+export * from './match-keywords';

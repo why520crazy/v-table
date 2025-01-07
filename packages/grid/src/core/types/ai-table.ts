@@ -9,7 +9,7 @@ export interface AITable {
     fields: WritableSignal<AITableFields>;
     context?: RendererContext;
     selection: WritableSignal<AITableSelection>;
-    matchedCells: WritableSignal<string[]>; // [`${recordId}:${fieldId}`]
+    keywordsMatchedCells: WritableSignal<Set<string>>; // [`${recordId}:${fieldId}`]
     recordsMap: Signal<{ [key: string]: AITableRecord }>;
     fieldsMap: Signal<{ [key: string]: AITableField }>;
     recordsWillHidden: WritableSignal<string[]>;
@@ -48,11 +48,8 @@ export const AITable = {
     isCellVisible(aiTable: AITable, cell: AIRecordFieldIdPath): boolean {
         const visibleRowIndexMap = aiTable.context!.visibleRowsIndexMap();
         const visibleColumnIndexMap = aiTable.context!.visibleColumnsMap();
-        let isVisible = false;
-        if (Array.isArray(cell) && !!cell.length) {
-            const [recordId, fieldId] = cell;
-            isVisible = visibleRowIndexMap!.has(recordId) && visibleColumnIndexMap.has(fieldId);
-        }
+        const [recordId, fieldId] = cell || [];
+        const isVisible = visibleRowIndexMap!.has(recordId) && visibleColumnIndexMap.has(fieldId);
         return isVisible;
     },
     getCellIndex(aiTable: AITable, cell: AIRecordFieldIdPath): { rowIndex: number; columnIndex: number } | null {
