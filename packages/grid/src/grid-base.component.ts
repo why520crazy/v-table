@@ -35,7 +35,6 @@ import { AI_TABLE_GRID_FIELD_SERVICE_MAP, AITableGridFieldService } from './serv
 import { AITableGridSelectionService } from './services/selection.service';
 import { AIFieldConfig, AITableFieldMenuItem, AITableContextMenuItem, AITableReferences } from './types';
 import { AITableFieldPropertyEditor } from './components';
-import { AITableGridMatchCellService } from './services/match-cell.service';
 
 @Component({
     selector: 'ai-table-grid-base',
@@ -102,7 +101,6 @@ export class AITableGridBase implements OnInit {
     protected aiTableGridFieldService = inject(AITableGridFieldService);
     protected aiTableGridEventService = inject(AITableGridEventService);
     protected aiTableGridSelectionService = inject(AITableGridSelectionService);
-    protected aiTableGridMatchCellService = inject(AITableGridMatchCellService);
 
     ngOnInit(): void {
         this.initAITable();
@@ -120,7 +118,6 @@ export class AITableGridBase implements OnInit {
     initService() {
         this.aiTableGridEventService.initialize(this.aiTable, this.aiFieldConfig()?.fieldRenderers);
         this.aiTableGridSelectionService.initialize(this.aiTable);
-        this.aiTableGridMatchCellService.initialize(this.aiTable);
         this.aiTableGridEventService.registerEvents(this.elementRef.nativeElement);
         this.aiTableGridFieldService.initAIFieldConfig(this.aiFieldConfig());
         this.aiTable.references.set(this.aiReferences());
