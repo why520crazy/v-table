@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.30](https://github.com/worktile/ai-table/compare/0.0.29...0.0.30) (2025-01-07)
+
+
+### Features
+
+* **grid:** support sort by specified attribute value for field which is object type ([#223](https://github.com/worktile/ai-table/issues/223)) ([14308c4](https://github.com/worktile/ai-table/commit/14308c4c98faaabfc896e7415756a11f5c73315c))
+
+
+
 ## [0.0.29](https://github.com/worktile/ai-table/compare/0.0.28...0.0.29) (2025-01-06)
 
 
