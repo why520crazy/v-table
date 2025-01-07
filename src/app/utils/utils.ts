@@ -33,7 +33,7 @@ export function getDefaultValue() {
             {
                 _id: 'row-1',
                 short_id: `row-short-id-${1}`,
-                ...getDefaultTrackableEntity({ updated_at: '2024-12-19' }),
+                ...getDefaultTrackableEntity({ updated_at: '2024-12-19', updated_by: 'member_03' }),
                 positions: {
                     view1: 0,
                     view2: 1
@@ -44,8 +44,8 @@ export function getDefaultValue() {
                     'column-20': ['66b31d0c8097a908f74bcd8a'],
                     'column-21': ['66b31d0c8097a908f74bcd8a'],
                     'column-22': ['66b31d0c8097a908f74bcd8a'],
-                    'column-3': 0,
-                    'column-4': { timestamp: 1734636127 },
+                    'column-3': null,
+                    'column-4': { timestamp: 1682235946 },
                     'column-5': ['member_01'],
                     'column-6': 10,
                     'column-7': 3,
@@ -73,7 +73,7 @@ export function getDefaultValue() {
                     'column-20': ['66b31d0c8097a908f74bcd8a', '66b31d0c8097a908f74bcd8b'],
                     'column-21': ['66b31d0c8097a908f74bcd8a', '66b31d0c8097a908f74bcd8b'],
                     'column-22': ['66b31d0c8097a908f74bcd8a', '66b31d0c8097a908f74bcd8b'],
-                    'column-3': 10,
+                    'column-3': 0,
                     'column-4': { timestamp: 1682235946 },
                     'column-5': ['member_01', 'member_02'],
                     'column-6': 50,
@@ -124,6 +124,88 @@ export function getDefaultValue() {
                     // 'column-10': 1682235946,
                     // 'column-11': ['member_02'],
                     // 'column-12': 1720490727
+                }
+            },
+            {
+                _id: 'row-4',
+                short_id: `row-short-id-${4}`,
+                ...getDefaultTrackableEntity(),
+                positions: {
+                    view1: 2,
+                    view2: 0
+                },
+                values: {
+                    'column-1': '文本 4-1',
+                    'column-2': ['_id_4'],
+                    'column-20': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-21': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-22': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-3': null,
+                    'column-4': { timestamp: 1682235946 },
+                    'column-5': [],
+                    'column-6': 100,
+                    'column-7': 1,
+                    'column-8': {},
+                    'column-9': [],
+                    'column-10': 1682235946,
+                    'column-11': ['member_02'],
+                    'column-12': 1720490727
+                }
+            },
+            {
+                _id: 'row-5',
+                short_id: `row-short-id-${5}`,
+                ...getDefaultTrackableEntity(),
+                positions: {
+                    view1: 2,
+                    view2: 0
+                },
+                values: {
+                    'column-1': '文本 5-1',
+                    'column-2': ['_id_5'],
+                    'column-20': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-21': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-22': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-3': 1,
+                    'column-4': { timestamp: 1682235946 },
+                    'column-5': ['member_05', 'member_07'],
+                    'column-6': 100,
+                    'column-7': 1,
+                    'column-8': {},
+                    'column-9': [],
+                    'column-10': 1682235946,
+                    'column-11': ['member_02'],
+                    'column-12': 1720490727
                 }
             }
         ],
@@ -428,7 +510,7 @@ export function getCanvasDefaultValue() {
             {
                 _id: 'row-1',
                 short_id: `row-short-id-${1}`,
-                ...getDefaultTrackableEntity({ updated_at: '2024-12-19' }),
+                ...getDefaultTrackableEntity({ updated_at: '2024-12-19', updated_by: 'member_03' }),
                 positions: {
                     view1: 0,
                     view2: 1
@@ -443,8 +525,8 @@ export function getCanvasDefaultValue() {
                     'column-111': ['piece_1'],
                     'column-112': ['tag_1'],
                     'column-20': ['66b31d0c8097a908f74bcd8a'],
-                    'column-3': 0,
-                    'column-4': { timestamp: 1734636127 },
+                    'column-3': null,
+                    'column-4': { timestamp: 1682235946 },
                     'column-5': ['member_01'],
                     'column-6': 10,
                     'column-7': 5,
@@ -477,7 +559,7 @@ export function getCanvasDefaultValue() {
                     'column-111': ['piece_2'],
                     'column-112': ['tag_2'],
                     'column-20': ['66b31d0c8097a908f74bcd8a', '66b31d0c8097a908f74bcd8b'],
-                    'column-3': 10,
+                    'column-3': 0,
                     'column-4': { timestamp: 1682235946 },
                     'column-5': ['member_01', 'member_02', 'member_03', 'member_04', 'member_05', 'member_06', 'member_07', 'member_08'],
                     'column-6': 50,
@@ -526,6 +608,88 @@ export function getCanvasDefaultValue() {
                     'column-21': ['66b31d0c8097a908f74bcd8a'],
                     'column-22': ['66b31d0c8097a908f74bcd8b', '66b31d0c8097a908f74bcd8a'],
                     'column-23': ['66b31d0c8097a908f74bcd8e', '66b31d0c8097a908f74bcd8a', '66b31d0c8097a908f74bcd8b']
+                }
+            },
+            {
+                _id: 'row-4',
+                short_id: `row-short-id-${4}`,
+                ...getDefaultTrackableEntity(),
+                positions: {
+                    view1: 2,
+                    view2: 0
+                },
+                values: {
+                    'column-1': '文本 4-1',
+                    'column-2': ['_id_4'],
+                    'column-20': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-21': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-22': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-3': null,
+                    'column-4': { timestamp: 1682235946 },
+                    'column-5': [],
+                    'column-6': 100,
+                    'column-7': 1,
+                    'column-8': {},
+                    'column-9': [],
+                    'column-10': 1682235946,
+                    'column-11': ['member_02'],
+                    'column-12': 1720490727
+                }
+            },
+            {
+                _id: 'row-5',
+                short_id: `row-short-id-${5}`,
+                ...getDefaultTrackableEntity(),
+                positions: {
+                    view1: 2,
+                    view2: 0
+                },
+                values: {
+                    'column-1': '文本 5-1',
+                    'column-2': ['_id_5'],
+                    'column-20': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-21': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-22': [
+                        '66b31d0c8097a908f74bcd8a',
+                        '66b31d0c8097a908f74bcd8b',
+                        '66b31d0c8097a908f74bcd8c',
+                        '66b31d0c8097a908f74bcd8d'
+                    ],
+                    'column-3': 1,
+                    'column-4': { timestamp: 1682235946 },
+                    'column-5': ['member_05', 'member_07'],
+                    'column-6': 100,
+                    'column-7': 1,
+                    'column-8': {},
+                    'column-9': [],
+                    'column-10': 1682235946,
+                    'column-11': ['member_02'],
+                    'column-12': 1720490727
                 }
             }
         ],
@@ -738,7 +902,7 @@ export function getCanvasDefaultValue() {
             },
             {
                 _id: 'column-5',
-                name: '成员',
+                name: '成员', // 多选成员
                 positions: {
                     view1: 9,
                     view2: 9
