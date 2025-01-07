@@ -40,8 +40,8 @@ export interface AIFieldConfig {
 export interface AITableUserInfo {
     uid?: string;
     display_name?: string;
-    display_name_pinyin?: string;
     avatar?: string;
+    [key: string]: any;
 }
 
 export interface AITableReferences {

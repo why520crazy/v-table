@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 import { WebsocketProvider } from 'y-websocket';
 import { getProvider } from '../provider';
 import { getCanvasDefaultValue, sortDataByView } from '../utils/utils';
-import { AITableValue } from '@ai-table/grid';
+import { AITableFieldType, AITableValue } from '@ai-table/grid';
 
 export const LOCAL_STORAGE_KEY = 'ai-table-active-view-id';
 const LOCAL_STORAGE_AI_TABLE_SHARED_DATA = 'ai-table-demo-shared-data';
@@ -52,8 +52,20 @@ export class TableService {
         return this.activeView().short_id;
     });
 
+    sortKeysMap: Partial<Record<AITableFieldType, string>> = {
+        [AITableFieldType.createdBy]: 'display_name_pinyin',
+        [AITableFieldType.updatedBy]: 'display_name_pinyin',
+        [AITableFieldType.member]: 'display_name_pinyin'
+    };
+
     renderRecords = computed(() => {
-        return buildRecordsByView(this.aiTable, this.records(), this.fields(), this.activeView()) as AITableViewRecords;
+        return buildRecordsByView(
+            this.aiTable,
+            this.records(),
+            this.fields(),
+            this.activeView() as AITableView,
+            this.sortKeysMap
+        ) as AITableViewRecords;
     });
 
     renderFields = computed(() => {
