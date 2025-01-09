@@ -31,7 +31,7 @@ export function getPosition(data: AITableViewRecords | AITableViewFields, active
     return position;
 }
 
-export function addView(aiTable: AIViewTable, type: 'add' | 'copy') {
+export function addView(aiTable: AIViewTable, type: 'add' | 'copy', viewId?: string) {
     let index = aiTable.views().length;
     const newId = idCreator();
     const shortId = shortIdCreator();
@@ -42,8 +42,8 @@ export function addView(aiTable: AIViewTable, type: 'add' | 'copy') {
     };
     let originViewId = aiTable.views()[aiTable.views().length - 1]._id;
     if (type === 'copy') {
-        originViewId = aiTable.activeViewId();
-        const copyView = aiTable.views().find((item) => item._id === aiTable.activeViewId())!;
+        originViewId = viewId ?? aiTable.activeViewId();
+        const copyView = aiTable.views().find((item) => item._id === originViewId)!;
         newView = {
             ...copyView,
             _id: newId,
