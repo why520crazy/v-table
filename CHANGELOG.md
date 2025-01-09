@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.31](https://github.com/worktile/ai-table/compare/0.0.30...0.0.31) (2025-01-09)
+
+
+### Features
+
+* **state:** support copy the view with the specified viewId ([#228](https://github.com/worktile/ai-table/issues/228)) ([71d8222](https://github.com/worktile/ai-table/commit/71d8222a69ba15aa132dcb0600086b45258ecda2))
+
+
+
 ## [0.0.30](https://github.com/worktile/ai-table/compare/0.0.29...0.0.30) (2025-01-07)
 
 
