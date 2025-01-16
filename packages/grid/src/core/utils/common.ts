@@ -31,8 +31,7 @@ export function createAITable(records: WritableSignal<AITableRecords>, fields: W
             );
         }),
         recordsWillHidden: signal([]),
-        recordsWillMove: signal([]),
-        references: signal({ members: {} })
+        recordsWillMove: signal([])
     };
     return aiTable;
 }

@@ -41,7 +41,14 @@ import { AITableGridEventService } from './services/event.service';
 import { AITableGridFieldService } from './services/field.service';
 import { AITableGridSelectionService } from './services/selection.service';
 import { AITableMouseDownType, AITableRendererConfig, ScrollActionOptions } from './types';
-import { buildGridLinearRows, getColumnIndicesMap, getDetailByTargetName, handleMouseStyle, isCellMatchKeywords, isWindows } from './utils';
+import {
+    buildGridLinearRows,
+    getColumnIndicesSizeMap,
+    getDetailByTargetName,
+    handleMouseStyle,
+    isCellMatchKeywords,
+    isWindows
+} from './utils';
 import { getMousePosition } from './utils/position';
 
 @Component({
@@ -70,6 +77,8 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
 
     containerRect = signal({ width: 0, height: 0 });
 
+    frozenColumnCount = signal(1);
+
     hasContainerRect = computed(() => {
         return this.containerRect().width > 0 && this.containerRect().height > 0;
     });
@@ -84,7 +93,7 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
         return buildGridLinearRows(this.gridData().records, !this.aiReadonly());
     });
 
-    visibleColumnsMap = computed(() => {
+    visibleColumnsIndexMap = computed(() => {
         const columns = AITable.getVisibleFields(this.aiTable);
         return new Map(columns?.map((item, index) => [item._id, index]));
     });
@@ -106,9 +115,9 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
             columnCount: fields.length,
             rowInitSize: AI_TABLE_FIELD_HEAD_HEIGHT,
             columnInitSize: AI_TABLE_ROW_HEAD_WIDTH,
-            rowIndicesMap: {},
-            columnIndicesMap: getColumnIndicesMap(fields),
-            frozenColumnCount: 1
+            rowIndicesSizeMap: {},
+            columnIndicesSizeMap: getColumnIndicesSizeMap(fields),
+            frozenColumnCount: this.frozenColumnCount()
         });
         return {
             aiTable: this.aiTable,
@@ -171,10 +180,12 @@ export class AITableGrid extends AITableGridBase implements OnInit, OnDestroy {
     private initContext() {
         this.aiTable.context = new RendererContext({
             linearRows: this.linearRows,
-            visibleColumnsMap: this.visibleColumnsMap,
+            visibleColumnsIndexMap: this.visibleColumnsIndexMap,
             visibleRowsIndexMap: this.visibleRowsIndexMap,
             pointPosition: signal(DEFAULT_POINT_POSITION),
             scrollState: signal(DEFAULT_SCROLL_STATE),
+            frozenColumnCount: this.frozenColumnCount,
+            references: this.aiReferences,
             scrollAction: this.scrollAction
         });
     }
