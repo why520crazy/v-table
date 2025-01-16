@@ -126,9 +126,12 @@ export class AITableGridEventService {
             columnCount
         });
         const originRect = container!.getBoundingClientRect();
+        const isFrozenColumn = AITable.isFrozenColumn(aiTable, columnIndex);
+        const scrollLeft = isFrozenColumn ? 0 : scrollState().scrollLeft;
+        const scrollTop = scrollState().scrollTop;
         const originPosition = {
-            x: originX + originOffset - scrollState().scrollLeft + originRect.x,
-            y: originY - scrollState().scrollTop + originRect.y,
+            x: originX + originOffset - scrollLeft + originRect.x,
+            y: originY - scrollTop + originRect.y,
             width: originWidth,
             height: rowHeight
         };
