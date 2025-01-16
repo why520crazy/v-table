@@ -62,5 +62,12 @@ export const AITable = {
             };
         }
         return null;
+    },
+    isFrozenColumn(aiTable: AITable, columnIndex: number) {
+        const frozenColumnCount = aiTable.context!.frozenColumnCount();
+        if (columnIndex <= frozenColumnCount - 1) {
+            return true;
+        }
+        return false;
     }
 };
