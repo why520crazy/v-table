@@ -11,9 +11,9 @@ export class Coordinate {
     public containerWidth: number;
     public containerHeight: number;
     // 用 index 映射 每一行的 高度
-    public rowIndicesMap: AITableSizeMap = {};
+    public rowIndicesSizeMap: AITableSizeMap = {};
     // 用 index 映射 每一列 的 宽度
-    public columnIndicesMap: AITableSizeMap = {};
+    public columnIndicesSizeMap: AITableSizeMap = {};
     // 除去表头和编号列真正单元格绘制的初始值 x
     public rowInitSize: number;
     // 除去表头和编号列真正单元格绘制的初始值 y
@@ -31,8 +31,8 @@ export class Coordinate {
         rowCount,
         columnCount,
         container,
-        rowIndicesMap = {},
-        columnIndicesMap = {},
+        rowIndicesSizeMap = {},
+        columnIndicesSizeMap = {},
         rowInitSize = 0,
         columnInitSize = 0,
         frozenColumnCount = 0
@@ -43,8 +43,8 @@ export class Coordinate {
         this.rowInitSize = rowInitSize;
         this.columnInitSize = columnInitSize;
         this.containerWidth = container.offsetWidth;
-        this.rowIndicesMap = rowIndicesMap;
-        this.columnIndicesMap = columnIndicesMap;
+        this.rowIndicesSizeMap = rowIndicesSizeMap;
+        this.columnIndicesSizeMap = columnIndicesSizeMap;
         this.containerHeight = container.offsetHeight;
         this.frozenColumnCount = frozenColumnCount;
         this.container = container;
@@ -78,14 +78,14 @@ export class Coordinate {
      * 根据 rowIndex 获取对应行高
      */
     public getRowHeight(index: number) {
-        return this.rowIndicesMap[index] ?? this.rowHeight;
+        return this.rowIndicesSizeMap[index] ?? this.rowHeight;
     }
 
     /**
      * 根据 columnIndex 获取对应列宽
      */
     public getColumnWidth(index: number) {
-        return this.columnIndicesMap[index];
+        return this.columnIndicesSizeMap[index];
     }
 
     /**
@@ -110,7 +110,7 @@ export class Coordinate {
             }
 
             for (let i = lastMeasuredIndex + 1; i <= index; i++) {
-                const size = isColumnType ? this.columnIndicesMap[i] : (this.rowIndicesMap[i] ?? this.rowHeight);
+                const size = isColumnType ? this.columnIndicesSizeMap[i] : (this.rowIndicesSizeMap[i] ?? this.rowHeight);
 
                 cellMetadataMap[i] = {
                     offset,

@@ -14,7 +14,6 @@ export interface AITable {
     fieldsMap: Signal<{ [key: string]: AITableField }>;
     recordsWillHidden: WritableSignal<string[]>;
     recordsWillMove: WritableSignal<string[]>;
-    references: WritableSignal<AITableReferences>;
 }
 
 export type AIPlugin = (aiTable: AITable) => AITable;
@@ -47,14 +46,14 @@ export const AITable = {
     },
     isCellVisible(aiTable: AITable, cell: AIRecordFieldIdPath): boolean {
         const visibleRowIndexMap = aiTable.context!.visibleRowsIndexMap();
-        const visibleColumnIndexMap = aiTable.context!.visibleColumnsMap();
+        const visibleColumnIndexMap = aiTable.context!.visibleColumnsIndexMap();
         const [recordId, fieldId] = cell || [];
         const isVisible = visibleRowIndexMap!.has(recordId) && visibleColumnIndexMap.has(fieldId);
         return isVisible;
     },
     getCellIndex(aiTable: AITable, cell: AIRecordFieldIdPath): { rowIndex: number; columnIndex: number } | null {
         const visibleRowIndexMap = aiTable.context!.visibleRowsIndexMap();
-        const visibleColumnIndexMap = aiTable.context!.visibleColumnsMap();
+        const visibleColumnIndexMap = aiTable.context!.visibleColumnsIndexMap();
         if (AITable.isCellVisible(aiTable, cell)) {
             const [recordId, fieldId] = cell;
             return {

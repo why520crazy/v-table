@@ -2,12 +2,12 @@ import { AITable, AITableField, AITableFieldOption, FieldValue, getFieldOptionBy
 import { AI_TABLE_GRID_FIELD_SERVICE_MAP } from '../services';
 import { AITableSizeMap } from '../types';
 
-export function getColumnIndicesMap(fields: AITableField[]) {
-    const columnIndicesMap: AITableSizeMap = {};
+export function getColumnIndicesSizeMap(fields: AITableField[]) {
+    const columnIndicesSizeMap: AITableSizeMap = {};
     fields?.forEach((field, index) => {
-        columnIndicesMap[index] = field.width ?? (getFieldOptionByField(field) as AITableFieldOption).width;
+        columnIndicesSizeMap[index] = field.width ?? (getFieldOptionByField(field) as AITableFieldOption).width;
     });
-    return columnIndicesMap;
+    return columnIndicesSizeMap;
 }
 
 /**

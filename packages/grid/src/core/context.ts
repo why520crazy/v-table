@@ -1,22 +1,26 @@
 import { Signal, WritableSignal } from '@angular/core';
-import { AITableContext, AITableLinearRow, AITablePointPosition, AITableScrollState, ScrollActionOptions } from '../types';
+import { AITableContext, AITableLinearRow, AITablePointPosition, AITableReferences, AITableScrollState, ScrollActionOptions } from '../types';
 
 export class RendererContext {
     linearRows: Signal<AITableLinearRow[]>;
     pointPosition: WritableSignal<AITablePointPosition>;
     scrollState: WritableSignal<AITableScrollState>;
-    visibleColumnsMap: Signal<Map<string, number>>;
+    visibleColumnsIndexMap: Signal<Map<string, number>>;
     visibleRowsIndexMap: Signal<Map<string, number>>;
+    frozenColumnCount: Signal<number>;
+    references: Signal<AITableReferences>;
     scrollAction: (options: ScrollActionOptions) => void;
 
     constructor(options: AITableContext) {
-        const { linearRows, pointPosition, scrollState, visibleColumnsMap, visibleRowsIndexMap, scrollAction } = options;
+        const { linearRows, pointPosition, scrollState, visibleColumnsIndexMap, visibleRowsIndexMap, frozenColumnCount, references, scrollAction } = options;
         this.linearRows = linearRows;
         this.pointPosition = pointPosition;
         this.scrollState = scrollState;
         this.scrollAction = scrollAction;
-        this.visibleColumnsMap = visibleColumnsMap;
+        this.visibleColumnsIndexMap = visibleColumnsIndexMap;
         this.visibleRowsIndexMap = visibleRowsIndexMap;
+        this.frozenColumnCount = frozenColumnCount;
+        this.references = references;
     }
 
     setPointPosition(position: Partial<AITablePointPosition>) {

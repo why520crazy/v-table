@@ -71,8 +71,8 @@ export interface AITableCoordinate {
     container: HTMLDivElement;
     rowHeight: number;
     rowInitSize?: number;
-    rowIndicesMap: AITableSizeMap;
-    columnIndicesMap: AITableSizeMap;
+    rowIndicesSizeMap: AITableSizeMap;
+    columnIndicesSizeMap: AITableSizeMap;
     columnInitSize?: number;
     frozenColumnCount?: number;
 }
@@ -134,6 +134,8 @@ export interface AITableContext {
     pointPosition: WritableSignal<AITablePointPosition>;
     scrollState: WritableSignal<AITableScrollState>;
     scrollAction: (options: ScrollActionOptions) => void;
-    visibleColumnsMap: Signal<Map<string, number>>;
+    visibleColumnsIndexMap: Signal<Map<string, number>>;
     visibleRowsIndexMap: Signal<Map<string, number>>;
+    frozenColumnCount: Signal<number>;
+    references: Signal<AITableReferences>;
 }
