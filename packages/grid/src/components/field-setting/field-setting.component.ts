@@ -1,4 +1,4 @@
-import { NgClass, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, TemplateRef, booleanAttribute, computed, inject, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ThyButton } from 'ngx-tethys/button';
@@ -6,12 +6,11 @@ import {
     ThyDropdownDirective,
     ThyDropdownMenuComponent,
     ThyDropdownMenuItemDirective,
-    ThyDropdownMenuItemIconDirective,
     ThyDropdownMenuItemNameDirective
 } from 'ngx-tethys/dropdown';
-import { ThyConfirmValidatorDirective, ThyFormModule, ThyFormValidatorConfig, ThyUniqueCheckValidator } from 'ngx-tethys/form';
+import { ThyFormModule, ThyFormValidatorConfig, ThyUniqueCheckValidator } from 'ngx-tethys/form';
 import { ThyIcon } from 'ngx-tethys/icon';
-import { ThyInput, ThyInputCount, ThyInputDirective, ThyInputGroup } from 'ngx-tethys/input';
+import { ThyInputCount, ThyInputDirective, ThyInputGroup } from 'ngx-tethys/input';
 import { ThyListItem } from 'ngx-tethys/list';
 import { ThyPopoverRef } from 'ngx-tethys/popover';
 import { ThyAutofocusDirective } from 'ngx-tethys/shared';
@@ -28,27 +27,23 @@ import {
 import { AITableFieldIsMultiplePipe } from '../../pipes';
 
 @Component({
-    selector: 'ai-table-field-property-editor',
-    templateUrl: './field-property-editor.component.html',
+    selector: 'ai-table-field-setting',
+    templateUrl: './field-setting.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         NgIf,
-        NgForOf,
         NgClass,
         FormsModule,
         ThyIcon,
-        ThyInput,
         ThyInputGroup,
         ThyInputCount,
         ThyInputDirective,
-        ThyConfirmValidatorDirective,
         ThyUniqueCheckValidator,
         ThyDropdownDirective,
         ThyDropdownMenuComponent,
         ThyDropdownMenuItemDirective,
         ThyDropdownMenuItemNameDirective,
-        ThyDropdownMenuItemIconDirective,
         ThyButton,
         ThyFormModule,
         ThyListItem,
@@ -57,7 +52,7 @@ import { AITableFieldIsMultiplePipe } from '../../pipes';
         AITableFieldIsMultiplePipe
     ],
     host: {
-        class: 'field-property-editor d-block pl-5 pr-5 pb-5 pt-4'
+        class: 'field-setting d-block pl-5 pr-5 pb-5 pt-4'
     },
     styles: [
         `
@@ -67,7 +62,7 @@ import { AITableFieldIsMultiplePipe } from '../../pipes';
         `
     ]
 })
-export class AITableFieldPropertyEditor {
+export class AITableFieldSetting {
     aiEditField = model.required<AITableField>();
 
     @Input({ required: true }) aiTable!: AITable;
@@ -97,7 +92,7 @@ export class AITableFieldPropertyEditor {
 
     fieldOptions = FieldOptions;
 
-    protected thyPopoverRef = inject(ThyPopoverRef<AITableFieldPropertyEditor>);
+    protected thyPopoverRef = inject(ThyPopoverRef<AITableFieldSetting>);
 
     checkUniqueName = (fieldName: string) => {
         fieldName = fieldName?.trim();
