@@ -34,7 +34,7 @@ import { AITableGridEventService } from './services/event.service';
 import { AI_TABLE_GRID_FIELD_SERVICE_MAP, AITableGridFieldService } from './services/field.service';
 import { AITableGridSelectionService } from './services/selection.service';
 import { AIFieldConfig, AITableFieldMenuItem, AITableContextMenuItem, AITableReferences } from './types';
-import { AITableFieldPropertyEditor } from './components';
+import { AITableFieldSetting } from './components';
 
 @Component({
     selector: 'ai-table-grid-base',
@@ -147,8 +147,8 @@ export class AITableGridBase implements OnInit {
             origin: gridColumnBlank!,
             position
         });
-        if (popoverRef && !this.aiFieldConfig()?.fieldPropertyEditor) {
-            (popoverRef.componentInstance as AITableFieldPropertyEditor).addField.subscribe((defaultValue) => {
+        if (popoverRef && !this.aiFieldConfig()?.fieldSettingComponent) {
+            (popoverRef.componentInstance as AITableFieldSetting).addField.subscribe((defaultValue) => {
                 const fields = this.gridData().fields;
                 const fieldCount = fields.length;
                 this.aiAddField.emit({

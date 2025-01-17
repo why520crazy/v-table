@@ -1,4 +1,4 @@
-import { AI_TABLE_GRID_FIELD_SERVICE_MAP, AITable, AITableField, AITableFieldPropertyEditor } from '@ai-table/grid';
+import { AI_TABLE_GRID_FIELD_SERVICE_MAP, AITable, AITableField, AITableFieldSetting } from '@ai-table/grid';
 import { ElementRef, Signal } from '@angular/core';
 import _ from 'lodash';
 import { Actions } from '../action';
@@ -27,8 +27,8 @@ export const EditFieldPropertyItem = {
                 origin: origin!,
                 position
             });
-            if (popoverRef && fieldService && !fieldService.aiFieldConfig?.fieldPropertyEditor) {
-                (popoverRef.componentInstance as AITableFieldPropertyEditor).setField.subscribe((value) => {
+            if (popoverRef && fieldService && !fieldService.aiFieldConfig?.fieldSettingComponent) {
+                (popoverRef.componentInstance as AITableFieldSetting).setField.subscribe((value) => {
                     Actions.setField(aiTable, value.field, value.path);
                 });
             }

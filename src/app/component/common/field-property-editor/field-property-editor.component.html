@@ -1,10 +1,10 @@
-<ai-table-field-property-editor
+<ai-table-field-setting
     [aiTable]="aiTable"
     [aiEditField]="aiEditField()"
     [isUpdate]="isUpdate"
     [aiExternalTemplate]="aiExternalTemplate"
 >
-</ai-table-field-property-editor>
+</ai-table-field-setting>
 
 <ng-template #aiExternalTemplate>
     @if (aiEditField().type === AITableFieldType.select) {

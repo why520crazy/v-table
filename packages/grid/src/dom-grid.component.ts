@@ -15,7 +15,7 @@ import { ThyStopPropagationDirective } from 'ngx-tethys/shared';
 import { ThyTag } from 'ngx-tethys/tag';
 import { ProgressEditorComponent, SelectOptionComponent } from './components';
 import { AITableFieldMenu } from './components/field-menu/field-menu.component';
-import { AITableFieldPropertyEditor } from './components/field-property-editor/field-property-editor.component';
+import { AITableFieldSetting } from './components/field-setting/field-setting.component';
 import { AITableField } from './core';
 import { AITableGridBase } from './grid-base.component';
 import { IsSelectRecordPipe, MemberSettingPipe, SelectOptionPipe, SelectOptionsPipe, SelectSettingPipe, UserPipe } from './pipes/grid.pipe';
@@ -43,7 +43,7 @@ import { AITableGridSelectionService } from './services/selection.service';
         ThyIcon,
         ThyRate,
         ThyProgress,
-        AITableFieldPropertyEditor,
+        AITableFieldSetting,
         ThyDatePickerFormatPipe,
         ThyFlexibleText,
         ThyStopPropagationDirective,

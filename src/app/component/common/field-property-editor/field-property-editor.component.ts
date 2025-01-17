@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, WritableSignal, booleanAttribute, computed, model } from '@angular/core';
-import { AITableField, AITableFieldType, AITableFieldPropertyEditor, AITable } from '@ai-table/grid';
+import { AITableField, AITableFieldType, AITableFieldSetting, AITable } from '@ai-table/grid';
 
 @Component({
     selector: 'field-property-editor',
     templateUrl: './field-property-editor.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [AITableFieldPropertyEditor]
+    imports: [AITableFieldSetting]
 })
 export class FieldPropertyEditor {
     aiEditField = model.required<AITableField>();
