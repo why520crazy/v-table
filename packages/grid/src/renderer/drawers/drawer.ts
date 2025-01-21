@@ -258,9 +258,11 @@ export class Drawer {
         } = options;
         let offsetX = 0;
         let offsetY = 0;
+        const fontStyle = `${fontWeight} ${fontSize}px ${DEFAULT_FONT_FAMILY}`;
         const baselineOffset = verticalAlign === DEFAULT_TEXT_VERTICAL_ALIGN_TOP ? fontSize / 2 : 0;
-        const fontStyle = `${fontWeight}-${fontSize}px`;
+        const fontStyleKey = `${fontWeight}-${fontSize}px`;
         const isUnderline = textDecoration === 'underline';
+        this.ctx.font = fontStyle;
         const textRenderer = (textDataList: any[]) => {
             textDataList.forEach((data) => {
                 const { offsetX, offsetY, text, width, linkUrl } = data;
@@ -278,8 +280,7 @@ export class Drawer {
 
         if (fillStyle) this.setStyle({ fillStyle });
         this.ctx.textAlign = textAlign;
-
-        const cacheKey = `${fontStyle}-${maxRow}-${maxWidth || 0}-${fieldType}-${text}`;
+        const cacheKey = `${fontStyleKey}-${maxRow}-${maxWidth || 0}-${fieldType}-${text}`;
         const cacheTextData = textDataCache.get(cacheKey);
         if (cacheTextData) {
             if (this.needDraw && needDraw) {
@@ -389,6 +390,7 @@ export class Drawer {
         const baselineOffset = verticalAlign === DEFAULT_TEXT_VERTICAL_ALIGN_TOP ? fontSize / 2 : 0;
         if (fillStyle) this.setStyle({ fillStyle });
         this.ctx.textAlign = textAlign;
+        console.log(`set: ${fontStyle}`);
         this.ctx.font = fontStyle;
         this.ctx.fillText(text, x, y + baselineOffset);
     }
