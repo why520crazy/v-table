@@ -390,7 +390,6 @@ export class Drawer {
         const baselineOffset = verticalAlign === DEFAULT_TEXT_VERTICAL_ALIGN_TOP ? fontSize / 2 : 0;
         if (fillStyle) this.setStyle({ fillStyle });
         this.ctx.textAlign = textAlign;
-        console.log(`set: ${fontStyle}`);
         this.ctx.font = fontStyle;
         this.ctx.fillText(text, x, y + baselineOffset);
     }
