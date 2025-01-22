@@ -596,7 +596,6 @@ export class CellDrawer extends Drawer {
             if (!userInfo) continue;
 
             const { uid, display_name, avatar } = userInfo;
-            const type = AITableMemberType.member;
             const itemWidth = AITableAvatarSize.size24 + (isMulti ? AI_TABLE_CELL_MEMBER_ITEM_PADDING : 0);
 
             currentX = AI_TABLE_CELL_PADDING + index * itemWidth;
@@ -616,23 +615,23 @@ export class CellDrawer extends Drawer {
             let isMore = currentX + itemWidth > columnWidth - 2 * AI_TABLE_CELL_PADDING;
             if (columnWidth != null) {
                 // 在非活动状态下，当超出列宽时，不会渲染后续内容
-                if (!isActive && currentX >= columnWidth - 2 * AI_TABLE_CELL_PADDING) {
+                if (currentX >= columnWidth - 2 * AI_TABLE_CELL_PADDING) {
                     break;
                 }
                 // 如果不是非活动状态的最后一行，则换行渲染溢出内容
-                if (!isActive && currentX > columnWidth - 2 * AI_TABLE_CELL_PADDING) {
+                if (currentX > columnWidth - 2 * AI_TABLE_CELL_PADDING) {
                     currentX = AI_TABLE_CELL_PADDING;
                 }
-                if (isActive && currentX + itemWidth > columnWidth - AI_TABLE_CELL_PADDING) {
+                if (currentX + itemWidth > columnWidth - AI_TABLE_CELL_PADDING) {
                     currentX = AI_TABLE_CELL_PADDING;
                     currentY += itemHeight;
                 }
-                if (isActive && currentY >= maxHeight) {
+                if (currentY >= maxHeight) {
                     isOverflow = true;
                 }
             }
 
-            if (ctx && !isActive) {
+            if (ctx) {
                 this.avatar({
                     x: x + currentX,
                     y: y + currentY,
