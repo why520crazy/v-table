@@ -1,6 +1,6 @@
 import { Signal, WritableSignal } from '@angular/core';
 import { Colors } from '../../constants/colors';
-import { AITableReferences, AITableSelection } from '../../types';
+import { AITableSelection } from '../../types';
 import { RendererContext } from '../context';
 import { AIRecordFieldIdPath, AITableField, AITableFields, AITableRecord, AITableRecords } from './core';
 
