@@ -62,7 +62,6 @@ export function toSharedType(
                 return toRecordSyncElement(record, data.fields);
             })
         );
-
         const viewsSharedType = new Y.Array();
         sharedType.set('views', viewsSharedType);
         viewsSharedType.insert(0, data.views.map(toSyncElement));

@@ -1,4 +1,4 @@
-import { AITableRecordUpdatedInfo, FieldValue, TrackableEntity } from '@ai-table/grid';
+import { AITableRecordUpdatedInfo, FieldValue, isSystemField, TrackableEntity } from '@ai-table/grid';
 import {
     AITableViewField,
     AITableViewFields,
@@ -38,7 +38,12 @@ export function toRecordSyncElement(record: AITableViewRecord, fields: AITableVi
     const customFieldValues = new Y.Array();
     const valuesArray: FieldValue[] = [];
     fields.forEach((field: AITableViewField) => {
-        valuesArray.push(record['values'][field._id]);
+        let value = record['values'][field._id];
+        // yjs will throw an error if the value is undefined.
+        if (value === undefined) {
+            value = null;
+        }
+        valuesArray.push(value);
     });
     customFieldValues.insert(0, valuesArray);
     // To save memory, convert map to array.
@@ -57,7 +62,6 @@ export function translatePositionToPath(data: AITableViewRecords | AITableViewFi
     if (index === -1) {
         index = data.length;
     }
-
     return [index];
 }
 

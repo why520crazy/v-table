@@ -58,7 +58,7 @@ export default function addNode(
             if (records) {
                 const recordIndex = getSharedRecordIndex(records, action.path[0]);
                 const record = records.get(recordIndex);
-                if (action.updatedInfo.updated_at && action.updatedInfo.updated_at) {
+                if (action.updatedInfo.updated_at && action.updatedInfo.updated_by) {
                     setRecordUpdatedInfo(record, action.updatedInfo as { updated_at: number; updated_by: string });
                 }
             }
